@@ -126,7 +126,7 @@ class _SplashScreenState extends State<SplashScreen>
                                     builder: (context) => const Login()));
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromRGBO(25, 192, 122, 1),
+                            backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                               //side: BorderSide(color: Colors.black, width: 2),

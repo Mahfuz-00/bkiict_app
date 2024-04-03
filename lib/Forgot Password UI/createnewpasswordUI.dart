@@ -51,7 +51,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                               'Enter new password',
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                  color: Color.fromRGBO(25, 192, 122, 1),
+                                  color: Color.fromRGBO(134, 188, 66, 1),
                                   fontSize: 25,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'default'),
@@ -128,7 +128,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                                           builder: (context) => PasswordChanged()));
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color.fromRGBO(25, 192, 122, 1),
+                                  backgroundColor: Color.fromRGBO(134, 188, 66, 1),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),

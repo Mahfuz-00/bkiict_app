@@ -32,7 +32,7 @@ class _OPTVerficationState extends State<OPTVerfication> {
                               'OTP Verification',
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                  color: Color.fromRGBO(25, 192, 122, 1),
+                                  color: Color.fromRGBO(134, 188, 66, 1),
                                   fontSize: 25,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'default'),
@@ -73,13 +73,13 @@ class _OPTVerficationState extends State<OPTVerfication> {
                                             fillColor: Color.fromRGBO(247,248,250,255),*/
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Color.fromRGBO(25, 192, 122, 1),
+                                                color: Color.fromRGBO(134, 188, 66, 1),
                                                 width: 2.0,
                                               ),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: Color.fromRGBO(25, 192, 122, 1),
+                                                  color: Color.fromRGBO(134, 188, 66, 1),
                                                   width: 2.0,
                                               ),
                                             ),
@@ -101,13 +101,13 @@ class _OPTVerficationState extends State<OPTVerfication> {
                                           decoration: const InputDecoration(
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Color.fromRGBO(25, 192, 122, 1),
+                                                color: Color.fromRGBO(134, 188, 66, 1),
                                                 width: 2.0,
                                               ),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Color.fromRGBO(25, 192, 122, 1),
+                                                color: Color.fromRGBO(134, 188, 66, 1),
                                                 width: 2.0,
                                               ),
                                             ),
@@ -129,13 +129,13 @@ class _OPTVerficationState extends State<OPTVerfication> {
                                           decoration: const InputDecoration(
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Color.fromRGBO(25, 192, 122, 1),
+                                                color: Color.fromRGBO(134, 188, 66, 1),
                                                 width: 2.0,
                                               ),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Color.fromRGBO(25, 192, 122, 1),
+                                                color: Color.fromRGBO(134, 188, 66, 1),
                                                 width: 2.0,
                                               ),
                                             ),
@@ -157,13 +157,13 @@ class _OPTVerficationState extends State<OPTVerfication> {
                                           decoration: const InputDecoration(
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Color.fromRGBO(25, 192, 122, 1),
+                                                color: Color.fromRGBO(134, 188, 66, 1),
                                                 width: 2.0,
                                               ),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Color.fromRGBO(25, 192, 122, 1),
+                                                color: Color.fromRGBO(134, 188, 66, 1),
                                                 width: 2.0,
                                               ),
                                             ),
@@ -183,7 +183,7 @@ class _OPTVerficationState extends State<OPTVerfication> {
                                       MaterialPageRoute(builder: (context) => CreateNewPassword()));
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color.fromRGBO(25, 192, 122, 1),
+                                  backgroundColor: Color.fromRGBO(134, 188, 66, 1),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -234,7 +234,7 @@ class _OPTVerficationState extends State<OPTVerfication> {
                                 'Resend',
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                  color: Color.fromRGBO(25, 192, 122, 1),
+                                  color: Color.fromRGBO(134, 188, 66, 1),
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'default',

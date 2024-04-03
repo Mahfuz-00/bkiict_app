@@ -14,14 +14,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Color.fromRGBO(25, 192, 122, 1), // Change the status bar color here
+      statusBarColor: Color.fromRGBO(134, 188, 66, 1), // Change the status bar color here
     ));
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'BKIICT',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(25, 192, 122, 1)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(134, 188, 66, 1)),
         useMaterial3: true,
       ),
       home: const SplashScreen(),

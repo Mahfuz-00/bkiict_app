@@ -33,7 +33,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           'Forgot Password?',
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                              color: Color.fromRGBO(25, 192, 122, 1),
+                              color: Color.fromRGBO(134, 188, 66, 1),
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'default'),
@@ -86,7 +86,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                       builder: (context) => OPTVerfication()));
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO(25, 192, 122, 1),
+                              backgroundColor: Color.fromRGBO(134, 188, 66, 1),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -134,7 +134,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             'Login',
                             textAlign: TextAlign.center,
                             style: const TextStyle(
-                              color: Color.fromRGBO(25, 192, 122, 1),
+                              color: Color.fromRGBO(134, 188, 66, 1),
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'default',

@@ -76,7 +76,7 @@ class _SignupState extends State<Signup> {
                           'Hello! Register to get started!',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Color.fromRGBO(25, 192, 122, 1),
+                            color: Color.fromRGBO(134, 188, 66, 1),
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'default',
@@ -399,7 +399,7 @@ class _SignupState extends State<Signup> {
                         ElevatedButton(
                             onPressed: _registerUser,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO(25, 192, 122, 1),
+                              backgroundColor: Color.fromRGBO(134, 188, 66, 1),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -445,7 +445,7 @@ class _SignupState extends State<Signup> {
                                 'Login now',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Color.fromRGBO(25, 192, 122, 1),
+                                  color: Color.fromRGBO(134, 188, 66, 1),
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'default',

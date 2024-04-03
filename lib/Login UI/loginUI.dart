@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:footer/footer.dart';
 
 import '../API Models(Login and Sign Up)/loginmodels.dart';
+import '../Dashboard UI/dashboardUI.dart';
 import '../Forgot Password UI/forgotpasswordUI.dart';
 import '../Sign Up UI/signupUI.dart';
 
@@ -68,7 +69,7 @@ class _LoginState extends State<Login> {
                             'Welcome Again!',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Color.fromRGBO(25, 192, 122, 1),
+                                color: Color.fromRGBO(134, 188, 66, 1),
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'default'),
@@ -205,22 +206,22 @@ class _LoginState extends State<Login> {
                               onPressed: () {
                                 if(validateAndsave()) {
                                   print(_loginRequest.toJSON());
-                                 /* Navigator.push(
+                                  Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const BCCMainDashboard()));*/
+                                          builder: (context) => const Dashboard()));
                                   clearForm();
                                 }
                                 else{
                                   const snackBar = SnackBar(
-                                    content: Text('Validation Failed!'),
+                                    content: Text('Login Failed!'),
                                   );
 
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromRGBO(25, 192, 122, 1),
+                                backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
@@ -271,7 +272,7 @@ class _LoginState extends State<Login> {
                               'Register now',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Color.fromRGBO(25, 192, 122, 1),
+                                color: Color.fromRGBO(134, 188, 66, 1),
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'default',
