@@ -41,6 +41,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   fl_chart: ^0.66.2
   fluttertoast: ^8.2.4
+  table_calendar: ^3.1.1
 
 dev_dependencies:
   flutter_test:
