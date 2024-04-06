@@ -160,6 +160,8 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
       body: SingleChildScrollView(
           child: SafeArea(
             child: Container(
+              height: screenHeight,
+              color: Colors.grey[100],
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

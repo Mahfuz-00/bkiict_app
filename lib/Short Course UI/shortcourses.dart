@@ -221,6 +221,8 @@ class _ShortCoursesState extends State<ShortCourses> with SingleTickerProviderSt
             scrollDirection: Axis.vertical,
             child: SafeArea(
               child: Container(
+                height: screenHeight,
+                color: Colors.grey[100],
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
                   children: [
@@ -283,6 +285,8 @@ class _ShortCoursesState extends State<ShortCourses> with SingleTickerProviderSt
             scrollDirection: Axis.vertical,
             child: SafeArea(
               child: Container(
+                height: screenHeight,
+                color: Colors.grey[100],
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
                   children: [

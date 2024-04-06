@@ -31,7 +31,7 @@ class _IDCardDownloadState extends State<IDCardDownload> with SingleTickerProvid
           },
         ),
         title: const Text(
-          'BKIICT',
+          'ID Card',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -156,11 +156,71 @@ class _IDCardDownloadState extends State<IDCardDownload> with SingleTickerProvid
       body: SingleChildScrollView(
           child: SafeArea(
             child: Container(
+              height: screenHeight,
+              color: Colors.grey[100],
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Center(
+                    child: Text(
+                      'Congratulations, Your Registration Successfully Submitted',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color.fromRGBO(143, 150, 158, 1),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'default',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    width: screenWidth * 0.85,
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: Color.fromRGBO(143, 150, 158, 1),
+                          width: 1,
+                        )),
+                    child: Row(
+                      children: [
 
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: Material(
+                      elevation: 5,
+                      borderRadius: BorderRadius.circular(5),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                          fixedSize: Size(MediaQuery.of(context).size.width* 0.85, MediaQuery.of(context).size.height * 0.08),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const IDCardDownload()));
+                        },
+                        child: const Text('Download',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'default',
+                            )),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

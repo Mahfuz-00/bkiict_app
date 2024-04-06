@@ -158,6 +158,8 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
       body: SingleChildScrollView(
           child: SafeArea(
             child: Container(
+              height: screenHeight,
+              color: Colors.grey[100],
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

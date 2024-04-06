@@ -155,6 +155,8 @@ class _FeedbackUIState extends State<FeedbackUI> with SingleTickerProviderStateM
       body: SingleChildScrollView(
           child: SafeArea(
             child: Container(
+              height: screenHeight,
+              color: Colors.grey[100],
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,5 +1,8 @@
 
-import 'package:bkiict_app/Dashboard%20UI/dashboardUI.dart';
+//import 'dart:collection';
+//import 'dart:html';
+
+import '../Dashboard%20UI/dashboardUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -18,7 +21,37 @@ class _AdmissionCalenderState extends State<AdmissionCalender> with SingleTicker
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+ /* late final ValueNotifier<List<Event>> _selectedEvents;
 
+  List<Event> _getEventsForDay(DateTime day) {
+    return events[day] ?? [];
+  }
+
+  int getHashCode(DateTime key) => key.microsecondsSinceEpoch;
+
+  final events = LinkedHashMap(
+    equals: isSameDay,
+    hashCode: (DateTime key) => key.hashCode,
+  )..addAll({
+    DateTime(2024, 4, 10): [Event('Event A'), Event('Event B')],
+    DateTime(2024, 4, 11): [Event('Event C')],
+    DateTime(2024, 4, 13): [Event('Event D'), Event('Event E'), Event('Event F')],
+  });
+
+  @override
+  void initState() {
+    super.initState();
+
+    _selectedDay = _focusedDay;
+    _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+  }
+
+  @override
+  void dispose() {
+    _selectedEvents.dispose();
+    super.dispose();
+  }
+*/
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -160,7 +193,9 @@ class _AdmissionCalenderState extends State<AdmissionCalender> with SingleTicker
       body: SingleChildScrollView(
           child: SafeArea(
             child: Container(
+              height: screenHeight,
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+              color: Colors.grey[100],
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
