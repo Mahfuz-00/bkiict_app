@@ -155,7 +155,7 @@ class _AboutUsState extends State<AboutUs> with SingleTickerProviderStateMixin{
       body: SingleChildScrollView(
           child: SafeArea(
             child: Container(
-              height: screenHeight,
+              //height: screenHeight,
               color: Colors.grey[100],
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: Column(

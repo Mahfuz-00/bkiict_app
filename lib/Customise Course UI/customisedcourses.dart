@@ -221,7 +221,7 @@ class _CustomisedCoursesState extends State<CustomisedCourses> with SingleTicker
             scrollDirection: Axis.vertical,
             child: SafeArea(
               child: Container(
-                height: screenHeight,
+                height: screenHeight+205,
                 color: Colors.grey[100],
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
@@ -285,7 +285,7 @@ class _CustomisedCoursesState extends State<CustomisedCourses> with SingleTicker
             scrollDirection: Axis.vertical,
             child: SafeArea(
               child: Container(
-                height: screenHeight,
+                height: screenHeight+205,
                 color: Colors.grey[100],
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(

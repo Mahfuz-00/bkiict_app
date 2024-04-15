@@ -157,191 +157,189 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
           ],
         ),
       ),
-      body: SingleChildScrollView(
-          child: SafeArea(
-            child: Container(
-              height: screenHeight,
-              color: Colors.grey[100],
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Text('Select Your Course',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'default',
-                      ),
+      body: SafeArea(
+        child: Container(
+          height: screenHeight,
+          color: Colors.grey[100],
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Text('Select Your Course',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'default',
+                  ),
+                ),
+              ),
+              SizedBox(height: 20,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Center(
+                  child: Text('One of the Activities of Bangladesh Computer Council (BCC) is to develop trained manpower in the field of ICT through ICT training',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color.fromRGBO(143, 150, 158, 1),
+                      letterSpacing: 1.1,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'default',
                     ),
                   ),
-                  SizedBox(height: 20,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Center(
-                      child: Text('One of the Activities of Bangladesh Computer Council (BCC) is to develop trained manpower in the field of ICT through ICT training',
-                        textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 50,),
+              Center(
+                child: Material(
+                  elevation: 5,
+                  borderRadius: BorderRadius.circular(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                      fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ShortCourses()));
+                    },
+                    child: const Text('Short Courses',
                         style: TextStyle(
-                          color: Color.fromRGBO(143, 150, 158, 1),
-                          letterSpacing: 1.1,
-                          fontSize: 15,
+                          color: Colors.white,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'default',
-                        ),
-                      ),
-                    ),
+                        )),
                   ),
-                  SizedBox(height: 50,),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ShortCourses()));
-                        },
-                        child: const Text('Short Courses',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LongCourses()));
-                        },
-                        child: const Text('Long Courses',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const CustomisedCourses()));
-                        },
-                        child: const Text('Customised Courses',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const AllCourses()));
-                        },
-                        child: const Text('All Courses',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () {
-                          /*Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const AboutUs()));*/
-                        },
-                        child: const Text('Download Courses Info',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          )
+              SizedBox(height: 20,),
+              Center(
+                child: Material(
+                  elevation: 5,
+                  borderRadius: BorderRadius.circular(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                      fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LongCourses()));
+                    },
+                    child: const Text('Long Courses',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'default',
+                        )),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20,),
+              Center(
+                child: Material(
+                  elevation: 5,
+                  borderRadius: BorderRadius.circular(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                      fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CustomisedCourses()));
+                    },
+                    child: const Text('Customised Courses',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'default',
+                        )),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20,),
+              Center(
+                child: Material(
+                  elevation: 5,
+                  borderRadius: BorderRadius.circular(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                      fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AllCourses()));
+                    },
+                    child: const Text('All Courses',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'default',
+                        )),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20,),
+              Center(
+                child: Material(
+                  elevation: 5,
+                  borderRadius: BorderRadius.circular(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                      fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {
+                      /*Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AboutUs()));*/
+                    },
+                    child: const Text('Download Courses Info',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'default',
+                        )),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
       bottomNavigationBar: Container(
         height: screenHeight * 0.08,

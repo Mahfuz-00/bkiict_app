@@ -195,7 +195,7 @@ class _RegistrationCenterState extends State<RegistrationCenter> with SingleTick
       body: SingleChildScrollView(
           child: SafeArea(
             child: Container(
-              height: screenHeight,
+              height: screenHeight-80,
               color: Colors.grey[100],
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               child: Column(

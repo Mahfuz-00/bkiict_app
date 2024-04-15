@@ -172,7 +172,7 @@ class _RegistrationPersonalInformationState extends State<RegistrationPersonalIn
       body: SingleChildScrollView(
           child: SafeArea(
             child: Container(
-              height: screenHeight,
+              height: screenHeight-40,
               color: Colors.grey[100],
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               child: Column(
