@@ -84,21 +84,12 @@ class _RegistrationPersonalInformationState extends State<RegistrationPersonalIn
                     ),
                     radius: 30,
                   ),
+                  SizedBox(height: 20),
                   Text(
                     'User Name',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Organization Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'default',
                     ),
@@ -117,22 +108,7 @@ class _RegistrationPersonalInformationState extends State<RegistrationPersonalIn
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const RegistrationPersonalInformation())); // Close the drawer
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Report',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                /*Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const BCCReport()));*/
+                        builder: (context) => const Dashboard())); // Close the drawer
               },
             ),
             Divider(),
@@ -243,7 +219,7 @@ class _RegistrationPersonalInformationState extends State<RegistrationPersonalIn
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(),
-                        labelText: 'Email ID',
+                        labelText: 'Email Address',
                         labelStyle: TextStyle(
                           color: Colors.black87,
                           fontWeight: FontWeight.bold,
@@ -338,7 +314,7 @@ class _RegistrationPersonalInformationState extends State<RegistrationPersonalIn
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(12.0), // Adjust the padding as needed
-                            child: Icon(Icons.calendar_today_outlined, size: 40,),
+                            child: Icon(Icons.calendar_today_outlined, size: 30,),
                           ),
                         ),
                       ),
@@ -373,7 +349,7 @@ class _RegistrationPersonalInformationState extends State<RegistrationPersonalIn
                         fontWeight: FontWeight.bold,
                         fontFamily: 'default',
                       ),
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(),
@@ -383,6 +359,35 @@ class _RegistrationPersonalInformationState extends State<RegistrationPersonalIn
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                           fontFamily: 'default',
+                        ),
+                        suffixIcon: GestureDetector(
+                          onTap: (){},
+                          child: Container(
+                              margin: EdgeInsets.only(right: 2),
+                              padding: EdgeInsets.all(3),
+                              width: 80,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(2),
+                                  bottomRight: Radius.circular(2),
+                                ),
+                              ),
+                              child: Column(
+                                children: [
+                                  Icon(Icons.file_upload,
+                                    color: Color.fromRGBO(143, 150, 158, 1),),
+                                  Text('Upload',
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(143, 150, 158, 1),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'default',
+                                    ),)
+                                ],
+                              )
+                          ),
                         ),
                       ),
                     ),

@@ -80,21 +80,12 @@ class _RegistrationApplicationReviewState
                     ),
                     radius: 30,
                   ),
+                  SizedBox(height: 20),
                   Text(
                     'User Name',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Organization Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'default',
                     ),
@@ -108,30 +99,12 @@ class _RegistrationApplicationReviewState
                     color: Colors.black87,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'default',
-                  )),
+                    fontFamily: 'default',)),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            const RegistrationApplicationReview())); // Close the drawer
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Report',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',
-                  )),
-              onTap: () {
-                /*Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const BCCReport()));*/
+                        builder: (context) => const Dashboard())); // Close the drawer
               },
             ),
             Divider(),
@@ -141,8 +114,7 @@ class _RegistrationApplicationReviewState
                     color: Colors.black87,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'default',
-                  )),
+                    fontFamily: 'default',)),
               onTap: () {
                 /* Navigator.push(
                     context,
@@ -157,14 +129,12 @@ class _RegistrationApplicationReviewState
                     color: Colors.black87,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'default',
-                  )),
+                    fontFamily: 'default',)),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            const Login())); // Close the drawer
+                        builder: (context) => const Login())); // Close the drawer
               },
             ),
             Divider(),
@@ -624,10 +594,7 @@ class _RegistrationApplicationReviewState
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const IDCardDownload()));
+                      showSliderAlert(context);
                     },
                     child: const Text('Procced',
                         style: TextStyle(
@@ -770,6 +737,112 @@ class _RegistrationApplicationReviewState
           ],
         ),
       ),
+    );
+  }
+
+  void showSliderAlert(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 400,
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text('Bkash Payment',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color.fromRGBO(134, 188, 66, 1),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: 'default',
+                    ),),
+                ),
+              ),
+              Divider(),
+              SizedBox(height: 20,),
+              Text('Trx ID',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Color.fromRGBO(134, 188, 66, 1),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  fontFamily: 'default',
+                ),),
+              SizedBox(height: 10,),
+              Center(
+                child: Container(
+                  width: 380,
+                  height: 70,
+                  child: TextFormField(
+                    style: const TextStyle(
+                      color: Color.fromRGBO(143, 150, 158, 1),
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'default',
+                    ),
+                    decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(),
+                      labelText: 'Trx ID',
+                      labelStyle: TextStyle(
+                        color: Colors.black87,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        fontFamily: 'default',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 2,),
+              Text('Enter the Transaction ID from Bkash Payment',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Color.fromRGBO(143, 150, 158, 1),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  fontFamily: 'default',
+                ),),
+              SizedBox(height: 45),
+              Center(
+                child: Material(
+                  elevation: 5,
+                  borderRadius: BorderRadius.circular(5),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                      fixedSize: Size(MediaQuery.of(context).size.width* 0.9, MediaQuery.of(context).size.height * 0.08),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const IDCardDownload()));
+                    },
+                    child: const Text('Confirm',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'default',
+                        )),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

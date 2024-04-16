@@ -70,21 +70,12 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
                     ),
                     radius: 30,
                   ),
+                  SizedBox(height: 20),
                   Text(
                     'User Name',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Organization Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'default',
                     ),
@@ -103,22 +94,7 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const Admission())); // Close the drawer
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Report',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                /*Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const BCCReport()));*/
+                        builder: (context) => const Dashboard())); // Close the drawer
               },
             ),
             Divider(),

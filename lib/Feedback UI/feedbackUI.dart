@@ -67,21 +67,12 @@ class _FeedbackUIState extends State<FeedbackUI> with SingleTickerProviderStateM
                     ),
                     radius: 30,
                   ),
+                  SizedBox(height: 20),
                   Text(
                     'User Name',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Organization Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'default',
                     ),
@@ -100,22 +91,7 @@ class _FeedbackUIState extends State<FeedbackUI> with SingleTickerProviderStateM
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const FeedbackUI())); // Close the drawer
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Report',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                /*Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const BCCReport()));*/
+                        builder: (context) => const Dashboard())); // Close the drawer
               },
             ),
             Divider(),
@@ -391,7 +367,7 @@ class _FeedbackUIState extends State<FeedbackUI> with SingleTickerProviderStateM
                               Row(
                                 children: [
                                   Container(
-                                    width: 200,
+                                    width: 250,
                                     height: 70,
                                     child: Center(
                                       child: TextFormField(
@@ -422,7 +398,7 @@ class _FeedbackUIState extends State<FeedbackUI> with SingleTickerProviderStateM
                                     child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: const Color.fromRGBO(68, 157, 68, 1),
-                                          fixedSize: Size(140, 55),
+                                          fixedSize: Size(90, 55),
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(5),
                                           ),
@@ -433,13 +409,7 @@ class _FeedbackUIState extends State<FeedbackUI> with SingleTickerProviderStateM
                                             MaterialPageRoute(
                                                 builder: (context) => const FeedbackUI()));*/
                                         },
-                                        child: Text('Try Another Image',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'default',
-                                            )),
+                                        child: Icon(Icons.refresh, color: Colors.white, size: 40),
                                       ),
                                   ),
                                 ],
