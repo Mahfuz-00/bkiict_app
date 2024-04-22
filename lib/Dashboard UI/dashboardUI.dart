@@ -135,7 +135,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
-            height: screenHeight,
+            height: screenHeight-(screenHeight*0.2),
             color: Colors.grey[100],
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               child: Column(
