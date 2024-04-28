@@ -36,6 +36,7 @@ class _RegistrationPersonalInformationState extends State<RegistrationPersonalIn
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
@@ -148,7 +149,6 @@ class _RegistrationPersonalInformationState extends State<RegistrationPersonalIn
       body: SingleChildScrollView(
           child: SafeArea(
             child: Container(
-              height: screenHeight-40,
               color: Colors.grey[100],
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               child: Column(

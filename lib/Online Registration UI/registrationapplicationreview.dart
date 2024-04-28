@@ -23,6 +23,7 @@ class _RegistrationApplicationReviewState
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
@@ -144,7 +145,6 @@ class _RegistrationApplicationReviewState
       body: SingleChildScrollView(
           child: SafeArea(
         child: Container(
-          height: screenHeight*1.35,
           color: Colors.grey[100],
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
           child: Column(
@@ -196,6 +196,7 @@ class _RegistrationApplicationReviewState
                           ),
                         ),
                       ),
+                      SizedBox(height: 10,),
                       Text(
                         'Profile Picture',
                         style: TextStyle(
@@ -209,7 +210,7 @@ class _RegistrationApplicationReviewState
                   ),
                 ),
               ),
-              SizedBox(height: 15,),
+              SizedBox(height: 25,),
               Center(
                   child: Container(
                     width: screenWidth * 0.85,
@@ -745,7 +746,7 @@ class _RegistrationApplicationReviewState
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: 400,
+          height: 600,
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.all(20),
           child: Column(

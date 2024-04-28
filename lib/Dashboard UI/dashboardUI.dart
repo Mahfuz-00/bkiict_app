@@ -24,6 +24,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
         titleSpacing: 5,
@@ -135,7 +136,6 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
-            height: screenHeight-(screenHeight*0.2),
             color: Colors.grey[100],
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               child: Column(

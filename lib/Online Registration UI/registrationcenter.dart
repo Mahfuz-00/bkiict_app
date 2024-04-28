@@ -59,6 +59,7 @@ class _RegistrationCenterState extends State<RegistrationCenter> with SingleTick
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
@@ -171,7 +172,6 @@ class _RegistrationCenterState extends State<RegistrationCenter> with SingleTick
       body: SingleChildScrollView(
           child: SafeArea(
             child: Container(
-              height: screenHeight-80,
               color: Colors.grey[100],
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               child: Column(

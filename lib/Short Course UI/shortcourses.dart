@@ -35,6 +35,7 @@ class _ShortCoursesState extends State<ShortCourses> with SingleTickerProviderSt
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
@@ -197,7 +198,6 @@ class _ShortCoursesState extends State<ShortCourses> with SingleTickerProviderSt
             scrollDirection: Axis.vertical,
             child: SafeArea(
               child: Container(
-                height: screenHeight+205,
                 color: Colors.grey[100],
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
@@ -261,7 +261,6 @@ class _ShortCoursesState extends State<ShortCourses> with SingleTickerProviderSt
             scrollDirection: Axis.vertical,
             child: SafeArea(
               child: Container(
-                height: screenHeight+205,
                 color: Colors.grey[100],
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
