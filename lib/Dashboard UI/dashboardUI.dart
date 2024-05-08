@@ -1,5 +1,6 @@
 import 'package:bkiict_app/Admission%20UI/admissiondashboardUI.dart';
 import 'package:bkiict_app/Course%20Dashboard%20UI/coursedashboard.dart';
+import 'package:bkiict_app/Profile/profile.dart';
 
 import '../About%20Us%20UI/aboutusUI.dart';
 import '../Feedback%20UI/feedbackUI.dart';
@@ -23,115 +24,31 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      key: _scaffoldKey,
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-        titleSpacing: 5,
-        leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.white,),
-          onPressed: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-        ),
-        title: const Text(
-          'BKIICT',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            fontFamily: 'default',
-          ),
+        automaticallyImplyLeading: false,
+        title: Row(
+          children: [
+            SizedBox(width: 28,),
+            const Text(
+              'BKIICT',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                fontFamily: 'default',
+              ),
+            ),
+          ],
         ),
         actions: [
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.notifications_rounded, color: Colors.white,),
           ),
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.white,),
-            onPressed: () {},
-          ),
         ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(134, 188, 66, 1),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    child: Icon(
-                      Icons.person,
-                      size: 35,
-                    ),
-                    radius: 30,
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'User Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              title: Text('Home',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Dashboard())); // Close the drawer
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Information',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-               /* Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Information()));*/
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Logout',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Login())); // Close the drawer
-              },
-            ),
-            Divider(),
-          ],
-        ),
       ),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -217,35 +134,6 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                                   builder: (context) => const Admission()));
                         },
                         child: const Text('Admission',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const FeedbackUI()));
-                        },
-                        child: const Text('Feedback',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -362,10 +250,10 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
             ),
             GestureDetector(
               onTap: (){
-               /* Navigator.push(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SearchUser()));*/
+                        builder: (context) => Profile()));
               },
               behavior: HitTestBehavior.translucent,
               child: Container(
@@ -382,7 +270,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(
-                      Icons.search,
+                      Icons.person,
                       size: 30,
                       color: Colors.white,
                     ),
@@ -390,7 +278,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                       height: 5,
                     ),
                     Text(
-                      'Search',
+                      'Profile',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -405,10 +293,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
             GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: (){
-              /*  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Information()));*/
+                _showLogoutDialog(context);
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -424,7 +309,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(
-                      Icons.info,
+                      Icons.logout,
                       size: 30,
                       color: Colors.white,
                     ),
@@ -432,7 +317,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                       height: 5,
                     ),
                     Text(
-                      'Information',
+                      'Log Out',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -449,4 +334,69 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
       ),
     );
   }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Column(
+            children: [
+              Text('Logout Confirmation',
+                style: TextStyle(
+                  color: Colors.redAccent,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  fontFamily: 'default',
+                ),),
+              Divider()
+            ],
+          ),
+          content: Text('Are you sure you want to log out?',
+            style: TextStyle(
+              color: const Color.fromRGBO(134, 188, 66, 1),
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              fontFamily: 'default',
+            ),),
+          actions: <Widget>[
+           Row(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+               ElevatedButton(
+                 onPressed: () {
+                   Navigator.of(context).pop(); // Close the dialog
+                 },
+                 child: Text('Cancel',
+                   style: TextStyle(
+                     color: const Color.fromRGBO(134, 188, 66, 1),
+                     fontWeight: FontWeight.bold,
+                     fontSize: 14,
+                     fontFamily: 'default',
+                   ),),
+               ),
+               SizedBox(width: 10,),
+               ElevatedButton(
+                 onPressed: () {
+                   Navigator.pushReplacement(
+                       context,
+                       MaterialPageRoute(
+                           builder: (context) => const Login()));
+                 },
+                 child: Text('Logout',
+                   style: TextStyle(
+                     color: Colors.redAccent,
+                     fontWeight: FontWeight.bold,
+                     fontSize: 14,
+                     fontFamily: 'default',
+                   ),),
+               ),
+             ],
+           )
+          ],
+        );
+      },
+    );
+  }
+
 }

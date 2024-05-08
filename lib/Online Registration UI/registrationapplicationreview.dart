@@ -1,5 +1,6 @@
 import 'package:bkiict_app/Dashboard%20UI/dashboardUI.dart';
 import 'package:bkiict_app/Online%20Registration%20UI/idcarddownload.dart';
+import 'package:bkiict_app/Online%20Registration%20UI/paymentconfirmation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -29,14 +30,13 @@ class _RegistrationApplicationReviewState
         backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
         titleSpacing: 5,
         leading: IconButton(
-          icon: const Icon(
-            Icons.menu,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-        ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new_outlined,
+              color: Colors.white,
+            )),
         title: const Text(
           'BKIICT',
           style: TextStyle(
@@ -45,101 +45,6 @@ class _RegistrationApplicationReviewState
             fontSize: 20,
             fontFamily: 'default',
           ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.notifications_rounded,
-              color: Colors.white,
-            ),
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(134, 188, 66, 1),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    child: Icon(
-                      Icons.person,
-                      size: 35,
-                    ),
-                    radius: 30,
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'User Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              title: Text('Home',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Dashboard())); // Close the drawer
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Information',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                /* Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Information()));*/
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Logout',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Login())); // Close the drawer
-              },
-            ),
-            Divider(),
-          ],
         ),
       ),
       body: SingleChildScrollView(
@@ -168,7 +73,7 @@ class _RegistrationApplicationReviewState
               Center(
                 child: Container(
                   width: screenWidth * 0.3,
-                  height: screenHeight * 0.15,
+                  height: screenHeight * 0.16,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5),
@@ -196,7 +101,7 @@ class _RegistrationApplicationReviewState
                           ),
                         ),
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(height: 5,),
                       Text(
                         'Profile Picture',
                         style: TextStyle(
@@ -210,7 +115,7 @@ class _RegistrationApplicationReviewState
                   ),
                 ),
               ),
-              SizedBox(height: 25,),
+              SizedBox(height: 20,),
               Center(
                   child: Container(
                     width: screenWidth * 0.85,
@@ -595,7 +500,10 @@ class _RegistrationApplicationReviewState
                       ),
                     ),
                     onPressed: () {
-                      showSliderAlert(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentConfirmation()));
                     },
                     child: const Text('Procced',
                         style: TextStyle(
@@ -611,239 +519,7 @@ class _RegistrationApplicationReviewState
           ),
         ),
       )),
-      bottomNavigationBar: Container(
-        height: screenHeight * 0.08,
-        color: const Color.fromRGBO(134, 188, 66, 1),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Dashboard()));
-              },
-              child: Container(
-                width: screenWidth / 3,
-                padding: EdgeInsets.all(5),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.home,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'Home',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        fontFamily: 'default',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                /* Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SearchUser()));*/
-              },
-              behavior: HitTestBehavior.translucent,
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border(
-                  left: BorderSide(
-                    color: Colors.black,
-                    width: 1.0,
-                  ),
-                )),
-                width: screenWidth / 3,
-                padding: EdgeInsets.all(5),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.search,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'Search',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        fontFamily: 'default',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                /*  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Information()));*/
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border(
-                  left: BorderSide(
-                    color: Colors.black,
-                    width: 1.0,
-                  ),
-                )),
-                width: screenWidth / 3,
-                padding: EdgeInsets.all(5),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.info,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'Information',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        fontFamily: 'default',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
-  void showSliderAlert(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          height: 600,
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text('Bkash Payment',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color.fromRGBO(134, 188, 66, 1),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: 'default',
-                    ),),
-                ),
-              ),
-              Divider(),
-              SizedBox(height: 20,),
-              Text('Trx ID',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Color.fromRGBO(134, 188, 66, 1),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  fontFamily: 'default',
-                ),),
-              SizedBox(height: 10,),
-              Center(
-                child: Container(
-                  width: 380,
-                  height: 70,
-                  child: TextFormField(
-                    style: const TextStyle(
-                      color: Color.fromRGBO(143, 150, 158, 1),
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),
-                    decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      labelText: 'Trx ID',
-                      labelStyle: TextStyle(
-                        color: Colors.black87,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        fontFamily: 'default',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 2,),
-              Text('Enter the Transaction ID from Bkash Payment',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 150, 158, 1),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  fontFamily: 'default',
-                ),),
-              SizedBox(height: 45),
-              Center(
-                child: Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(5),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                      fixedSize: Size(MediaQuery.of(context).size.width* 0.9, MediaQuery.of(context).size.height * 0.08),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const IDCardDownload()));
-                    },
-                    child: const Text('Confirm',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'default',
-                        )),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
 }

@@ -1,4 +1,5 @@
 
+import 'package:bkiict_app/Admission%20UI/admissiondashboardUI.dart';
 import 'package:bkiict_app/All%20Course%20UI/allcourses.dart';
 import 'package:bkiict_app/Customise%20Course%20UI/customisedcourses.dart';
 import 'package:bkiict_app/Dashboard%20UI/dashboardUI.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../Login UI/loginUI.dart';
+import '../Profile/profile.dart';
 
 class CourseDashboard extends StatefulWidget {
   const CourseDashboard({super.key});
@@ -29,11 +31,13 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
         backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
         titleSpacing: 5,
         leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.white,),
-          onPressed: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-        ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new_outlined,
+              color: Colors.white,
+            )),
         title: const Text(
           'Courses',
           style: TextStyle(
@@ -48,90 +52,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
             onPressed: () {},
             icon: const Icon(Icons.notifications_rounded, color: Colors.white,),
           ),
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.white,),
-            onPressed: () {},
-          ),
         ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(134, 188, 66, 1),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    child: Icon(
-                      Icons.person,
-                      size: 35,
-                    ),
-                    radius: 30,
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'User Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              title: Text('Home',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Dashboard())); // Close the drawer
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Information',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                /* Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Information()));*/
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Logout',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Login())); // Close the drawer
-              },
-            ),
-            Divider(),
-          ],
-        ),
       ),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -363,10 +284,10 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
             ),
             GestureDetector(
               onTap: (){
-                /* Navigator.push(
+                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SearchUser()));*/
+                        builder: (context) => const Admission()));
               },
               behavior: HitTestBehavior.translucent,
               child: Container(
@@ -383,7 +304,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(
-                      Icons.search,
+                      Icons.app_registration,
                       size: 30,
                       color: Colors.white,
                     ),
@@ -391,7 +312,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                       height: 5,
                     ),
                     Text(
-                      'Search',
+                      'Admission',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -406,10 +327,10 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
             GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: (){
-                /*  Navigator.push(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const Information()));*/
+                        builder: (context) => Profile()));
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -425,7 +346,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(
-                      Icons.info,
+                      Icons.person,
                       size: 30,
                       color: Colors.white,
                     ),
@@ -433,7 +354,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                       height: 5,
                     ),
                     Text(
-                      'Information',
+                      'Profile',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

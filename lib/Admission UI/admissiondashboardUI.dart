@@ -1,11 +1,13 @@
 import 'package:bkiict_app/Admission%20Process%20UI/admissionprocessUI.dart';
 import 'package:bkiict_app/Admisssion%20Calender%20UI/admissioncalenderUI.dart';
+import 'package:bkiict_app/Course%20Dashboard%20UI/coursedashboard.dart';
 import 'package:bkiict_app/Dashboard%20UI/dashboardUI.dart';
 import 'package:bkiict_app/Online%20Registration%20UI/registrationcenter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../Login UI/loginUI.dart';
+import '../Profile/profile.dart';
 
 class Admission extends StatefulWidget {
   const Admission({super.key});
@@ -27,11 +29,13 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
         backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
         titleSpacing: 5,
         leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.white,),
-          onPressed: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-        ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new_outlined,
+              color: Colors.white,
+            )),
         title: const Text(
           'Admission',
           style: TextStyle(
@@ -46,90 +50,7 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
             onPressed: () {},
             icon: const Icon(Icons.notifications_rounded, color: Colors.white,),
           ),
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.white,),
-            onPressed: () {},
-          ),
         ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(134, 188, 66, 1),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    child: Icon(
-                      Icons.person,
-                      size: 35,
-                    ),
-                    radius: 30,
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'User Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              title: Text('Home',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Dashboard())); // Close the drawer
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Information',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                /* Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Information()));*/
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Logout',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Login())); // Close the drawer
-              },
-            ),
-            Divider(),
-          ],
-        ),
       ),
       body: SafeArea(
         child: Container(
@@ -137,8 +58,9 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
           color: Colors.grey[100],
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(height: 40,),
               Center(
                 child: Text('Admission & Register',
                   textAlign: TextAlign.center,
@@ -166,7 +88,7 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
                   ),
                 ),
               ),
-              SizedBox(height: 50,),
+              SizedBox(height: 90,),
               Center(
                 child: Material(
                   elevation: 5,
@@ -186,35 +108,6 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
                                 builder: (context) => const AdmissionProcess()));
                     },
                     child: const Text('Admission Process',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'default',
-                        )),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20,),
-              Center(
-                child: Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                      fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AdmissionCalender()));
-                    },
-                    child: const Text('Admission Calender',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -301,10 +194,10 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
             ),
             GestureDetector(
               onTap: (){
-                /* Navigator.push(
+                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SearchUser()));*/
+                        builder: (context) => const CourseDashboard()));
               },
               behavior: HitTestBehavior.translucent,
               child: Container(
@@ -321,7 +214,7 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(
-                      Icons.search,
+                      Icons.book,
                       size: 30,
                       color: Colors.white,
                     ),
@@ -329,7 +222,7 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
                       height: 5,
                     ),
                     Text(
-                      'Search',
+                      'Courses',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -344,10 +237,10 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
             GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: (){
-                /*  Navigator.push(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const Information()));*/
+                        builder: (context) => Profile()));
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -363,7 +256,7 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(
-                      Icons.info,
+                      Icons.person,
                       size: 30,
                       color: Colors.white,
                     ),
@@ -371,7 +264,7 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
                       height: 5,
                     ),
                     Text(
-                      'Information',
+                      'Profile',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

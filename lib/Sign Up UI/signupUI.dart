@@ -127,56 +127,6 @@ class _SignupState extends State<Signup> {
                                 width: 350,
                                 height: 70,
                                 child: TextFormField(
-                                  style: const TextStyle(
-                                    color: Color.fromRGBO(143, 150, 158, 1),
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'default',
-                                  ),
-                                  decoration: const InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Organization Name',
-                                    labelStyle: TextStyle(
-                                      color: Colors.black87,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      fontFamily: 'default',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Container(
-                                width: 350,
-                                height: 70,
-                                child: TextFormField(
-                                  style: const TextStyle(
-                                    color: Color.fromRGBO(143, 150, 158, 1),
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'default',
-                                  ),
-                                  decoration: const InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Designation',
-                                    labelStyle: TextStyle(
-                                      color: Colors.black87,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      fontFamily: 'default',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Container(
-                                width: 350,
-                                height: 70,
-                                child: TextFormField(
                                   keyboardType: TextInputType.emailAddress,
                                   onSaved: (input) => _registerRequest.Email= input!,
                                   validator: (input) {
@@ -312,33 +262,6 @@ class _SignupState extends State<Signup> {
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              DropdownFormField(hintText: 'Type of User', dropdownItems: types,),
-                              const SizedBox(height: 20),
-                              Container(
-                                width: 350,
-                                height: 70,
-                                child: TextFormField(
-                                  style: const TextStyle(
-                                    color: Color.fromRGBO(143, 150, 158, 1),
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'default',
-                                  ),
-                                  decoration: const InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    border: OutlineInputBorder(),
-                                    labelText: 'License Number',
-                                    labelStyle: TextStyle(
-                                      color: Colors.black87,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      fontFamily: 'default',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 5),
                               Container(
                                 width: 350,
                                 height: 70,
@@ -388,35 +311,6 @@ class _SignupState extends State<Signup> {
                                             ],
                                           )
                                       ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Container(
-                                width: 350,
-                                height: 120,
-                                child: TextFormField(
-                                  style: const TextStyle(
-                                    color: Color.fromRGBO(143, 150, 158, 1),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'default',
-                                  ),
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    labelText: 'Address',
-                                    labelStyle: TextStyle(
-                                      color: Colors.black87,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      fontFamily: 'default',
-                                    ),
-                                    alignLabelWithHint: true,
-                                    contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 145),
-                                    border:  const OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(Radius.circular(5))
                                     ),
                                   ),
                                 ),
