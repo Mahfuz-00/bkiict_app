@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../Login UI/loginUI.dart';
-import '../Profile/profile.dart';
+import '../Profile UI/profileUI.dart';
 
 class Admission extends StatefulWidget {
   const Admission({super.key});

@@ -1,7 +1,9 @@
 import 'package:bkiict_app/Admission%20UI/admissiondashboardUI.dart';
 import 'package:bkiict_app/Course%20Dashboard%20UI/coursedashboard.dart';
-import 'package:bkiict_app/Profile/profile.dart';
+import 'package:bkiict_app/Profile UI/profileUI.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../API Service (Log Out)/apiServiceLogOut.dart';
 import '../About%20Us%20UI/aboutusUI.dart';
 import '../Feedback%20UI/feedbackUI.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +18,8 @@ class Dashboard extends StatefulWidget {
   State<Dashboard> createState() => _DashboardState();
 }
 
-class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMixin{
+class _DashboardState extends State<Dashboard>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -30,7 +33,9 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            SizedBox(width: 28,),
+            SizedBox(
+              width: 28,
+            ),
             const Text(
               'BKIICT',
               textAlign: TextAlign.center,
@@ -46,7 +51,10 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications_rounded, color: Colors.white,),
+            icon: const Icon(
+              Icons.notifications_rounded,
+              color: Colors.white,
+            ),
           ),
         ],
       ),
@@ -55,154 +63,170 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
           child: Container(
             color: Colors.grey[100],
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                    Center(
-                      child: Text('Welcome to BKIICT',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'default',
-                        ),
-                      ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(
+                    'Welcome to BKIICT',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'default',
                     ),
-                  SizedBox(height: 20,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Center(
-                      child: Text('One of the Activities of Bangladesh Computer Council (BCC) is to develop trained manpower in the field of ICT through ICT training',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color.fromRGBO(143, 150, 158, 1),
-                          letterSpacing: 1.1,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'default',
-                        ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Center(
+                    child: Text(
+                      'One of the Activities of Bangladesh Computer Council (BCC) is to develop trained manpower in the field of ICT through ICT training',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color.fromRGBO(143, 150, 158, 1),
+                        letterSpacing: 1.1,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'default',
                       ),
                     ),
                   ),
-                  SizedBox(height: 50,),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Center(
+                  child: Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                        fixedSize: Size(MediaQuery.of(context).size.width * 0.8,
+                            MediaQuery.of(context).size.height * 0.08),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const CourseDashboard()));
-                         },
-                        child: const Text('Courses',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
                       ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CourseDashboard()));
+                      },
+                      child: const Text('Courses',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          )),
                     ),
                   ),
-                  SizedBox(height: 20,),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                        fixedSize: Size(MediaQuery.of(context).size.width * 0.8,
+                            MediaQuery.of(context).size.height * 0.08),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Admission()));
-                        },
-                        child: const Text('Admission',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
                       ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Admission()));
+                      },
+                      child: const Text('Admission',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          )),
                     ),
                   ),
-                  SizedBox(height: 20,),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                        fixedSize: Size(MediaQuery.of(context).size.width * 0.8,
+                            MediaQuery.of(context).size.height * 0.08),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const AboutUs()));
-                        },
-                        child: const Text('About Us',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
                       ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AboutUs()));
+                      },
+                      child: const Text('About Us',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          )),
                     ),
                   ),
-                  SizedBox(height: 20,),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                        fixedSize: Size(MediaQuery.of(context).size.width * 0.8,
+                            MediaQuery.of(context).size.height * 0.08),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        onPressed: () {
-                          /*Navigator.push(
+                      ),
+                      onPressed: () {
+                        /*Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const AboutUs()));*/
-                        },
-                        child: const Text('Result',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
-                      ),
+                      },
+                      child: const Text('Result',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          )),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -215,10 +239,8 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
             GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Dashboard()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Dashboard()));
               },
               child: Container(
                 width: screenWidth / 3,
@@ -249,21 +271,19 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
               ),
             ),
             GestureDetector(
-              onTap: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Profile()));
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Profile()));
               },
               behavior: HitTestBehavior.translucent,
               child: Container(
                 decoration: BoxDecoration(
                     border: Border(
-                      left: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    )),
+                  left: BorderSide(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
+                )),
                 width: screenWidth / 3,
                 padding: EdgeInsets.all(5),
                 child: Column(
@@ -292,17 +312,17 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
             ),
             GestureDetector(
               behavior: HitTestBehavior.translucent,
-              onTap: (){
+              onTap: () {
                 _showLogoutDialog(context);
               },
               child: Container(
                 decoration: BoxDecoration(
                     border: Border(
-                      left: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    )),
+                  left: BorderSide(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
+                )),
                 width: screenWidth / 3,
                 padding: EdgeInsets.all(5),
                 child: Column(
@@ -342,61 +362,86 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
         return AlertDialog(
           title: Column(
             children: [
-              Text('Logout Confirmation',
+              Text(
+                'Logout Confirmation',
                 style: TextStyle(
                   color: Colors.redAccent,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                   fontFamily: 'default',
-                ),),
+                ),
+              ),
               Divider()
             ],
           ),
-          content: Text('Are you sure you want to log out?',
+          content: Text(
+            'Are you sure you want to log out?',
             style: TextStyle(
               color: const Color.fromRGBO(134, 188, 66, 1),
               fontWeight: FontWeight.bold,
               fontSize: 16,
               fontFamily: 'default',
-            ),),
+            ),
+          ),
           actions: <Widget>[
-           Row(
-             mainAxisAlignment: MainAxisAlignment.center,
-             children: [
-               ElevatedButton(
-                 onPressed: () {
-                   Navigator.of(context).pop(); // Close the dialog
-                 },
-                 child: Text('Cancel',
-                   style: TextStyle(
-                     color: const Color.fromRGBO(134, 188, 66, 1),
-                     fontWeight: FontWeight.bold,
-                     fontSize: 14,
-                     fontFamily: 'default',
-                   ),),
-               ),
-               SizedBox(width: 10,),
-               ElevatedButton(
-                 onPressed: () {
-                   Navigator.pushReplacement(
-                       context,
-                       MaterialPageRoute(
-                           builder: (context) => const Login()));
-                 },
-                 child: Text('Logout',
-                   style: TextStyle(
-                     color: Colors.redAccent,
-                     fontWeight: FontWeight.bold,
-                     fontSize: 14,
-                     fontFamily: 'default',
-                   ),),
-               ),
-             ],
-           )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Close the dialog
+                  },
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(
+                      color: const Color.fromRGBO(134, 188, 66, 1),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      fontFamily: 'default',
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    // Clear user data from SharedPreferences
+                    final prefs = await SharedPreferences.getInstance();
+                    await prefs.remove('userName');
+                    await prefs.remove('organizationName');
+                    await prefs.remove('photoUrl');
+                    // Create an instance of LogOutApiService
+                    var logoutApiService = await LogOutApiService.create();
+
+                    // Wait for authToken to be initialized
+                    logoutApiService.authToken;
+
+                    // Call the signOut method on the instance
+                    if (await logoutApiService.signOut()) {
+                      Navigator.pop(context);
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Login())); // Close the drawer
+                    }
+                  },
+                  child: Text(
+                    'Logout',
+                    style: TextStyle(
+                      color: Colors.redAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      fontFamily: 'default',
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         );
       },
     );
   }
-
 }

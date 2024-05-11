@@ -54,7 +54,7 @@ class _IDCardDownloadState extends State<IDCardDownload> with SingleTickerProvid
               children: [
                 Center(
                   child: Text(
-                    'Congratulations, Your Registration Successfully Submitted',
+                    'Congratulations, Your Payment is Completed, \n You can download your id card',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color.fromRGBO(143, 150, 158, 1),

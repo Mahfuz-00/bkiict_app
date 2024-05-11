@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:footer/footer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../API Models(Login and Sign Up)/loginmodels.dart';
+import '../API Model and Service (Login)/apiservicelogin.dart';
+import '../API Model and Service (Login)/loginmodels.dart';
 import '../Dashboard UI/dashboardUI.dart';
 import '../Forgot Password UI/forgotpasswordUI.dart';
 import '../Sign Up UI/signupUI.dart';
-
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -17,9 +18,13 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool _isObscured = true;
   late TextEditingController _passwordController;
+  late TextEditingController _emailController;
   late LoginRequestmodel _loginRequest;
   var globalKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalfromkey = GlobalKey<FormState>();
+  late String userType;
+  bool _isLoading = false;
+  bool _isButtonClicked = false;
 
   IconData _getIcon() {
     return _isObscured ? Icons.visibility_off : Icons.visibility;
@@ -37,6 +42,7 @@ class _LoginState extends State<Login> {
     super.initState();
     _loginRequest = LoginRequestmodel(Email: '', Password: '');
     _passwordController = TextEditingController();
+    _emailController = TextEditingController();
     _checkLoginRequest();
   }
 
@@ -94,9 +100,21 @@ class _LoginState extends State<Login> {
                                   width: 350,
                                   height: 70,
                                   child: TextFormField(
+                                    controller: _emailController,
                                     keyboardType: TextInputType.emailAddress,
-                                    onSaved: (input) => _loginRequest.Email= input!,
-                                    validator: (input) => input!.contains('@') ? "Please, Enter a Valid Email": null,
+                                    onSaved: (input) =>
+                                        _loginRequest.Email = input!,
+                                    validator: (input) {
+                                      if (input!.isEmpty) {
+                                        return 'Please enter your email address';
+                                      }
+                                      final emailRegex = RegExp(
+                                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                                      if (!emailRegex.hasMatch(input)) {
+                                        return 'Please enter a valid email address';
+                                      }
+                                      return null;
+                                    },
                                     style: const TextStyle(
                                       color: Color.fromRGBO(143, 150, 158, 1),
                                       fontSize: 15,
@@ -105,7 +123,8 @@ class _LoginState extends State<Login> {
                                     ),
                                     decoration: const InputDecoration(
                                       filled: true,
-                                      fillColor: Color.fromRGBO(247, 248, 250, 1),
+                                      fillColor:
+                                          Color.fromRGBO(247, 248, 250, 1),
                                       border: OutlineInputBorder(),
                                       labelText: 'Enter your Email',
                                       labelStyle: TextStyle(
@@ -125,19 +144,24 @@ class _LoginState extends State<Login> {
                                     children: [
                                       TextFormField(
                                         keyboardType: TextInputType.text,
-                                        onSaved: (input)=> _loginRequest.Password = input!,
-                                        validator: (input) => input!.length < 6 ? "Password should be more than 3 characters": null,
+                                        onSaved: (input) =>
+                                            _loginRequest.Password = input!,
+                                        validator: (input) => input!.length < 8
+                                            ? "Password should be more than 7 characters"
+                                            : null,
                                         controller: _passwordController,
                                         obscureText: _isObscured,
                                         style: const TextStyle(
-                                          color: Color.fromRGBO(143, 150, 158, 1),
+                                          color:
+                                              Color.fromRGBO(143, 150, 158, 1),
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
                                           fontFamily: 'default',
                                         ),
                                         decoration: InputDecoration(
                                           filled: true,
-                                          fillColor: const Color.fromRGBO(247, 248, 250, 1),
+                                          fillColor: const Color.fromRGBO(
+                                              247, 248, 250, 1),
                                           border: const OutlineInputBorder(),
                                           labelText: 'Enter your password',
                                           labelStyle: TextStyle(
@@ -159,11 +183,13 @@ class _LoginState extends State<Login> {
                                           errorStyle: TextStyle(height: 0),
                                         ),
                                       ),
-                                      if (_passwordController.text.isNotEmpty && _passwordController.text.length < 6)
+                                      if (_passwordController.text.isNotEmpty &&
+                                          _passwordController.text.length < 7)
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 8.0),
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
                                           child: Text(
-                                            "Password should be more than 3 characters",
+                                            "Password should be more than 7 characters",
                                             style: TextStyle(color: Colors.red),
                                           ),
                                         ),
@@ -183,7 +209,8 @@ class _LoginState extends State<Login> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => const ForgotPassword()));
+                                            builder: (context) =>
+                                                const ForgotPassword()));
                                   },
                                   child: const Text(
                                     'Forgot Password?',
@@ -203,25 +230,34 @@ class _LoginState extends State<Login> {
                             height: 25,
                           ),
                           ElevatedButton(
-                              onPressed: () {
-                                if(validateAndsave()) {
-                                  print(_loginRequest.toJSON());
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => const Dashboard()));
-                                  clearForm();
+                              onPressed: () async {
+                                setState(() {
+                                  _isButtonClicked =
+                                      true; // Button clicked, show circular progress indicator
+                                });
+                                if (await validateAndSave(
+                                    globalfromkey, context)) {
+                                  //print(_loginRequest.toJSON());
+                                  print('Checking $userType');
+                                  if (userType != null) {
+                                    if (userType == 'isp_staff') {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Dashboard(
+                                                /*shouldRefresh: true*/)),
+                                      );
+                                    }
+                                  }
                                 }
-                                else{
-                                  const snackBar = SnackBar(
-                                    content: Text('Login Failed!'),
-                                  );
-
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                }
+                                setState(() {
+                                  _isButtonClicked =
+                                      false; // Validation complete, hide circular progress indicator
+                                });
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                                backgroundColor:
+                                    const Color.fromRGBO(134, 188, 66, 1),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
@@ -292,26 +328,95 @@ class _LoginState extends State<Login> {
     );
   }
 
-  bool validateAndsave(){
-    if (globalfromkey.currentState == null) {
-      // Handle the case where globalfromkey.currentState is null
-      return false;
-    }
-    final form = globalfromkey.currentState;
-    if(form!.validate()) {
+  Future<bool> validateAndSave(GlobalKey<FormState> formKey, BuildContext context) async {
+    final form = formKey.currentState;
+    if (form != null && form.validate()) {
       form.save();
-      return true;
-    } else {
-      return false;
+      final apiService = APIService();
+      final loginRequestModel = LoginRequestmodel(
+        Email: _emailController.text,
+        Password: _passwordController.text,
+      );
+      try {
+        final response = await apiService.login(loginRequestModel);
+        if (response != null) {
+          // Handle successful login
+          storeTokenLocally(response.token);
+          userType = response.userType;
+          print('UserType :: $userType');
+          //_fetchUserProfile(response.token);
+          return true;
+        } else {
+          // Handle unsuccessful login
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Email or password is not valid.'),
+            ),
+          );
+          return false;
+        }
+      } catch (e) {
+        // Handle login error
+        String errorMessage = 'Incorrect Email and Password.';
+        if (e.toString().contains('Invalid User')) {
+          errorMessage = 'Please enter a valid email address.';
+        }
+        else if (e.toString().contains('Invalid Credentials')) {
+          errorMessage = 'Incorrect Password. Try again.';
+        }
+        else if (e.toString().contains('The email field is required') || e.toString().contains('The password field is required')) {
+          errorMessage = 'Email or password is empty. Please fill in both fields.';
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+          ),
+        );
+        return false;
+      }
     }
-
+    // Return false if form validation fails
+    return false;
   }
 
-  void clearForm() {
-    final form = globalfromkey.currentState;
-    if (form != null) {
-      form.reset();
-    }
+  late String AuthenToken;
+  late final String? UserName;
+  late final String? OrganizationName;
+  late final String? PhotoURL;
+
+  Future<void> storeTokenLocally(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('token', token);
+    print(prefs.getString('token'));
   }
+
+/*  Future<void> _fetchUserProfile(String token) async {
+    try {
+      final apiService = await APIProfileService();
+      final profile = await apiService.fetchUserProfile(token);
+      final userProfile = UserProfile.fromJson(profile);
+
+      // Save user profile data in SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      try {
+        await prefs.setString('userName', userProfile.name);
+        await prefs.setString('organizationName', userProfile.organization);
+        await prefs.setString('photoUrl', userProfile.photo);
+        UserName = prefs.getString('userName');
+        OrganizationName = prefs.getString('organizationName');
+        PhotoURL = prefs.getString('photoUrl');
+        print('User Name: $UserName');
+        print('Organization Name: $OrganizationName');
+        print('Photo URL: $PhotoURL');
+        print('User profile saved successfully');
+      } catch (e) {
+        print('Error saving user profile: $e');
+      }
+
+    } catch (e) {
+      print('Error fetching user profile: $e');
+      // Handle error as needed
+    }
+  }*/
 
 }
