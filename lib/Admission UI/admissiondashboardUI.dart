@@ -240,7 +240,7 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Profile()));
+                        builder: (context) => Profile(shouldRefresh: true,)));
               },
               child: Container(
                 decoration: BoxDecoration(

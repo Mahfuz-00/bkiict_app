@@ -330,7 +330,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Profile()));
+                        builder: (context) => Profile(shouldRefresh: true,)));
               },
               child: Container(
                 decoration: BoxDecoration(

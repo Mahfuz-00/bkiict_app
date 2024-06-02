@@ -273,7 +273,7 @@ class _DashboardState extends State<Dashboard>
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Profile()));
+                    MaterialPageRoute(builder: (context) => Profile(shouldRefresh: true,)));
               },
               behavior: HitTestBehavior.translucent,
               child: Container(
