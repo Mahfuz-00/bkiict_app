@@ -3,6 +3,11 @@ import 'package:bkiict_app/Course%20Dashboard%20UI/coursedashboard.dart';
 import 'package:bkiict_app/Profile UI/profileUI.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
+import 'package:http/http.dart' as http;
+import '../API Model and Service (Result)/apiServiceResult.dart';
 import '../API Service (Log Out)/apiServiceLogOut.dart';
 import '../About%20Us%20UI/aboutusUI.dart';
 import '../Feedback%20UI/feedbackUI.dart';
@@ -210,10 +215,7 @@ class _DashboardState extends State<Dashboard>
                         ),
                       ),
                       onPressed: () {
-                        /*Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const AboutUs()));*/
+                        generatePDF();
                       },
                       child: const Text('Result',
                           style: TextStyle(
@@ -272,8 +274,12 @@ class _DashboardState extends State<Dashboard>
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Profile(shouldRefresh: true,)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Profile(
+                              shouldRefresh: true,
+                            )));
               },
               behavior: HitTestBehavior.translucent,
               child: Container(
@@ -443,5 +449,48 @@ class _DashboardState extends State<Dashboard>
         );
       },
     );
+  }
+
+  Future<void> generatePDF() async {
+    const snackBar = SnackBar(
+      content: Text('Preparing Printing, Please wait'),
+    );
+    ScaffoldMessenger.of(context as BuildContext).showSnackBar(snackBar);
+    print('Print Triggered!!');
+
+    final apiService = await ResultAPIService.create();
+
+    // Fetch dashboard data
+    final Map<String, dynamic>? dashboardData =
+    await apiService.getResult();
+    if (dashboardData == null || dashboardData.isEmpty) {
+      // No data available or an error occurred
+      print(
+          'No data available or error occurred while fetching dashboard data');
+      return;
+    }
+    print(dashboardData);
+
+    final Map<String, dynamic>? records = dashboardData['data'] ?? [];
+    print(records);
+    if (records == null || records.isEmpty) {
+      // No records available
+      print('No records available');
+      return;
+    }
+
+    String link = records['download_link'];
+
+
+    try {
+      print('PDF generated successfully. Download URL: ${link}');
+      final Uri url = Uri.parse(link);
+      var data = await http.get(url);
+      await Printing.layoutPdf(
+          onLayout: (PdfPageFormat format) async => data.bodyBytes);
+    } catch (e) {
+      // Handle any errors
+      print('Error generating PDF: $e');
+    }
   }
 }

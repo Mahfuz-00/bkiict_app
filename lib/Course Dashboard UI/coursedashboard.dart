@@ -7,7 +7,11 @@ import 'package:bkiict_app/Long%20Course%20UI/longcourses.dart';
 import 'package:bkiict_app/Short%20Course%20UI/shortcourses.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
+import 'package:http/http.dart' as http;
 
+import '../API Model and Service (Download Course)/apiServiceCourseDownload.dart';
 import '../Login UI/loginUI.dart';
 import '../Profile UI/profileUI.dart';
 
@@ -107,7 +111,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ShortCourses()));
+                                  builder: (context) => const ShortCourses(shouldRefresh: true,)));
                       },
                       child: const Text('Short Courses',
                           style: TextStyle(
@@ -136,7 +140,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const LongCourses()));
+                                builder: (context) => const LongCourses(shouldRefresh: true,)));
                       },
                       child: const Text('Long Courses',
                           style: TextStyle(
@@ -165,7 +169,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const CustomisedCourses()));
+                                builder: (context) => const CustomisedCourses(shouldRefresh: true,)));
                       },
                       child: const Text('Customised Courses',
                           style: TextStyle(
@@ -177,7 +181,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                     ),
                   ),
                 ),
-                SizedBox(height: 20,),
+             /*   SizedBox(height: 20,),
                 Center(
                   child: Material(
                     elevation: 5,
@@ -194,7 +198,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const AllCourses()));
+                                builder: (context) => const AllCourses(shouldRefresh: true,)));
                       },
                       child: const Text('All Courses',
                           style: TextStyle(
@@ -205,7 +209,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                           )),
                     ),
                   ),
-                ),
+                ),*/
                 SizedBox(height: 20,),
                 Center(
                   child: Material(
@@ -220,10 +224,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                         ),
                       ),
                       onPressed: () {
-                        /*Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AboutUs()));*/
+                        generatePDF();
                       },
                       child: const Text('Download Courses Info',
                           style: TextStyle(
@@ -371,4 +372,48 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
       ),
     );
   }
+
+  Future<void> generatePDF() async {
+    const snackBar = SnackBar(
+      content: Text('Preparing Printing, Please wait'),
+    );
+    ScaffoldMessenger.of(context as BuildContext).showSnackBar(snackBar);
+    print('Print Triggered!!');
+
+    final apiService = await CourseDownloadAPIService.create();
+
+    // Fetch dashboard data
+    final Map<String, dynamic>? dashboardData =
+    await apiService.getResult();
+    if (dashboardData == null || dashboardData.isEmpty) {
+      // No data available or an error occurred
+      print(
+          'No data available or error occurred while fetching dashboard data');
+      return;
+    }
+    print(dashboardData);
+
+    final Map<String, dynamic>? records = dashboardData['data'] ?? [];
+    print(records);
+    if (records == null || records.isEmpty) {
+      // No records available
+      print('No records available');
+      return;
+    }
+
+    String link = records['download_link'];
+
+
+    try {
+      print('PDF generated successfully. Download URL: ${link}');
+      final Uri url = Uri.parse(link);
+      var data = await http.get(url);
+      await Printing.layoutPdf(
+          onLayout: (PdfPageFormat format) async => data.bodyBytes);
+    } catch (e) {
+      // Handle any errors
+      print('Error generating PDF: $e');
+    }
+  }
+
 }

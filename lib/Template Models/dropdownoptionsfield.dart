@@ -1,56 +1,61 @@
 import 'package:flutter/material.dart';
 
-class DropdownFormFieldBuilder {
-  final Map<String, List<String>> options;
-  final String labelText;
-  final String? selectedValue;
-  final ValueChanged<String?>? onChanged;
+class DropdownField<T> extends StatefulWidget {
+  final String hintText;
+  final List<DropdownMenuItem<T>> dropdownItems;
+  final T? initialValue;
+  final ValueChanged<T?>? onChanged;
 
-  DropdownFormFieldBuilder({
-    required this.options,
-    required this.labelText,
-    required this.selectedValue,
-    required this.onChanged,
+  DropdownField({
+    required this.hintText,
+    required this.dropdownItems,
+    this.initialValue,
+    this.onChanged,
   });
 
-  Widget build(BuildContext context) {
-    final List<String> items = selectedValue != null ? options[selectedValue!]! : [];
+  @override
+  _DropdownFormFieldState<T> createState() => _DropdownFormFieldState<T>();
+}
 
-    return Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(10),
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.9,
-        height: MediaQuery.of(context).size.height * 0.085,
-        padding: EdgeInsets.only(left: 10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey),
-        ),
-        child: DropdownButtonFormField<String>(
-          value: selectedValue,
-          items: items.map((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(
-                value,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  fontFamily: 'default',
-                ),
-              ),
-            );
-          }).toList(),
-          onChanged: onChanged,
-          decoration: InputDecoration(
-            labelText: labelText,
-            border: InputBorder.none,
-          ),
-        ),
+class _DropdownFormFieldState<T> extends State<DropdownField<T>> {
+  late T? _selectedValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedValue = widget.initialValue;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<T>(
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'default',
       ),
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        hintText: widget.hintText,
+        hintStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'default',
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      ),
+      value: _selectedValue,
+      items: widget.dropdownItems,
+      onChanged: (value) {
+        setState(() {
+          _selectedValue = value;
+        });
+        if (widget.onChanged != null) {
+          widget.onChanged!(value);
+        }
+      },
     );
   }
 }

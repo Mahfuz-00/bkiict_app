@@ -1,12 +1,18 @@
 
+import 'dart:io';
+
 import 'package:bkiict_app/Dashboard%20UI/dashboardUI.dart';
 import 'package:bkiict_app/Online%20Registration%20UI/registrationapplicationreview.dart';
 import 'package:bkiict_app/Online%20Registration%20UI/registrationpersonalinfo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Login UI/loginUI.dart';
 import '../Template Models/dropdownfield.dart';
+import '../Template Models/dropdownoptionsfield.dart';
 
 class RegistrationAcademicInformation extends StatefulWidget {
   const RegistrationAcademicInformation({super.key});
@@ -19,8 +25,10 @@ class _RegistrationAcademicInformationState extends State<RegistrationAcademicIn
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<DropdownMenuItem<String>> education = [
     DropdownMenuItem(child: Text("SSC or Equivalent"), value: "SSC or Equivalent"),
-    DropdownMenuItem(child: Text("HSC or Equivalent"), value: "SSC or Equivalent"),
+    DropdownMenuItem(child: Text("HSC or Equivalent"), value: "HSC or Equivalent"),
     DropdownMenuItem(child: Text("BSc or Equivalent"), value: "BSc or Equivalent"),
+    DropdownMenuItem(child: Text("Diploma or Equivalent"), value: "Diploma or Equivalent"),
+
   ];
 
   List<DropdownMenuItem<String>> decipline = [
@@ -28,6 +36,18 @@ class _RegistrationAcademicInformationState extends State<RegistrationAcademicIn
     DropdownMenuItem(child: Text("Commerce"), value: "Commerce"),
     DropdownMenuItem(child: Text("Arts"), value: "Arts"),
   ];
+
+  late TextEditingController _Qulificationcontroller = TextEditingController();
+  late TextEditingController _Deciplinecontroller = TextEditingController();
+  late TextEditingController _SubjectNamecontroller = TextEditingController();
+  late TextEditingController _PassingYearcontroller = TextEditingController();
+  late TextEditingController _Institutecontroller = TextEditingController();
+  late TextEditingController _Resultcontroller = TextEditingController();
+  late TextEditingController _PassingIDcontroller = TextEditingController();
+
+  late String? Qualification = '';
+  File? _imageFile;
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,51 +104,109 @@ class _RegistrationAcademicInformationState extends State<RegistrationAcademicIn
                       fontFamily: 'default',
                     ),),
                   SizedBox(height: 5,),
-                  DropdownFormField(hintText: 'Education Qualification', dropdownItems: education,),
-                  const SizedBox(height: 5),
-                  Text('Decipline',
-                    style: TextStyle(
-                      color: Color.fromRGBO(143, 150, 158, 1),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),),
-                  SizedBox(height: 5,),
-                  DropdownFormField(hintText: 'Decipline', dropdownItems: decipline,),
-                  const SizedBox(height: 5),
-                  Text('Subject',
-                    style: TextStyle(
-                      color: Color.fromRGBO(143, 150, 158, 1),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),),
-                  SizedBox(height: 5,),
-                  Container(
-                    width: 350,
-                    height: 70,
-                    child: TextFormField(
-                      style: const TextStyle(
-                        color: Color.fromRGBO(143, 150, 158, 1),
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'default',
+                  Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(5),
+                    child: Container(
+                      width: screenWidth * 0.9,
+                      height: screenHeight * 0.075,
+                      padding: EdgeInsets.only(left: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: Colors.grey),
                       ),
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
-                        labelText: 'Subject Name',
-                        labelStyle: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'default',
-                        ),
-                      ),
+                      child: DropdownField(
+                          hintText: 'Education Qualification',
+                          dropdownItems: education,
+                          initialValue: null,
+                          onChanged: (value) {
+                            setState(() {
+                              _Qulificationcontroller.text = value!;
+                              Qualification = value!;
+                            });
+                          }),
                     ),
                   ),
                   const SizedBox(height: 5),
+                  if(Qualification == 'SSC or Equivalent'  || Qualification == 'HSC or Equivalent')  ...[
+                    Text(
+                      'Decipline',
+                      style: TextStyle(
+                        color: Color.fromRGBO(143, 150, 158, 1),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'default',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Material(
+                      elevation: 5,
+                      borderRadius: BorderRadius.circular(5),
+                      child: Container(
+                        width: screenWidth * 0.9,
+                        height: screenHeight * 0.075,
+                        padding: EdgeInsets.only(left: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(color: Colors.grey),
+                        ),
+                        child: DropdownField(
+                            hintText: 'Decipline',
+                            dropdownItems: decipline,
+                            initialValue: null,
+                            onChanged: (value) {
+                              setState(() {
+                                _Deciplinecontroller.text = value!;
+                              });
+                            }),
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                  ],
+                  if(Qualification == 'BSc or Equivalent'  || Qualification == 'Diploma or Equivalent') ...[
+                    Text(
+                      'Subject',
+                      style: TextStyle(
+                        color: Color.fromRGBO(143, 150, 158, 1),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'default',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      width: screenWidth * 0.9,
+                      height: 70,
+                      child: TextFormField(
+                        controller: _SubjectNamecontroller,
+                        style: const TextStyle(
+                          color: Color.fromRGBO(143, 150, 158, 1),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'default',
+                        ),
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(),
+                          labelText: 'Subject Name',
+                          labelStyle: TextStyle(
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            fontFamily: 'default',
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                  ],
                   Text('Passing Year',
                     style: TextStyle(
                       color: Color.fromRGBO(143, 150, 158, 1),
@@ -138,12 +216,18 @@ class _RegistrationAcademicInformationState extends State<RegistrationAcademicIn
                     ),),
                   SizedBox(height: 5,),
                   Container(
-                    width: 350,
+                    width: screenWidth * 0.9,
                     height: 70,
                     child: TextFormField(
+                      controller: _PassingYearcontroller,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        // Only allow digits
+                        LengthLimitingTextInputFormatter(4),
+                      ],
                       style: const TextStyle(
                         color: Color.fromRGBO(143, 150, 158, 1),
-                        fontSize: 10,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'default',
                       ),
@@ -171,12 +255,13 @@ class _RegistrationAcademicInformationState extends State<RegistrationAcademicIn
                     ),),
                   SizedBox(height: 5,),
                   Container(
-                    width: 350,
+                    width: screenWidth * 0.9,
                     height: 70,
                     child: TextFormField(
+                      controller: _Institutecontroller,
                       style: const TextStyle(
                         color: Color.fromRGBO(143, 150, 158, 1),
-                        fontSize: 10,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'default',
                       ),
@@ -204,12 +289,13 @@ class _RegistrationAcademicInformationState extends State<RegistrationAcademicIn
                     ),),
                   SizedBox(height: 5,),
                   Container(
-                    width: 350,
+                    width: screenWidth * 0.9,
                     height: 70,
                     child: TextFormField(
+                      controller: _Resultcontroller,
                       style: const TextStyle(
                         color: Color.fromRGBO(143, 150, 158, 1),
-                        fontSize: 10,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'default',
                       ),
@@ -237,54 +323,62 @@ class _RegistrationAcademicInformationState extends State<RegistrationAcademicIn
                     ),),
                   SizedBox(height: 5,),
                   Container(
-                    width: 350,
-                    height: 70,
-                    child: TextFormField(
-                      style: const TextStyle(
-                        color: Color.fromRGBO(143, 150, 158, 1),
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'default',
-                      ),
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
-                        labelText: 'Certification',
-                        labelStyle: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'default',
-                        ),
-                        suffixIcon: GestureDetector(
-                          onTap: (){},
-                          child: Container(
-                              margin: EdgeInsets.only(right: 2),
-                              padding: EdgeInsets.all(3),
-                              width: 80,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(2),
-                                  bottomRight: Radius.circular(2),
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  Icon(Icons.file_upload,
-                                    color: Color.fromRGBO(143, 150, 158, 1),),
-                                  Text('Upload',
-                                    style: TextStyle(
-                                      color: Color.fromRGBO(143, 150, 158, 1),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'default',
-                                    ),)
-                                ],
-                              )
+                    width: (_imageWidth != 0
+                        ? (_imageWidth + 10).clamp(0, screenWidth * 0.9)
+                        : screenWidth * 0.9),
+                    height: (_imageHeight != 0
+                        ? (_imageHeight + 10).clamp(0, 200)
+                        : 80),
+                    child: InkWell(
+                      onTap: _selectImage,
+                      child: InputDecorator(
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                              borderSide: Divider.createBorderSide(context)),
+                          labelStyle: TextStyle(
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            fontFamily: 'default',
                           ),
+                          errorMaxLines: null,
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.red), // Customize error border color
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: _imageFile != null
+                                  ? Image.file(
+                                _imageFile!,
+                                width: null,
+                                height: null,
+                                fit: BoxFit.contain,
+                              )
+                                  : Center(
+                                child: Icon(Icons.image,
+                                    size: 60, color: Colors.grey),
+                              ),
+                            ),
+                            SizedBox(width: 8),
+                            VerticalDivider(
+                              thickness: 5,
+                            ),
+                            Text(
+                              'Upload',
+                              style: TextStyle(
+                                color: Color.fromRGBO(134, 188, 66, 1),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                fontFamily: 'default',
+                              ),
+                            ),
+                            // Customize upload text style
+                          ],
                         ),
                       ),
                     ),
@@ -306,10 +400,7 @@ class _RegistrationAcademicInformationState extends State<RegistrationAcademicIn
                               ),
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const RegistrationPersonalInformation()));
+                              Navigator.pop(context);
                             },
                             child: const Text('Back',
                                 style: TextStyle(
@@ -333,10 +424,26 @@ class _RegistrationAcademicInformationState extends State<RegistrationAcademicIn
                               ),
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const RegistrationApplicationReview()));
+                              saveData();
+                              if (validateInputs()) {
+                                saveData();
+                                print('validated');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        const RegistrationApplicationReview(
+                                          shouldRefresh: true,
+                                        )));
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                    Text('Fill up all required fields'),
+                                    behavior: SnackBarBehavior.floating,
+                                  ),
+                                );
+                              }
                             },
                             child: const Text('Next',
                                 style: TextStyle(
@@ -357,4 +464,76 @@ class _RegistrationAcademicInformationState extends State<RegistrationAcademicIn
       ),
     );
   }
+
+  bool validateInputs() {
+    if(Qualification == 'SSC or Equivalent'  || Qualification == 'HSC or Equivalent')  {
+      if(_Deciplinecontroller.text.isEmpty){
+        return false;
+      }
+      return true;
+    }
+    if(Qualification == 'BSc or Equivalent'  || Qualification == 'Diploma or Equivalent') {
+      if(_SubjectNamecontroller.text.isEmpty){
+        return false;
+      }
+      return true;
+    }
+    if (_Qulificationcontroller.text.isEmpty ||
+        _PassingYearcontroller.text.isEmpty ||
+        _Institutecontroller.text.isEmpty ||
+        _Resultcontroller.text.isEmpty || _imageFile == null) {
+      return false;
+    }
+    return true;
+  }
+
+  Future<void> saveData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('qualification', _Qulificationcontroller.text);
+    await prefs.setString('decipline', _Deciplinecontroller.text);
+    await prefs.setString('subject_name', _SubjectNamecontroller.text);
+    await prefs.setString('passing_year', _PassingYearcontroller.text);
+    await prefs.setString('institute', _Institutecontroller.text);
+    await prefs.setString('result', _Resultcontroller.text);
+    if (_imageFile != null) {
+      await prefs.setString('certificate_image_path', _imageFile!.path);
+    }
+
+    print(await prefs.getString('qualification'));
+    print(await prefs.getString('decipline'));
+    print(await prefs.getString('subject_name'));
+    print(await prefs.getString('passing_year'));
+    print(await prefs.getString('institute'));
+    print(await prefs.getString('result'));
+    print(await prefs.getString('certificate_image_path'));
+  }
+
+  Future<void> _selectImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+      await _getImageDimensions();
+    }
+  }
+
+  double _imageHeight = 0;
+  double _imageWidth = 0;
+
+  // Function to load image dimensions
+  Future<void> _getImageDimensions() async {
+    if (_imageFile != null) {
+      final data = await _imageFile!.readAsBytes();
+      final image = await decodeImageFromList(data);
+      setState(() {
+        _imageHeight = image.height.toDouble();
+        _imageWidth = image.width.toDouble();
+      });
+    }
+  }
+
+
 }
