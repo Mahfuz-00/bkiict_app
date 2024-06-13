@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../Data/API Service (Course Details)/apiServiceCourseDetails.dart';
-import 'Connection Checker/internetconnectioncheck.dart';
+import '../../Core/Connection Checker/internetconnectioncheck.dart';
+import '../../Data/Data Sources/API Service (Course Details)/apiServiceCourseDetails.dart';
 import 'courseDetailsModel.dart';
 
 class CourseDetails extends StatefulWidget {
