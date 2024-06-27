@@ -446,6 +446,11 @@ class _SignupState extends State<Signup> {
 
   void _registerUser() {
     if (validateAndSave() && checkConfirmPassword()) {
+      const snackBar = SnackBar(
+        content: Text(
+            'Processing'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
       final registerRequest = RegisterRequestmodel(
         fullName: _fullNameController.text,
         email: _emailController.text,
