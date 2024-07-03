@@ -3,13 +3,18 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Core/Connection Checker/internetconnectioncheck.dart';
 import '../../../Data/Data Sources/API Service (Log Out)/apiServiceLogOut.dart';
 import '../../../Data/Data Sources/API Service (Profile)/apiserviceprofile.dart';
+import '../../../Data/Data Sources/API Service (User Info Update)/apiServiceImageUpdate.dart';
+import '../../../Data/Data Sources/API Service (User Info Update)/apiServiceUserInfoUpdate.dart';
 import '../../../Data/Models/profileModelFull.dart';
+import '../../../Data/Models/userInfoUpdateModel.dart';
 import '../Login UI/loginUI.dart';
+import 'passwordChange.dart';
 
 class Profile extends StatefulWidget {
   final bool shouldRefresh;
@@ -28,6 +33,13 @@ class _ProfileState extends State<Profile> {
   bool isloaded = false;
   bool _pageLoading = true;
   late final UserProfileFull? userProfile;
+  File? _imageFile;
+  late TextEditingController _fullNameController;
+  late TextEditingController _organizationController;
+  late TextEditingController _designationController;
+  late TextEditingController _phoneController;
+  late TextEditingController _passwordController;
+  late TextEditingController _licenseNumberController;
 
   Future<void> _fetchUserProfile() async {
     final prefs = await SharedPreferences.getInstance();
@@ -59,6 +71,12 @@ class _ProfileState extends State<Profile> {
   void initState() {
     super.initState();
     _fetchUserProfile();
+    _fullNameController = TextEditingController();
+    _organizationController = TextEditingController();
+    _designationController = TextEditingController();
+    _phoneController = TextEditingController();
+    _licenseNumberController = TextEditingController();
+    _passwordController = TextEditingController();
     print('initState called');
     Future.delayed(Duration(seconds: 5), () {
       if (widget.shouldRefresh && !isloaded) {
@@ -163,7 +181,7 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                             ),
-                            /* Positioned(
+                             Positioned(
                                     bottom: 0,
                                     right: 0,
                                     child: Container(
@@ -180,7 +198,7 @@ class _ProfileState extends State<Profile> {
                                       ),
                                       child: IconButton(
                                         onPressed: () {
-                                          _showImagePicker();
+                                          //_showImagePicker();
                                         },
                                         alignment: Alignment.center,
                                         icon: Icon(
@@ -190,7 +208,7 @@ class _ProfileState extends State<Profile> {
                                         ),
                                       ),
                                     ),
-                                  ),*/
+                                  ),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -237,9 +255,9 @@ class _ProfileState extends State<Profile> {
                                     'Visitor Type',
                                     userProfile!.VisitorType),
                                 Divider(),*/
-                                /*GestureDetector(
+                                GestureDetector(
                                         onTap: () {
-                                          Navigator.pushReplacement(
+                                          Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) => PasswordChange(),));
@@ -279,7 +297,7 @@ class _ProfileState extends State<Profile> {
                                             ],
                                           ),
                                         ),
-                                      )*/
+                                      )
                               ],
                             ),
                           ),
@@ -337,6 +355,30 @@ class _ProfileState extends State<Profile> {
               ),
             ),
           ),
+          floatingActionButton: _pageLoading
+              ? null // Show indicator
+              : FloatingActionButton(
+            onPressed: () {
+              _showEditDialog();
+            },
+            child: Icon(
+              Icons.edit,
+              color: Colors.white,
+              size: 30,
+            ),
+            backgroundColor: const  Color.fromRGBO(134, 188, 66, 1),
+            // Change the background color as needed
+            elevation: 8,
+            // Increase the elevation to make it appear larger
+            highlightElevation: 12,
+            // Increase the highlight elevation for the pressed state
+
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  30), // Adjust the border radius as needed
+            ),
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         ),
       ),
     );
@@ -495,5 +537,309 @@ class _ProfileState extends State<Profile> {
       },
     );
   }
+
+
+  void _showEditDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(20),
+          title: Text('Edit Profile',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 24,
+                letterSpacing: 1.5,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'default',
+              )),
+          content: SingleChildScrollView(
+            child: Form(
+              key: globalfromkey, // Use the global form key
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildTextField(
+                      'Full Name', userProfile!.name, _fullNameController),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  /*_buildTextField('Organization Name',
+                      userProfile!.organization, _organizationController),
+                  SizedBox(
+                    height: 5,
+                  ),*/
+                  /* _buildTextField('Designation', userProfile!.designation,
+                      _designationController),
+                  SizedBox(
+                    height: 5,
+                  ),*/
+                  _buildTextField('Phone Number', userProfile!.phone as String,
+                      _phoneController),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  /* _buildTextField('License Number', userProfile!.license,
+                      _licenseNumberController),
+                  SizedBox(
+                    height: 5,
+                  ),*/
+                ],
+              ),
+            ),
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: TextButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const  Color.fromRGBO(134, 188, 66, 1),
+                      fixedSize: Size(MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.3,
+                          MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.02),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Close the dialog
+                      print('Dialog closed');
+                    },
+                    child: Text('Cancel',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'default',
+                        )),
+                  ),
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const  Color.fromRGBO(134, 188, 66, 1),
+                    fixedSize: Size(MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.3,
+                        MediaQuery
+                            .of(context)
+                            .size
+                            .height * 0.02),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  onPressed: () async {
+                    if (globalfromkey.currentState!.validate()) {
+                      print(userProfile!.id.toString());
+                      print(userProfile!.name);
+                      // print(userProfile!.organization);
+                      // print(userProfile!.designation);
+                      print(userProfile!.phone);
+                      //print(userProfile!.license);
+
+                      // Validate the form
+                      // If validation succeeds, update the profile
+                      final userProfileUpdate = UserProfileUpdate(
+                        userId: userProfile!.id.toString(),
+                        // Provide the user ID here
+                        name: _fullNameController.text,
+                        organization: _organizationController.text,
+                        designation: _designationController.text,
+                        phone: _phoneController.text,
+                        licenseNumber: _licenseNumberController.text,
+                      );
+                      final apiService = await APIServiceUpdateUser.create();
+                      final result =
+                      await apiService.updateUserProfile(userProfileUpdate);
+                      Navigator.of(context).pop();
+                      const snackBar = SnackBar(
+                        content: Text(
+                            'Profile Updated'),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Profile(
+                                      shouldRefresh:
+                                      true)));
+                      // Handle the result as needed, e.g., show a toast message
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(result)),
+                      ); // Close the dialog
+                    }
+                  },
+                  child: Text('Update',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'default',
+                      )),
+                ),
+              ],
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildTextField(String label, String initialValue,
+      TextEditingController controller) {
+    // Initialize the controller with the initial value if provided
+    if (initialValue != null && controller != null) {
+      controller.text = initialValue;
+    }
+
+    // Add a listener to the controller to track changes in the text field
+    controller.addListener(() {
+      // This function will be called whenever the text changes
+      String updatedValue = controller.text;
+
+      // Do something with the updated value
+      print("Updated value: $updatedValue");
+    });
+
+    return Container(
+      width: 350,
+      height: 70,
+      child: TextFormField(
+        controller: controller,
+        // Use the provided controller
+        validator: (input) {
+          if (input == null || input.isEmpty) {
+            return 'Please enter your $label';
+          }
+          return null;
+        },
+        style: const TextStyle(
+          color: Color.fromRGBO(143, 150, 158, 1),
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'default',
+        ),
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(),
+          labelText: label,
+          labelStyle: TextStyle(
+            color: Colors.black87,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            fontFamily: 'default',
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _showImagePicker() async {
+    final picker = ImagePicker();
+    final pickedFile = await showModalBottomSheet<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 150,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.camera),
+                title: Text('Take a picture',
+                  style: const TextStyle(
+                    color: Color.fromRGBO(143, 150, 158, 1),
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'default',
+                  ),),
+                onTap: () async {
+                  final pickedImage = await picker.pickImage(
+                    source: ImageSource.camera,
+                  );
+                  if (pickedImage != null) {
+                    setState(() {
+                      _imageFile = File(pickedImage.path);
+                    });
+                    await _updateProfilePicture(_imageFile!);
+                  }
+                  Navigator.pop(context, 'gallery');
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.photo_library),
+                title: Text('Choose from gallery',
+                  style: const TextStyle(
+                    color: Color.fromRGBO(143, 150, 158, 1),
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'default',
+                  ),),
+                onTap: () async {
+                  final pickedImage = await picker.pickImage(
+                    source: ImageSource.gallery,
+                  );
+                  if (pickedImage != null) {
+                    setState(() {
+                      _imageFile = File(pickedImage.path);
+                    });
+                    await _updateProfilePicture(_imageFile!);
+                  }
+                  Navigator.pop(context, 'camera');
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _updateProfilePicture(File imageFile) async {
+    try {
+      Navigator.pop(context);
+      const snackBar = SnackBar(
+        content: Text(
+            'Profile Picture Updating ....'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      final apiService = await APIProfilePictureUpdate.create();
+      print(imageFile.path);
+      print(imageFile);
+      final response = await apiService.updateProfilePicture(image: imageFile);
+      print('Profile picture update status: ${response.status}');
+      print('Message: ${response.message}');
+      const snackBar2 = SnackBar(
+        content: Text(
+            'Profile Picture Update Successfully'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar2);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  Profile(
+                      shouldRefresh:
+                      true)));
+    } catch (e) {
+      print('Error updating profile picture: $e');
+    }
+  }
+
 
 }
