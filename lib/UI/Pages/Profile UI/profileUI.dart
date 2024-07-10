@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +13,9 @@ import '../../../Data/Data Sources/API Service (Profile)/apiserviceprofile.dart'
 import '../../../Data/Data Sources/API Service (User Info Update)/apiServiceImageUpdate.dart';
 import '../../../Data/Data Sources/API Service (User Info Update)/apiServiceUserInfoUpdate.dart';
 import '../../../Data/Models/profileModelFull.dart';
+import '../../../Data/Models/profilemodel.dart';
 import '../../../Data/Models/userInfoUpdateModel.dart';
+import '../../Bloc/auth_cubit.dart';
 import '../Login UI/loginUI.dart';
 import 'passwordChange.dart';
 
@@ -54,18 +57,41 @@ class _ProfileState extends State<Profile> {
     print(userProfile!.name);
     print(userProfile!.id);
 
-    try {
+    setState(() {
+      // Map UserProfileFull to UserProfile or use directly if they match
+      userProfileCubit = UserProfile(
+        Id: userProfile!.id,
+        name: userProfile!.name,
+        photo: userProfile!.photo,
+        // Add other fields as needed
+      );
+    });
+
+    // Update the UserProfileCubit state using context.read
+    context.read<AuthCubit>().updateProfile(UserProfile(
+        Id: userProfile!.id,
+        name: userProfile!.name,
+        photo: userProfile!.photo)
+      // Add other fields as needed
+    );
+
+/*    try {
       await prefs.setString('userName', userProfile!.name);
+      await prefs.setString('organizationName', userProfile!.organization);
       await prefs.setString('photoUrl', userProfile!.photo);
       final String? UserName = prefs.getString('userName');
+      final String? OrganizationName = prefs.getString('organizationName');
       final String? PhotoURL = prefs.getString('photoUrl');
       print('User Name: $UserName');
+      print('Organization Name: $OrganizationName');
       print('Photo URL: $PhotoURL');
       print('User profile saved successfully');
     } catch (e) {
       print('Error saving user profile: $e');
-    }
+    }*/
   }
+
+  late UserProfile userProfileCubit;
 
   @override
   void initState() {
@@ -654,10 +680,7 @@ class _ProfileState extends State<Profile> {
                         userId: userProfile!.id.toString(),
                         // Provide the user ID here
                         name: _fullNameController.text,
-                        organization: _organizationController.text,
-                        designation: _designationController.text,
                         phone: _phoneController.text,
-                        licenseNumber: _licenseNumberController.text,
                       );
                       final apiService = await APIServiceUpdateUser.create();
                       final result =

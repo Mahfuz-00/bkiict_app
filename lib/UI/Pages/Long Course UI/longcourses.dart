@@ -152,7 +152,7 @@ class _LongCoursesState extends State<LongCourses> with SingleTickerProviderStat
     print('initState called');
     _tabController = TabController(length: 2, vsync: this);
     loadUserProfile();
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 2), () {
       if (widget.shouldRefresh && !_isFetched) {
         loadUserProfile();
         // Refresh logic here, e.g., fetch data again

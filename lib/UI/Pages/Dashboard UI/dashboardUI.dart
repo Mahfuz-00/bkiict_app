@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -6,6 +7,7 @@ import 'package:printing/printing.dart';
 import 'package:http/http.dart' as http;
 import '../../../Data/Data Sources/API Service (Log Out)/apiServiceLogOut.dart';
 import '../../../Data/Data Sources/API Service (Result)/apiServiceResult.dart';
+import '../../Bloc/auth_cubit.dart';
 import '../About Us UI/aboutusUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -425,6 +427,7 @@ class _DashboardState extends State<Dashboard>
                     // Call the signOut method on the instance
                     if (await logoutApiService.signOut()) {
                       Navigator.pop(context);
+                      context.read<AuthCubit>().logout();
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
