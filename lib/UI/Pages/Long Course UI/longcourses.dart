@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../Core/Connection Checker/internetconnectioncheck.dart';
 import '../../../Data/Data Sources/API Service (Course Dashboard)/apiServiceCourseDashboard.dart';
 import '../../Widgets/coursecard.dart';
-import '../../Widgets/courseinfo.dart';
+import '../../../Data/Models/courseinfo.dart';
 import '../../Widgets/requestWidgetShowAll.dart';
 
 class LongCourses extends StatefulWidget {

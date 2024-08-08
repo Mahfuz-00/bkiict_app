@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'coursedetails.dart';
-import 'courseinfo.dart';
+import '../../Data/Models/courseinfo.dart';
 
 class CourseCard extends StatelessWidget {
   final Course course;
