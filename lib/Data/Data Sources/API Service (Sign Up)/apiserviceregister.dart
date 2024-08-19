@@ -41,6 +41,7 @@ class APIService {
         var responseBody = await response.stream.bytesToString();
         var jsonResponse = jsonDecode(responseBody);
         print('User registered successfully!');
+        print(jsonResponse['message']);
         return jsonResponse['message'];
       } else {
         // Handle registration failure
