@@ -1,3 +1,4 @@
+import 'package:bkiict_app/UI/Widgets/buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,8 @@ class Admission extends StatefulWidget {
   State<Admission> createState() => _AdmissionState();
 }
 
-class _AdmissionState extends State<Admission> with SingleTickerProviderStateMixin{
+class _AdmissionState extends State<Admission>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -46,7 +48,10 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications_rounded, color: Colors.white,),
+            icon: const Icon(
+              Icons.notifications_rounded,
+              color: Colors.white,
+            ),
           ),
         ],
       ),
@@ -58,9 +63,12 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 40,),
+              SizedBox(
+                height: 40,
+              ),
               Center(
-                child: Text('Admission & Register',
+                child: Text(
+                  'Admission & Register',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black87,
@@ -70,11 +78,14 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Center(
-                  child: Text('You can Admission here or if you are new comer then register first',
+                  child: Text(
+                    'You can Admission here or if you are new comer then register first',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color.fromRGBO(143, 150, 158, 1),
@@ -86,64 +97,28 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
                   ),
                 ),
               ),
-              SizedBox(height: 90,),
-              Center(
-                child: Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                      fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AdmissionProcess()));
-                    },
-                    child: const Text('Admission Process',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'default',
-                        )),
-                  ),
-                ),
+              SizedBox(
+                height: 90,
               ),
-              SizedBox(height: 20,),
-              Center(
-                child: Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                      fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const RegistrationCenter()));
-                    },
-                    child: const Text('Online Registration',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'default',
-                        )),
-                  ),
-                ),
+              Buttons(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AdmissionProcess()));
+                  },
+                  name: 'Admission Process'),
+              SizedBox(
+                height: 20,
               ),
+              Buttons(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegistrationCenter()));
+                  },
+                  name: 'Online Registration'),
             ],
           ),
         ),
@@ -157,10 +132,8 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
             GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Dashboard()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Dashboard()));
               },
               child: Container(
                 width: screenWidth / 3,
@@ -191,8 +164,8 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
               ),
             ),
             GestureDetector(
-              onTap: (){
-                 Navigator.push(
+              onTap: () {
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const CourseDashboard()));
@@ -201,11 +174,11 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
               child: Container(
                 decoration: BoxDecoration(
                     border: Border(
-                      left: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    )),
+                  left: BorderSide(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
+                )),
                 width: screenWidth / 3,
                 padding: EdgeInsets.all(5),
                 child: Column(
@@ -234,20 +207,22 @@ class _AdmissionState extends State<Admission> with SingleTickerProviderStateMix
             ),
             GestureDetector(
               behavior: HitTestBehavior.translucent,
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Profile(shouldRefresh: true,)));
+                        builder: (context) => Profile(
+                              shouldRefresh: true,
+                            )));
               },
               child: Container(
                 decoration: BoxDecoration(
                     border: Border(
-                      left: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    )),
+                  left: BorderSide(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
+                )),
                 width: screenWidth / 3,
                 padding: EdgeInsets.all(5),
                 child: Column(

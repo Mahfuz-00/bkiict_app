@@ -1,6 +1,7 @@
+import 'package:bkiict_app/UI/Pages/Feedback%20UI/feedbackUI.dart';
+import 'package:bkiict_app/UI/Widgets/buttons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
@@ -8,6 +9,7 @@ import 'package:http/http.dart' as http;
 import '../../../Data/Data Sources/API Service (Log Out)/apiServiceLogOut.dart';
 import '../../../Data/Data Sources/API Service (Result)/apiServiceResult.dart';
 import '../../Bloc/auth_cubit.dart';
+import '../../Widgets/feedbackbutton.dart';
 import '../About Us UI/aboutusUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -108,128 +110,41 @@ class _DashboardState extends State<Dashboard>
                   SizedBox(
                     height: 50,
                   ),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width * 0.8,
-                              MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const CourseDashboard()));
-                        },
-                        child: const Text('Courses',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
-                      ),
-                    ),
+                  Buttons(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CourseDashboard()));
+                      },
+                      name: 'Courses'),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Buttons(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Admission()));
+                      },
+                      name: 'Admission'),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Buttons(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AboutUs()));
+                    },
+                    name: 'About Us',
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width * 0.8,
-                              MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Admission()));
-                        },
-                        child: const Text('Admission',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width * 0.8,
-                              MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const AboutUs()));
-                        },
-                        child: const Text('About Us',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Center(
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                          fixedSize: Size(MediaQuery.of(context).size.width * 0.8,
-                              MediaQuery.of(context).size.height * 0.08),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () {
-                          generatePDF();
-                        },
-                        child: const Text('Result',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'default',
-                            )),
-                      ),
-                    ),
-                  ),
+                  Buttons(onPressed: generatePDF, name: 'Result'),
                 ],
               ),
             ),
@@ -466,8 +381,7 @@ class _DashboardState extends State<Dashboard>
     final apiService = await ResultAPIService.create();
 
     // Fetch dashboard data
-    final Map<String, dynamic>? dashboardData =
-    await apiService.getResult();
+    final Map<String, dynamic>? dashboardData = await apiService.getResult();
     if (dashboardData == null || dashboardData.isEmpty) {
       // No data available or an error occurred
       print(
@@ -485,7 +399,6 @@ class _DashboardState extends State<Dashboard>
     }
 
     String link = records['download_link'];
-
 
     try {
       print('PDF generated successfully. Download URL: ${link}');

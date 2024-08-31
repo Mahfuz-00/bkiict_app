@@ -1,3 +1,4 @@
+import 'package:bkiict_app/UI/Widgets/buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
@@ -19,7 +20,8 @@ class CourseDashboard extends StatefulWidget {
   State<CourseDashboard> createState() => _CourseDashboardState();
 }
 
-class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProviderStateMixin{
+class _CourseDashboardState extends State<CourseDashboard>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -51,21 +53,25 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications_rounded, color: Colors.white,),
+            icon: const Icon(
+              Icons.notifications_rounded,
+              color: Colors.white,
+            ),
           ),
         ],
       ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
-            height: screenHeight*0.9,
+            height: screenHeight * 0.9,
             color: Colors.grey[100],
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
-                  child: Text('Select Your Course',
+                  child: Text(
+                    'Select Your Course',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black87,
@@ -75,11 +81,14 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                     ),
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Center(
-                    child: Text('One of the Activities of Bangladesh Computer Council (BCC) is to develop trained manpower in the field of ICT through ICT training',
+                    child: Text(
+                      'One of the Activities of Bangladesh Computer Council (BCC) is to develop trained manpower in the field of ICT through ICT training',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Color.fromRGBO(143, 150, 158, 1),
@@ -91,148 +100,49 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
                     ),
                   ),
                 ),
-                SizedBox(height: 50,),
-                Center(
-                  child: Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                        fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ShortCourses(shouldRefresh: true,)));
-                      },
-                      child: const Text('Short Courses',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'default',
-                          )),
-                    ),
-                  ),
+                SizedBox(
+                  height: 50,
                 ),
-                SizedBox(height: 20,),
-                Center(
-                  child: Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                        fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LongCourses(shouldRefresh: true,)));
-                      },
-                      child: const Text('Long Courses',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'default',
-                          )),
-                    ),
-                  ),
+                Buttons(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ShortCourses(
+                                    shouldRefresh: true,
+                                  )));
+                    },
+                    name: 'Short Courses'),
+                SizedBox(
+                  height: 20,
                 ),
-                SizedBox(height: 20,),
-                Center(
-                  child: Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                        fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const CustomisedCourses(shouldRefresh: true,)));
-                      },
-                      child: const Text('Customised Courses',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'default',
-                          )),
-                    ),
-                  ),
+                Buttons(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LongCourses(
+                                    shouldRefresh: true,
+                                  )));
+                    },
+                    name: 'Long Courses'),
+                SizedBox(
+                  height: 20,
                 ),
-             /*   SizedBox(height: 20,),
-                Center(
-                  child: Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                        fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AllCourses(shouldRefresh: true,)));
-                      },
-                      child: const Text('All Courses',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'default',
-                          )),
-                    ),
-                  ),
-                ),*/
-                SizedBox(height: 20,),
-                Center(
-                  child: Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                        fixedSize: Size(MediaQuery.of(context).size.width* 0.8, MediaQuery.of(context).size.height * 0.08),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                        generatePDF();
-                      },
-                      child: const Text('Download Courses Info',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'default',
-                          )),
-                    ),
-                  ),
+                Buttons(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CustomisedCourses(
+                                    shouldRefresh: true,
+                                  )));
+                    },
+                    name: 'Customised Courses'),
+                SizedBox(
+                  height: 20,
                 ),
+                Buttons(onPressed: generatePDF, name: 'Download Courses Info'),
               ],
             ),
           ),
@@ -247,10 +157,8 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
             GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Dashboard()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Dashboard()));
               },
               child: Container(
                 width: screenWidth / 3,
@@ -281,21 +189,19 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
               ),
             ),
             GestureDetector(
-              onTap: (){
-                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Admission()));
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Admission()));
               },
               behavior: HitTestBehavior.translucent,
               child: Container(
                 decoration: BoxDecoration(
                     border: Border(
-                      left: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    )),
+                  left: BorderSide(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
+                )),
                 width: screenWidth / 3,
                 padding: EdgeInsets.all(5),
                 child: Column(
@@ -324,20 +230,22 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
             ),
             GestureDetector(
               behavior: HitTestBehavior.translucent,
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Profile(shouldRefresh: true,)));
+                        builder: (context) => Profile(
+                              shouldRefresh: true,
+                            )));
               },
               child: Container(
                 decoration: BoxDecoration(
                     border: Border(
-                      left: BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    )),
+                  left: BorderSide(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
+                )),
                 width: screenWidth / 3,
                 padding: EdgeInsets.all(5),
                 child: Column(
@@ -380,8 +288,7 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
     final apiService = await CourseDownloadAPIService.create();
 
     // Fetch dashboard data
-    final Map<String, dynamic>? dashboardData =
-    await apiService.getResult();
+    final Map<String, dynamic>? dashboardData = await apiService.getResult();
     if (dashboardData == null || dashboardData.isEmpty) {
       // No data available or an error occurred
       print(
@@ -400,7 +307,6 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
 
     String link = records['download_link'];
 
-
     try {
       print('PDF generated successfully. Download URL: ${link}');
       final Uri url = Uri.parse(link);
@@ -412,5 +318,4 @@ class _CourseDashboardState extends State<CourseDashboard> with SingleTickerProv
       print('Error generating PDF: $e');
     }
   }
-
 }
