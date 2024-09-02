@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../Widgets/bottomnavbar.dart';
 import '../../Widgets/feedbackbodycontainer.dart';
 import '../Dashboard UI/dashboardUI.dart';
 import '../Login UI/loginUI.dart';
@@ -150,8 +148,6 @@ class _FeedbackUIState extends State<FeedbackUI>
         child:
             BodyContainer(screenWidth: screenWidth, screenHeight: screenHeight),
       )),
-      bottomNavigationBar:
-          BottomNavBar(screenHeight: screenHeight, screenWidth: screenWidth),
     );
   }
 }

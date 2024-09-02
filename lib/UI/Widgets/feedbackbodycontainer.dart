@@ -1,5 +1,18 @@
 import 'package:flutter/material.dart';
 
+/// A stateless widget that builds the main body of the feedback form.
+///
+/// This widget displays a header for feedback, a section for displaying
+/// user feedback, and a form for submitting new feedback. It takes in
+/// the screen width and height as parameters to manage layout dynamically.
+///
+/// The feedback form includes fields for the user's [Full Name],
+/// [Mobile Number], [Email], and [Comments], along with a captcha input
+/// section. A submit button allows users to send their feedback.
+///
+/// - Parameters:
+///   - [screenWidth]: The width of the screen to adjust the layout.
+///   - [screenHeight]: The height of the screen to adjust the layout.
 class BodyContainer extends StatelessWidget {
   const BodyContainer({
     super.key,
@@ -13,7 +26,6 @@ class BodyContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //height: screenHeight+330,
       color: Colors.grey[100],
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       child: Column(
@@ -91,7 +103,6 @@ class BodyContainer extends StatelessWidget {
                     children: [
                       Center(
                         child: Container(
-                          //width: screenWidth*0.8,
                           height: screenHeight*0.05,
                           decoration: BoxDecoration(
                             color: Color.fromRGBO(223,240,216, 1),
@@ -286,10 +297,7 @@ class BodyContainer extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                /* Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const FeedbackUI()));*/
+
                               },
                               child: Icon(Icons.refresh, color: Colors.white, size: 40),
                             ),
@@ -310,10 +318,7 @@ class BodyContainer extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
-                              /* Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const FeedbackUI()));*/
+
                             },
                             child: const Text('Submit Feedback',
                                 style: TextStyle(

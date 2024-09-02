@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+/// A custom button widget that provides a styled button for user interaction.
+///
+/// This widget is designed to be reusable and customizable for different actions within the application.
+///
+/// Key functionalities include:
+/// - [onPressed]: A callback function that is triggered when the button is pressed.
+/// - [name]: The text label displayed on the button.
 class Buttons extends StatelessWidget {
   final VoidCallback onPressed;
   final String name;

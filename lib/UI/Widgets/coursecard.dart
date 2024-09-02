@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'coursedetails.dart';
 import '../../Data/Models/courseinfo.dart';
 
+/// A widget that displays the details of a course in a card format.
+///
+/// This widget provides an overview of the course information and allows users to navigate to detailed course information.
+///
+/// Key functionalities include:
+/// - [course]: An instance of the [Course] model containing all relevant information about the course.
+///
+/// The course card displays the following information:
+/// - [courseName]: The name of the course.
+/// - [batchNo]: The batch number of the course.
+/// - [courseFee]: The fee required for the course.
+/// - [classes]: The total number of classes in the course.
+/// - [duration]: The duration of the course.
+/// - [classStart]: The starting date of the classes, formatted as [dd/MM/yyyy].
+/// - [shift]: The shift timing for the course.
+/// - [regDeadline]: The registration deadline for the course.
 class CourseCard extends StatelessWidget {
   final Course course;
 
@@ -101,18 +116,13 @@ class CourseCard extends StatelessWidget {
 
   Widget _buildRowTime(String label, String value) {
     //String formattedDateTime = DateFormat('dd/MM/yyyy hh:mm a').format(value); // 'a' for AM/PM
-
-    // Parse the date and time string
     DateTime dateTime = DateFormat('dd-MM-yyyy').parse(value);
-
-    // Format the date and time
     String formattedDateTime = DateFormat('dd-MM-yyyy').format(dateTime);
     DateTime date = DateTime.parse(value);
     DateFormat dateFormat = DateFormat.yMMMMd('en_US');
     DateFormat timeFormat = DateFormat.jm();
     String formattedDate = dateFormat.format(date);
     String formattedTime = timeFormat.format(date);
-    //String formattedDateTime = '$formattedDate, $formattedTime';
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -219,6 +229,4 @@ class CourseCard extends StatelessWidget {
       ],
     );
   }
-
-
 }

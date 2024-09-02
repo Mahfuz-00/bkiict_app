@@ -2,6 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../Pages/Feedback UI/feedbackUI.dart';
 
+/// A stateless widget that displays a button for providing feedback.
+///
+/// This button is centered on the screen and, when pressed, navigates
+/// the user to the [FeedbackUI] page. The button has a specific style,
+/// including background color and rounded corners, to enhance its appearance.
+///
+/// The button's size is dynamically set based on the screen width and height,
+/// ensuring a responsive design.
+///
+/// - Actions:
+///   - On button press, the app navigates to the [FeedbackUI] page.
 class FeedbackButton extends StatelessWidget {
   const FeedbackButton({
     super.key,

@@ -1,3 +1,14 @@
+/// Represents a coordinator for a course.
+///
+/// This class holds the details of a course coordinator.
+///
+/// **Variables:**
+/// - [name]: A String representing the name of the coordinator.
+/// - [photo]: A nullable String representing the photo URL of the coordinator.
+///
+/// **Actions:**
+/// - [fromJson]: A factory constructor that creates a Coordinator instance from a JSON map.
+/// - [toJson]: A method that converts the Coordinator instance to a JSON map.
 class Coordinator {
   final String name;
   final String? photo;
@@ -22,6 +33,17 @@ class Coordinator {
   }
 }
 
+/// Represents an instructor for a course.
+///
+/// This class holds the details of a course instructor.
+///
+/// **Variables:**
+/// - [name]: A String representing the name of the instructor.
+/// - [photo]: A nullable String representing the photo URL of the instructor.
+///
+/// **Actions:**
+/// - [fromJson]: A factory constructor that creates an Instructor instance from a JSON map.
+/// - [toJson]: A method that converts the Instructor instance to a JSON map.
 class Instructor {
   final String name;
   final String? photo;
@@ -46,6 +68,36 @@ class Instructor {
   }
 }
 
+/// Represents the details of a course.
+///
+/// This class contains all the relevant information about a course.
+///
+/// **Variables:**
+/// - [id]: An integer representing the unique identifier of the course.
+/// - [name]: A String representing the name of the course.
+/// - [overview]: A String providing an overview of the course.
+/// - [requirements]: A String listing the requirements for the course.
+/// - [project]: A String describing the course project.
+/// - [tools]: A String listing the tools used in the course.
+/// - [outline]: A String representing the course outline.
+/// - [duration]: A String indicating the duration of the course.
+/// - [hours]: A String specifying the number of hours for the course.
+/// - [fee]: A String representing the course fee.
+/// - [shift]: A String indicating the shift of the course.
+/// - [classes]: A String specifying the number of classes in the course.
+/// - [type]: A String indicating the type of the course.
+/// - [center]: A String representing the center where the course is held.
+/// - [batch]: A String representing the batch number for the course.
+/// - [regdeadline]: A String specifying the registration deadline for the course.
+/// - [classstart]: A String indicating the start date of the class.
+/// - [batchend]: A String indicating the end date of the batch.
+/// - [status]: A String representing the current status of the course.
+/// - [coordinator]: A Coordinator instance representing the coordinator of the course.
+/// - [instructors]: A List of Instructor instances representing the instructors for the course.
+///
+/// **Actions:**
+/// - [fromJson]: A factory constructor that creates a CourseDetail instance from a JSON map.
+/// - [toJson]: A method that converts the CourseDetail instance to a JSON map.
 class CourseDetail {
   final int id;
   final String name;

@@ -1,10 +1,28 @@
+/// Represents a course with its details.
+///
+/// This class contains all relevant information about a course.
+///
+/// **Variables:**
+/// - [courseId]: An integer representing the unique identifier of the course.
+/// - [courseName]: A String representing the name of the course.
+/// - [batchNo]: A String representing the batch number of the course.
+/// - [courseFee]: A String representing the fee for the course.
+/// - [classes]: A String indicating the number of classes in the course.
+/// - [duration]: A String specifying the duration of the course.
+/// - [classStart]: A String indicating the start date of the class.
+/// - [shift]: A String representing the shift of the course.
+/// - [regDeadline]: A String indicating the registration deadline for the course.
+///
+/// **Actions:**
+/// - [fromJson]: A factory constructor that creates a Course instance from a JSON map.
+/// - [toJson]: A method that converts the Course instance to a JSON map.
 class Course {
   final int courseId;
   final String courseName;
   final String batchNo;
   final String courseFee;
   final String classes;
-  final String duration; // in hours
+  final String duration;
   final String classStart;
   final String shift;
   final String regDeadline;
