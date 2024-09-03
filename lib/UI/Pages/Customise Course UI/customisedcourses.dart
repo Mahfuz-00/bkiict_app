@@ -7,15 +7,15 @@ import '../../Widgets/coursecard.dart';
 import '../../../Data/Models/courseinfo.dart';
 import '../../Widgets/requestWidgetShowAll.dart';
 
-class CustomisedCourses extends StatefulWidget {
+class CustomisedCoursesUI extends StatefulWidget {
   final bool shouldRefresh;
-  const CustomisedCourses({Key? key, this.shouldRefresh = false}) : super(key: key);
+  const CustomisedCoursesUI({Key? key, this.shouldRefresh = false}) : super(key: key);
 
   @override
-  State<CustomisedCourses> createState() => _CustomisedCoursesState();
+  State<CustomisedCoursesUI> createState() => _CustomisedCoursesUIState();
 }
 
-class _CustomisedCoursesState extends State<CustomisedCourses> with SingleTickerProviderStateMixin{
+class _CustomisedCoursesUIState extends State<CustomisedCoursesUI> with SingleTickerProviderStateMixin{
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TabController _tabController;
 
@@ -274,7 +274,7 @@ class _CustomisedCoursesState extends State<CustomisedCourses> with SingleTicker
                       ),
                     ),
                     SizedBox(height: 20,),
-                    RequestsWidgetShowAll(
+                    AllRequestsWidget(
                       loading: _isLoading,
                       fetch: _isFetched,
                       errorText: 'No Ongoing Course right now.',
@@ -307,7 +307,7 @@ class _CustomisedCoursesState extends State<CustomisedCourses> with SingleTicker
                       ),
                     ),
                     SizedBox(height: 20,),
-                    RequestsWidgetShowAll(
+                    AllRequestsWidget(
                       loading: _isLoading,
                       fetch: _isFetched,
                       errorText: 'No Upcoming Course.',

@@ -8,18 +8,18 @@ import '../../../Core/Connection Checker/internetconnectioncheck.dart';
 import '../../../Data/Data Sources/API Service (Registration)/apiServiceRegistration.dart';
 import 'paymentconfirmation.dart';
 
-class RegistrationApplicationReview extends StatefulWidget {
+class RegistrationApplicationReviewUI extends StatefulWidget {
   final bool shouldRefresh;
-  const RegistrationApplicationReview({Key? key, this.shouldRefresh = false})
+  const RegistrationApplicationReviewUI({Key? key, this.shouldRefresh = false})
       : super(key: key);
 
   @override
-  State<RegistrationApplicationReview> createState() =>
-      _RegistrationApplicationReviewState();
+  State<RegistrationApplicationReviewUI> createState() =>
+      _RegistrationApplicationReviewUIState();
 }
 
-class _RegistrationApplicationReviewState
-    extends State<RegistrationApplicationReview>
+class _RegistrationApplicationReviewUIState
+    extends State<RegistrationApplicationReviewUI>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late String Imagepath = "";
@@ -182,7 +182,7 @@ class _RegistrationApplicationReviewState
         child: CircularProgressIndicator(),
       ),
     )
-        : InternetChecker(
+        : InternetConnectionChecker(
       child: Scaffold(
         backgroundColor: Colors.grey[100],
         key: _scaffoldKey,
@@ -412,7 +412,7 @@ class _RegistrationApplicationReviewState
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                const PaymentConfirmation()),
+                                const PaymentConfirmationUI()),
                           );
                         } else {
                           setState(() {

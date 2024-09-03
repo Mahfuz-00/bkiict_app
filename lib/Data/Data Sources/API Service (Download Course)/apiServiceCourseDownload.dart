@@ -2,6 +2,24 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// A service class for managing course download-related API requests.
+///
+/// This class handles fetching downloadable course resources from the API,
+/// specifically course PDFs. It manages the authentication token required
+/// for authorized requests.
+///
+/// **Actions:**
+/// - [create]: Initializes the service and loads the authentication token.
+/// - [_loadAuthToken]: Loads the authentication token from shared preferences.
+/// - [getResult]: Fetches the course PDF results from the API, returning
+///   the response as a map or null if unsuccessful.
+///
+/// **Variables:**
+/// - [baseUrl]: The base URL for the API.
+/// - [authToken]: The authentication token used for authorized API requests.
+/// - [token]: The authentication token retrieved for the current session.
+/// - [response]: The HTTP response received from the API after fetching data.
+/// - [jsonData]: The JSON data received from the API upon a successful request.
 class CourseDownloadAPIService {
   final String baseUrl = 'https://bcc.touchandsolve.com/api';
   late final String authToken;
@@ -14,11 +32,6 @@ class CourseDownloadAPIService {
     print('triggered API');
     return apiService;
   }
-
-/*  CourseDownloadAPIService() {
-    _loadAuthToken();
-    print('triggered');
-  }*/
 
   Future<void> _loadAuthToken() async {
     final prefs = await SharedPreferences.getInstance();
@@ -40,7 +53,6 @@ class CourseDownloadAPIService {
           'Authorization': 'Bearer $authToken',
         },
       );
-
       print(response.statusCode);
 
       if (response.statusCode == 200) {

@@ -13,14 +13,14 @@ import '../Long Course UI/longcourses.dart';
 import '../Profile UI/profileUI.dart';
 import '../Short Course UI/shortcourses.dart';
 
-class CourseDashboard extends StatefulWidget {
-  const CourseDashboard({super.key});
+class CourseDashboardUI extends StatefulWidget {
+  const CourseDashboardUI({super.key});
 
   @override
-  State<CourseDashboard> createState() => _CourseDashboardState();
+  State<CourseDashboardUI> createState() => _CourseDashboardUIState();
 }
 
-class _CourseDashboardState extends State<CourseDashboard>
+class _CourseDashboardUIState extends State<CourseDashboardUI>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -108,7 +108,7 @@ class _CourseDashboardState extends State<CourseDashboard>
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ShortCourses(
+                              builder: (context) => const ShortCoursesUI(
                                     shouldRefresh: true,
                                   )));
                     },
@@ -121,7 +121,7 @@ class _CourseDashboardState extends State<CourseDashboard>
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const LongCourses(
+                              builder: (context) => const LongCoursesUI(
                                     shouldRefresh: true,
                                   )));
                     },
@@ -134,7 +134,7 @@ class _CourseDashboardState extends State<CourseDashboard>
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const CustomisedCourses(
+                              builder: (context) => const CustomisedCoursesUI(
                                     shouldRefresh: true,
                                   )));
                     },
@@ -158,7 +158,7 @@ class _CourseDashboardState extends State<CourseDashboard>
               behavior: HitTestBehavior.translucent,
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Dashboard()));
+                    MaterialPageRoute(builder: (context) => DashboardUI()));
               },
               child: Container(
                 width: screenWidth / 3,
@@ -191,7 +191,7 @@ class _CourseDashboardState extends State<CourseDashboard>
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Admission()));
+                    MaterialPageRoute(builder: (context) => const AdmissionDashboardUI()));
               },
               behavior: HitTestBehavior.translucent,
               child: Container(
@@ -234,7 +234,7 @@ class _CourseDashboardState extends State<CourseDashboard>
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Profile(
+                        builder: (context) => ProfileUI(
                               shouldRefresh: true,
                             )));
               },

@@ -1,7 +1,3 @@
-
-//import 'dart:collection';
-//import 'dart:html';
-
 import '../Dashboard%20UI/dashboardUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,14 +5,14 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../Login UI/loginUI.dart';
 
-class AdmissionCalender extends StatefulWidget {
-  const AdmissionCalender({super.key});
+class AdmissionCalenderUI extends StatefulWidget {
+  const AdmissionCalenderUI({super.key});
 
   @override
-  State<AdmissionCalender> createState() => _AdmissionCalenderState();
+  State<AdmissionCalenderUI> createState() => _AdmissionCalenderUIState();
 }
 
-class _AdmissionCalenderState extends State<AdmissionCalender> with SingleTickerProviderStateMixin{
+class _AdmissionCalenderUIState extends State<AdmissionCalenderUI> with SingleTickerProviderStateMixin{
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
@@ -129,7 +125,7 @@ class _AdmissionCalenderState extends State<AdmissionCalender> with SingleTicker
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const Dashboard())); // Close the drawer
+                        builder: (context) => const DashboardUI())); // Close the drawer
               },
             ),
             Divider(),
@@ -159,7 +155,7 @@ class _AdmissionCalenderState extends State<AdmissionCalender> with SingleTicker
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const Login())); // Close the drawer
+                        builder: (context) => const LoginUI())); // Close the drawer
               },
             ),
             Divider(),
@@ -236,7 +232,7 @@ class _AdmissionCalenderState extends State<AdmissionCalender> with SingleTicker
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Dashboard()));
+                        builder: (context) => DashboardUI()));
               },
               child: Container(
                 width: screenWidth / 3,

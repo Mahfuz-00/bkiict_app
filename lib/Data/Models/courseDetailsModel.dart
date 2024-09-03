@@ -98,7 +98,7 @@ class Instructor {
 /// **Actions:**
 /// - [fromJson]: A factory constructor that creates a CourseDetail instance from a JSON map.
 /// - [toJson]: A method that converts the CourseDetail instance to a JSON map.
-class CourseDetail {
+class CourseDetails {
   final int id;
   final String name;
   final String overview;
@@ -121,7 +121,7 @@ class CourseDetail {
   final Coordinator coordinator;
   final List<Instructor> instructors;
 
-  CourseDetail({
+  CourseDetails({
     required this.id,
     required this.name,
     required this.overview,
@@ -145,12 +145,12 @@ class CourseDetail {
     required this.instructors,
   });
 
-  factory CourseDetail.fromJson(Map<String, dynamic> json) {
+  factory CourseDetails.fromJson(Map<String, dynamic> json) {
     var instructorsFromJson = json['instructors'] as List;
     List<Instructor> instructorsList =
         instructorsFromJson.map((i) => Instructor.fromJson(i)).toList();
 
-    return CourseDetail(
+    return CourseDetails(
       id: json['id'],
       name: json['name'],
       overview: json['overview'],

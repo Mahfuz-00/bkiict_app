@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 import '../Login UI/loginUI.dart';
 
-class AdmissionProcess extends StatefulWidget {
-  const AdmissionProcess({super.key});
+class AdmissionProcessUI extends StatefulWidget {
+  const AdmissionProcessUI({super.key});
 
   @override
-  State<AdmissionProcess> createState() => _AdmissionProcessState();
+  State<AdmissionProcessUI> createState() => _AdmissionProcessUIState();
 }
 
-class _AdmissionProcessState extends State<AdmissionProcess> with SingleTickerProviderStateMixin{
+class _AdmissionProcessUIState extends State<AdmissionProcessUI> with SingleTickerProviderStateMixin{
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override

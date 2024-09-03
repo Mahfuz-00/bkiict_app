@@ -39,7 +39,7 @@ class _CourseDetailsState extends State<CourseDetails> {
   bool _isLoading = false;
   bool _pageLoading = true;
   bool _errorOccurred = false;
-  late CourseDetail _course;
+  late CourseDetails _course;
 
   late int _id = 0;
   late String _name = '';
@@ -190,7 +190,7 @@ class _CourseDetailsState extends State<CourseDetails> {
               child: CircularProgressIndicator(),
             ),
           )
-        : InternetChecker(
+        : InternetConnectionChecker(
             child: Scaffold(
               appBar: AppBar(
                 backgroundColor: const Color.fromRGBO(134, 188, 66, 1),

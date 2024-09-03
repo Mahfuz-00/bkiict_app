@@ -10,14 +10,14 @@ import '../../../Data/Data Sources/API Service (Sign Up)/apiserviceregister.dart
 import '../../../Data/Models/registermodels.dart';
 import '../Login UI/loginUI.dart';
 
-class Signup extends StatefulWidget {
-  const Signup({super.key});
+class SignupUI extends StatefulWidget {
+  const SignupUI({super.key});
 
   @override
-  State<Signup> createState() => _SignupState();
+  State<SignupUI> createState() => _SignupUIState();
 }
 
-class _SignupState extends State<Signup> {
+class _SignupUIState extends State<SignupUI> {
   bool _isObscuredPassword = true;
   bool _isObscuredConfirmPassword = true;
   late RegisterRequestmodel _registerRequest;
@@ -81,7 +81,7 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    return InternetChecker(
+    return InternetConnectionChecker(
       child: Scaffold(
         //resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
@@ -431,7 +431,7 @@ class _SignupState extends State<Signup> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Login()));
+                                          builder: (context) => LoginUI()));
                                 },
                                 child: const Text(
                                   'Login now',
@@ -477,7 +477,7 @@ class _SignupState extends State<Signup> {
         confirmPassword: _confirmPasswordController.text,
       );
 
-      final apiService = APIService();
+      final apiService = UserRegistrationAPIService();
       // Call register method passing registerRequestModel, _imageFile, and authToken
       apiService.register(registerRequest, _imageFile).then((response) {
         print("Submitted");
@@ -491,7 +491,7 @@ class _SignupState extends State<Signup> {
           clearForm();
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => Login()),
+            MaterialPageRoute(builder: (context) => LoginUI()),
           );
           const snackBar = SnackBar(
             content: Text('Registration Submitted!'),

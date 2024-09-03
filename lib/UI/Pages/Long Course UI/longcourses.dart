@@ -8,15 +8,15 @@ import '../../Widgets/coursecard.dart';
 import '../../../Data/Models/courseinfo.dart';
 import '../../Widgets/requestWidgetShowAll.dart';
 
-class LongCourses extends StatefulWidget {
+class LongCoursesUI extends StatefulWidget {
   final bool shouldRefresh;
-  const LongCourses({Key? key, this.shouldRefresh = false}) : super(key: key);
+  const LongCoursesUI({Key? key, this.shouldRefresh = false}) : super(key: key);
 
   @override
-  State<LongCourses> createState() => _LongCoursesState();
+  State<LongCoursesUI> createState() => _LongCoursesUIState();
 }
 
-class _LongCoursesState extends State<LongCourses> with SingleTickerProviderStateMixin{
+class _LongCoursesUIState extends State<LongCoursesUI> with SingleTickerProviderStateMixin{
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TabController _tabController;
 
@@ -190,7 +190,7 @@ class _LongCoursesState extends State<LongCourses> with SingleTickerProviderStat
         child: CircularProgressIndicator(),
       ),
     )
-        :  InternetChecker(
+        :  InternetConnectionChecker(
       child: Scaffold(
         backgroundColor: Colors.grey[100],
         key: _scaffoldKey,
@@ -285,7 +285,7 @@ class _LongCoursesState extends State<LongCourses> with SingleTickerProviderStat
                         ),
                       ),
                       SizedBox(height: 20,),
-                      RequestsWidgetShowAll(
+                      AllRequestsWidget(
                         loading: _isLoading,
                         fetch: _isFetched,
                         errorText: 'No Ongoing Course right now.',
@@ -318,7 +318,7 @@ class _LongCoursesState extends State<LongCourses> with SingleTickerProviderStat
                         ),
                       ),
                       SizedBox(height: 20,),
-                      RequestsWidgetShowAll(
+                      AllRequestsWidget(
                         loading: _isLoading,
                         fetch: _isFetched,
                         errorText: 'No Upcoming Course.',

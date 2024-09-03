@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 import '../Login UI/loginUI.dart';
 
-class IDCardDownload extends StatefulWidget {
-  const IDCardDownload({super.key});
+class IDCardDownloadUI extends StatefulWidget {
+  const IDCardDownloadUI({super.key});
 
   @override
-  State<IDCardDownload> createState() => _IDCardDownloadState();
+  State<IDCardDownloadUI> createState() => _IDCardDownloadUIState();
 }
 
-class _IDCardDownloadState extends State<IDCardDownload> with SingleTickerProviderStateMixin{
+class _IDCardDownloadUIState extends State<IDCardDownloadUI> with SingleTickerProviderStateMixin{
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -217,7 +217,7 @@ class _IDCardDownloadState extends State<IDCardDownload> with SingleTickerProvid
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const IDCardDownload()));
+                                builder: (context) => const IDCardDownloadUI()));
                       },
                       child: const Text('Download',
                           style: TextStyle(

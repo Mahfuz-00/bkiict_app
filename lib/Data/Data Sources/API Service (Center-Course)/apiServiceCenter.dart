@@ -2,6 +2,22 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// A service class for managing center-related API requests.
+///
+/// This class handles the fetching of center items from the specified API endpoint.
+/// It manages the authentication token required for authorized requests.
+///
+/// **Actions:**
+/// - [create]: Initializes the service and loads the authentication token.
+/// - [_loadAuthToken]: Loads the authentication token from shared preferences.
+/// - [fetchCenterItems]: Fetches center items from the API and returns
+///   the response as a map.
+///
+/// **Variables:**
+/// - [baseUrl]: The base URL for the API.
+/// - [authToken]: The authentication token used for authorized API requests.
+/// - [response]: The HTTP response received from the API after fetching data.
+/// - [jsonData]: The JSON data received from the API upon a successful request.
 class CenterAPIService {
   final String baseUrl = 'https://bcc.touchandsolve.com/api';
   late final String authToken;
@@ -14,11 +30,6 @@ class CenterAPIService {
     print('triggered API');
     return apiService;
   }
-
-/*  CenterAPIService() {
-    _loadAuthToken();
-    print('triggered');
-  }*/
 
   Future<void> _loadAuthToken() async {
     final prefs = await SharedPreferences.getInstance();
@@ -40,8 +51,6 @@ class CenterAPIService {
           'Authorization': 'Bearer $authToken',
         },
       );
-
-
       print(response.statusCode);
 
       if (response.statusCode == 200) {
@@ -49,10 +58,10 @@ class CenterAPIService {
         print(jsonData);
         return jsonData;
       } else {
-        throw Exception('Failed to load dashboard items');
+        throw Exception('Failed to load centers');
       }
     } catch (e) {
-      throw Exception('Error fetching dashboard items: $e');
+      throw Exception('Error fetching centers: $e');
     }
   }
 }

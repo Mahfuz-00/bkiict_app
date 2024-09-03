@@ -22,7 +22,7 @@ import 'templateerrorcontainer.dart';
 /// - Actions:
 ///   - The widget builds a list view displaying all items from [listWidget].
 ///   - If an error occurs, it shows an error message using [buildNoRequestsWidget].
-class RequestsWidgetShowAll extends StatelessWidget {
+class AllRequestsWidget extends StatelessWidget {
   final bool loading;
   final bool fetch;
   final String errorText;
@@ -30,7 +30,7 @@ class RequestsWidgetShowAll extends StatelessWidget {
   final List<Widget> listWidget;
 
 
-  const RequestsWidgetShowAll({
+  const AllRequestsWidget({
     Key? key,
     required this.loading,
     required this.fetch,

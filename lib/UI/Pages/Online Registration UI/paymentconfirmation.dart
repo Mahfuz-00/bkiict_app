@@ -7,14 +7,14 @@ import '../../../Data/Data Sources/API Service (Payment)/apiServicePayment.dart'
 import '../Dashboard UI/dashboardUI.dart';
 import '../Login UI/loginUI.dart';
 
-class PaymentConfirmation extends StatefulWidget {
-  const PaymentConfirmation({super.key});
+class PaymentConfirmationUI extends StatefulWidget {
+  const PaymentConfirmationUI({super.key});
 
   @override
-  State<PaymentConfirmation> createState() => _PaymentConfirmationState();
+  State<PaymentConfirmationUI> createState() => _PaymentConfirmationUIState();
 }
 
-class _PaymentConfirmationState extends State<PaymentConfirmation> with SingleTickerProviderStateMixin{
+class _PaymentConfirmationUIState extends State<PaymentConfirmationUI> with SingleTickerProviderStateMixin{
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TextEditingController _paymentConfirmationController =
   TextEditingController();
@@ -24,7 +24,7 @@ class _PaymentConfirmationState extends State<PaymentConfirmation> with SingleTi
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    return InternetChecker(
+    return InternetConnectionChecker(
       child: PopScope(
         canPop: false,
         child: Scaffold(
@@ -217,7 +217,7 @@ class _PaymentConfirmationState extends State<PaymentConfirmation> with SingleTi
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Dashboard()));
+                              builder: (context) => const DashboardUI()));
                     },
                     child:  buttonloading
                         ? CircularProgressIndicator()

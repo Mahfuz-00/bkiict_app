@@ -7,15 +7,15 @@ import '../../Widgets/coursecard.dart';
 import '../../../Data/Models/courseinfo.dart';
 import '../../Widgets/templateerrorcontainer.dart';
 
-class AllCourses extends StatefulWidget {
+class AllCoursesUI extends StatefulWidget {
   final bool shouldRefresh;
-  const AllCourses({Key? key, this.shouldRefresh = false}) : super(key: key);
+  const AllCoursesUI({Key? key, this.shouldRefresh = false}) : super(key: key);
 
   @override
-  State<AllCourses> createState() => _AllCoursesState();
+  State<AllCoursesUI> createState() => _AllCoursesUIState();
 }
 
-class _AllCoursesState extends State<AllCourses> with SingleTickerProviderStateMixin{
+class _AllCoursesUIState extends State<AllCoursesUI> with SingleTickerProviderStateMixin{
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TabController _tabController;
 

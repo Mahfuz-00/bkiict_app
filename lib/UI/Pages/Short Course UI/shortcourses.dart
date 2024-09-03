@@ -9,16 +9,16 @@ import '../../../Data/Data Sources/API Service (Course Dashboard)/apiServiceCour
 import '../../Widgets/coursecard.dart';
 import '../../../Data/Models/courseinfo.dart';
 
-class ShortCourses extends StatefulWidget {
+class ShortCoursesUI extends StatefulWidget {
   final bool shouldRefresh;
 
-  const ShortCourses({Key? key, this.shouldRefresh = false}) : super(key: key);
+  const ShortCoursesUI({Key? key, this.shouldRefresh = false}) : super(key: key);
 
   @override
-  State<ShortCourses> createState() => _ShortCoursesState();
+  State<ShortCoursesUI> createState() => _ShortCoursesUIState();
 }
 
-class _ShortCoursesState extends State<ShortCourses>
+class _ShortCoursesUIState extends State<ShortCoursesUI>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TabController _tabController;
@@ -198,7 +198,7 @@ class _ShortCoursesState extends State<ShortCourses>
               child: CircularProgressIndicator(),
             ),
           )
-        : InternetChecker(
+        : InternetConnectionChecker(
             child: Scaffold(
               backgroundColor: Colors.grey[100],
               key: _scaffoldKey,
@@ -298,7 +298,7 @@ class _ShortCoursesState extends State<ShortCourses>
                             SizedBox(
                               height: 20,
                             ),
-                            RequestsWidgetShowAll(
+                            AllRequestsWidget(
                                 loading: _isLoading,
                                 fetch: _isFetched,
                                 errorText: 'No Ongoing Course right now.',
@@ -334,7 +334,7 @@ class _ShortCoursesState extends State<ShortCourses>
                             SizedBox(
                               height: 20,
                             ),
-                            RequestsWidgetShowAll(
+                            AllRequestsWidget(
                               loading: _isLoading,
                               fetch: _isFetched,
                               errorText: 'No Upcoming Course.',

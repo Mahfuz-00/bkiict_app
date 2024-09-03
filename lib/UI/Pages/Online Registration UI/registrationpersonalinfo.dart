@@ -10,16 +10,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Widgets/dropdownoptionsfield.dart';
 import 'registrationacademicinfo.dart';
 
-class RegistrationPersonalInformation extends StatefulWidget {
-  const RegistrationPersonalInformation({super.key});
+class RegistrationPersonalInformationUI extends StatefulWidget {
+  const RegistrationPersonalInformationUI({super.key});
 
   @override
-  State<RegistrationPersonalInformation> createState() =>
-      _RegistrationPersonalInformationState();
+  State<RegistrationPersonalInformationUI> createState() =>
+      _RegistrationPersonalInformationUIState();
 }
 
-class _RegistrationPersonalInformationState
-    extends State<RegistrationPersonalInformation>
+class _RegistrationPersonalInformationUIState
+    extends State<RegistrationPersonalInformationUI>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TextEditingController _Datecontroller = TextEditingController();
@@ -466,7 +466,7 @@ class _RegistrationPersonalInformationState
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                  const RegistrationAcademicInformation()));
+                                  const RegistrationAcademicInformationUI()));
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

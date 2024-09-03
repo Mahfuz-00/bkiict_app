@@ -19,14 +19,14 @@ import '../Course Dashboard UI/coursedashboard.dart';
 import '../Login UI/loginUI.dart';
 import '../Profile UI/profileUI.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+class DashboardUI extends StatefulWidget {
+  const DashboardUI({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<DashboardUI> createState() => _DashboardUIState();
 }
 
-class _DashboardState extends State<Dashboard>
+class _DashboardUIState extends State<DashboardUI>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -115,7 +115,7 @@ class _DashboardState extends State<Dashboard>
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const CourseDashboard()));
+                                builder: (context) => const CourseDashboardUI()));
                       },
                       name: 'Courses'),
                   SizedBox(
@@ -126,7 +126,7 @@ class _DashboardState extends State<Dashboard>
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Admission()));
+                                builder: (context) => const AdmissionDashboardUI()));
                       },
                       name: 'Admission'),
                   SizedBox(
@@ -137,7 +137,7 @@ class _DashboardState extends State<Dashboard>
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const AboutUs()));
+                              builder: (context) => const AboutUsUI()));
                     },
                     name: 'About Us',
                   ),
@@ -160,7 +160,7 @@ class _DashboardState extends State<Dashboard>
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Dashboard()));
+                      MaterialPageRoute(builder: (context) => DashboardUI()));
                 },
                 child: Container(
                   width: screenWidth / 3,
@@ -195,7 +195,7 @@ class _DashboardState extends State<Dashboard>
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Profile(
+                          builder: (context) => ProfileUI(
                                 shouldRefresh: true,
                               )));
                 },
@@ -350,7 +350,7 @@ class _DashboardState extends State<Dashboard>
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  Login())); // Close the drawer
+                                  LoginUI())); // Close the drawer
                     }
                   },
                   child: Text(

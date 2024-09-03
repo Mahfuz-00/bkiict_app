@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 import '../Login UI/loginUI.dart';
 
-class AboutUs extends StatefulWidget {
-  const AboutUs({super.key});
+class AboutUsUI extends StatefulWidget {
+  const AboutUsUI({super.key});
 
   @override
-  State<AboutUs> createState() => _AboutUsState();
+  State<AboutUsUI> createState() => _AboutUsUIState();
 }
 
-class _AboutUsState extends State<AboutUs>{
+class _AboutUsUIState extends State<AboutUsUI>{
 
   @override
   Widget build(BuildContext context) {

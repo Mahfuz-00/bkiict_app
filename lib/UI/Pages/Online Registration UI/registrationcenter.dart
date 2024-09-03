@@ -5,19 +5,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../Data/Data Sources/API Service (Center-Course)/apiServiceBatch.dart';
 import '../../../Data/Data Sources/API Service (Center-Course)/apiServiceCenter.dart';
 import '../../../Data/Data Sources/API Service (Center-Course)/apiServiceCourse.dart';
-import '../../../Data/Models/CenterModels.dart';
+import '../../../Data/Models/firstPageModels.dart';
 import '../../Widgets/dropdownfield.dart';
 import '../../Widgets/dropdownoptionsfield.dart';
 import 'registrationpersonalinfo.dart';
 
-class RegistrationCenter extends StatefulWidget {
-  const RegistrationCenter({super.key});
+class RegistrationCenterUI extends StatefulWidget {
+  const RegistrationCenterUI({super.key});
 
   @override
-  State<RegistrationCenter> createState() => _RegistrationCenterState();
+  State<RegistrationCenterUI> createState() => _RegistrationCenterUIState();
 }
 
-class _RegistrationCenterState extends State<RegistrationCenter> with SingleTickerProviderStateMixin{
+class _RegistrationCenterUIState extends State<RegistrationCenterUI> with SingleTickerProviderStateMixin{
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TextEditingController _CourseTypecontroller = TextEditingController();
 
@@ -607,7 +607,7 @@ class _RegistrationCenterState extends State<RegistrationCenter> with SingleTick
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                    const RegistrationPersonalInformation()));
+                                    const RegistrationPersonalInformationUI()));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

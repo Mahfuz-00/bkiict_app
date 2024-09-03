@@ -103,7 +103,7 @@ class _FeedbackUIState extends State<FeedbackUI>
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            const Dashboard())); // Close the drawer
+                            const DashboardUI())); // Close the drawer
               },
             ),
             Divider(),
@@ -136,7 +136,7 @@ class _FeedbackUIState extends State<FeedbackUI>
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            const Login())); // Close the drawer
+                            const LoginUI())); // Close the drawer
               },
             ),
             Divider(),

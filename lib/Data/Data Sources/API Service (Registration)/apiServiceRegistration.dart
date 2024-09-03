@@ -1,11 +1,28 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// A service class for handling course registration via an API.
+///
+/// This class is responsible for sending registration data to the specified
+/// API endpoint. It retrieves user data from shared preferences and handles
+/// file uploads for registration.
+///
+/// **Actions:**
+/// - [create]: Initializes the service and loads the authentication token.
+/// - [sendRegistrationDataFromSharedPreferences]: Sends the registration
+///   data, including user details and uploaded files, to the API endpoint.
+///   Returns a map containing the response data or null if an error occurs.
+///
+/// **Variables:**
+/// - [apiUrl]: The API endpoint for course registration.
+/// - [authToken]: The authentication token used for authorized API requests.
+/// - [prefs]: Shared preferences instance to access user data.
+/// - [request]: The HTTP multipart request used to send registration data.
+/// - [response]: The HTTP response received from the API after sending data.
+/// - [jsonResponse]: The decoded JSON response returned from the API upon
+///   successful request.
 class RegistrationAPIService {
   static const String apiUrl = 'https://www.bcc.touchandsolve.com/api/bkiict/course/registration';
 
@@ -63,7 +80,6 @@ class RegistrationAPIService {
     request.fields['passing_year'] = prefs.getString('passing_year') ?? '';
     request.fields['institute_name'] = prefs.getString('institute') ?? '';
     request.fields['result'] = prefs.getString('result') ?? '';
-
 
     if (imageFile != null) {
       var imageStream = http.ByteStream(imageFile.openRead());

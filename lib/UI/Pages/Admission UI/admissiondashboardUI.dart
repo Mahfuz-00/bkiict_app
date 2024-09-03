@@ -8,14 +8,14 @@ import '../Dashboard UI/dashboardUI.dart';
 import '../Online Registration UI/registrationcenter.dart';
 import '../Profile UI/profileUI.dart';
 
-class Admission extends StatefulWidget {
-  const Admission({super.key});
+class AdmissionDashboardUI extends StatefulWidget {
+  const AdmissionDashboardUI({super.key});
 
   @override
-  State<Admission> createState() => _AdmissionState();
+  State<AdmissionDashboardUI> createState() => _AdmissionDashboardUIState();
 }
 
-class _AdmissionState extends State<Admission>
+class _AdmissionDashboardUIState extends State<AdmissionDashboardUI>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -105,7 +105,7 @@ class _AdmissionState extends State<Admission>
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const AdmissionProcess()));
+                            builder: (context) => const AdmissionProcessUI()));
                   },
                   name: 'Admission Process'),
               SizedBox(
@@ -116,7 +116,7 @@ class _AdmissionState extends State<Admission>
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const RegistrationCenter()));
+                            builder: (context) => const RegistrationCenterUI()));
                   },
                   name: 'Online Registration'),
             ],
@@ -133,7 +133,7 @@ class _AdmissionState extends State<Admission>
               behavior: HitTestBehavior.translucent,
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Dashboard()));
+                    MaterialPageRoute(builder: (context) => DashboardUI()));
               },
               child: Container(
                 width: screenWidth / 3,
@@ -168,7 +168,7 @@ class _AdmissionState extends State<Admission>
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const CourseDashboard()));
+                        builder: (context) => const CourseDashboardUI()));
               },
               behavior: HitTestBehavior.translucent,
               child: Container(
@@ -211,7 +211,7 @@ class _AdmissionState extends State<Admission>
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Profile(
+                        builder: (context) => ProfileUI(
                               shouldRefresh: true,
                             )));
               },

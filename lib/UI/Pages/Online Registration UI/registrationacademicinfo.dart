@@ -9,14 +9,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Widgets/dropdownoptionsfield.dart';
 import 'registrationapplicationreview.dart';
 
-class RegistrationAcademicInformation extends StatefulWidget {
-  const RegistrationAcademicInformation({super.key});
+class RegistrationAcademicInformationUI extends StatefulWidget {
+  const RegistrationAcademicInformationUI({super.key});
 
   @override
-  State<RegistrationAcademicInformation> createState() => _RegistrationAcademicInformationState();
+  State<RegistrationAcademicInformationUI> createState() => _RegistrationAcademicInformationUIState();
 }
 
-class _RegistrationAcademicInformationState extends State<RegistrationAcademicInformation> with SingleTickerProviderStateMixin{
+class _RegistrationAcademicInformationUIState extends State<RegistrationAcademicInformationUI> with SingleTickerProviderStateMixin{
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<DropdownMenuItem<String>> education = [
     DropdownMenuItem(child: Text("SSC or Equivalent"), value: "SSC or Equivalent"),
@@ -436,7 +436,7 @@ class _RegistrationAcademicInformationState extends State<RegistrationAcademicIn
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                        const RegistrationApplicationReview(
+                                        const RegistrationApplicationReviewUI(
                                           shouldRefresh: true,
                                         )));
                               } else {
