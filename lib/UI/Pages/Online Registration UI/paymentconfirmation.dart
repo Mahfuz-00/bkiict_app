@@ -1,12 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../Core/Connection Checker/internetconnectioncheck.dart';
 import '../../../Data/Data Sources/API Service (Payment)/apiServicePayment.dart';
 import '../Dashboard UI/dashboardUI.dart';
-import '../Login UI/loginUI.dart';
 
+/// [PaymentConfirmationUI] is a stateful widget that displays the payment confirmation interface.
+/// It allows users to confirm their payment for registration and view the success message.
+///
+/// Variables:
+/// - [scaffoldKey]: GlobalKey to manage the state of the scaffold.
+/// - [_paymentConfirmationController]: Controller for the payment confirmation TextField.
+/// - [buttonloading]: Boolean flag to indicate loading state of the confirm button.
+///
+/// Actions:
+/// - [showSliderAlert]: Displays a modal bottom sheet for Bkash payment confirmation.
 class PaymentConfirmationUI extends StatefulWidget {
   const PaymentConfirmationUI({super.key});
 
@@ -51,7 +59,6 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI> with Sing
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  //height: screenHeight,
                   color: Colors.grey[100],
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                   child: Column(
@@ -237,5 +244,4 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI> with Sing
       },
     );
   }
-
 }

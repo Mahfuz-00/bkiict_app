@@ -1,13 +1,48 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../Core/Connection Checker/internetconnectioncheck.dart';
 import '../../../Data/Data Sources/API Service (Registration)/apiServiceRegistration.dart';
 import 'paymentconfirmation.dart';
 
+/// The [RegistrationApplicationReviewUI] class is represents reviewing and confirming registration applications.
+///
+/// This widget provides a visual representation of the registration application
+/// details for the user to review before final submission.
+///
+/// **Variables:**
+/// - [shouldRefresh]: A boolean indicating if the page should refresh upon loading.
+/// - [_scaffoldKey]: A GlobalKey for the Scaffold widget, used for displaying snackbars.
+/// - [Imagepath]: A string representing the path of the uploaded image.
+/// - [CertificateImagepath]: A string representing the path of the uploaded certificate image.
+/// - [CenterName]: A string representing the name of the center.
+/// - [courseType]: A string representing the type of course.
+/// - [course]: A string representing the course name.
+/// - [fee]: A string representing the course fee.
+/// - [batch]: A string representing the batch name.
+/// - [CenterID]: A string representing the center's ID.
+/// - [courseID]: A string representing the course's ID.
+/// - [batchID]: A string representing the batch's ID.
+/// - [fullName]: A string representing the user's full name.
+/// - [email]: A string representing the user's email.
+/// - [mobileNumber]: A string representing the user's mobile number.
+/// - [dateOfBirth]: A string representing the user's date of birth.
+/// - [gender]: A string representing the user's gender.
+/// - [educationQualification]: A string representing the user's education qualification.
+/// - [discipline]: A string representing the user's discipline.
+/// - [subject]: A string representing the user's subject of study.
+/// - [passingYear]: A string representing the year of passing.
+/// - [institute]: A string representing the name of the institute.
+/// - [result]: A string representing the user's result.
+/// - [_pageLoading]: A boolean indicating if the page is loading.
+/// - [_isFetched]: A boolean indicating if data has been fetched.
+/// - [buttonloading]: A boolean indicating if the button is loading during processing.
+///
+/// **Actions:**
+/// - [getDataFromSharedPreferences]: Fetches data from SharedPreferences and assigns it to the relevant variables.
+/// - [printData]: Prints the application data to the console for debugging.
+/// - [_buildRow]: Builds a row displaying a label and its corresponding value in the UI.
 class RegistrationApplicationReviewUI extends StatefulWidget {
   final bool shouldRefresh;
   const RegistrationApplicationReviewUI({Key? key, this.shouldRefresh = false})
@@ -70,7 +105,6 @@ class _RegistrationApplicationReviewUIState
     institute = prefs.getString('institute') ?? '';
     result = prefs.getString('result') ?? '';
     CertificateImagepath = prefs.getString('certificate_image_path') ?? '';
-    // Print the data for verification
     printData();
   }
 
@@ -152,15 +186,12 @@ class _RegistrationApplicationReviewUIState
     );
   }
 
-  Map<String, String> _formData = {};
-
   @override
   void initState() {
     super.initState();
     getDataFromSharedPreferences();
     Future.delayed(Duration(seconds: 5), () {
       if (widget.shouldRefresh) {
-        // Refresh logic here, e.g., fetch data again
         print('Page Loading Done!!');
         setState(() {
           print('Page Loading');
@@ -178,7 +209,6 @@ class _RegistrationApplicationReviewUIState
         ? Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        // Show circular loading indicator while waiting
         child: CircularProgressIndicator(),
       ),
     )
@@ -235,7 +265,6 @@ class _RegistrationApplicationReviewUIState
                     width: screenWidth * 0.3,
                     height: screenHeight * 0.17,
                     decoration: BoxDecoration(
-                      /*shape: BoxShape.square,*/
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: FileImage(File(Imagepath)),
@@ -332,7 +361,6 @@ class _RegistrationApplicationReviewUIState
                         ],
                       ),
                     )),
-
                 SizedBox(height: 15,),
                 Center(
                     child: Container(
@@ -407,7 +435,6 @@ class _RegistrationApplicationReviewUIState
                               'exam_registration_id', examRegistrationId);
                           print(
                               'Saved exam registration ID: $examRegistrationId');
-                          // If registration was successful, navigate to the next screen
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -418,14 +445,13 @@ class _RegistrationApplicationReviewUIState
                           setState(() {
                             buttonloading = false;
                           });
-                          // If registration failed, show a snackbar indicating the failure
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
                                   'Failed to submit registration data. Please try again.'),
                               duration: Duration(
                                   seconds:
-                                  3), // Adjust the duration as needed
+                                  3),
                             ),
                           );
                         }
@@ -449,5 +475,4 @@ class _RegistrationApplicationReviewUIState
       ),
     );
   }
-
 }

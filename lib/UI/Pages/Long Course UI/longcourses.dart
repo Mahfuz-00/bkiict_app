@@ -1,13 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../Core/Connection Checker/internetconnectioncheck.dart';
 import '../../../Data/Data Sources/API Service (Course Dashboard)/apiServiceCourseDashboard.dart';
 import '../../Widgets/coursecard.dart';
 import '../../../Data/Models/courseinfo.dart';
 import '../../Widgets/requestWidgetShowAll.dart';
 
+/// A [StatefulWidget] that displays a user interface for managing [LongCoursesUI], including ongoing and upcoming courses.
+///
+/// This widget includes:
+/// - [shouldRefresh]: A bool indicating whether to refresh the user data on initialization.
+///
+/// State Management:
+/// - [_scaffoldKey]: A key to manage the state of the [Scaffold] widget.
+/// - [_tabController]: Controls the tab navigation for ongoing and upcoming courses.
+///
+/// State Variables:
+/// - [OngoingCourses]: A list to hold the ongoing course widgets.
+/// - [UpcomingCourses]: A list to hold the upcoming course widgets.
+/// - [_isFetched]: A flag to track if data has been fetched.
+/// - [_isLoading]: A flag to indicate if data is currently being loaded.
+/// - [_pageLoading]: A flag to track the loading state of the page.
+/// - [_errorOccurred]: A flag to indicate if an error occurred while fetching data.
+/// - [userName]: Stores the user's name retrieved from shared preferences.
+/// - [organizationName]: Stores the user's organization name retrieved from shared preferences.
+/// - [photoUrl]: Stores the user's photo URL retrieved from shared preferences.
+/// - [notifications]: A list to hold notifications retrieved from the API.
 class LongCoursesUI extends StatefulWidget {
   final bool shouldRefresh;
   const LongCoursesUI({Key? key, this.shouldRefresh = false}) : super(key: key);
@@ -49,12 +68,9 @@ class _LongCoursesUIState extends State<LongCoursesUI> with SingleTickerProvider
     if (_isFetched) return;
     try {
       final apiService = await CourseDashboardAPIService.create();
-
-      // Fetch dashboard data
       final Map<String, dynamic>? dashboardData =
       await apiService.Courses(type: 'long');
       if (dashboardData == null || dashboardData.isEmpty) {
-        // No data available or an error occurred
         print('No data available or error occurred while fetching Course Data');
         return;
       }
@@ -63,20 +79,16 @@ class _LongCoursesUIState extends State<LongCoursesUI> with SingleTickerProvider
       final Map<String, dynamic>? records = dashboardData['records'] ?? [];
       print(records);
       if (records == null || records.isEmpty) {
-        // No records available
         print('No records available');
         return;
       }
 
-      // Set isLoading to true while fetching data
       setState(() {
         _isLoading = true;
       });
 
-      // Extract notifications
       notifications = List<String>.from(records['notifications'] ?? []);
 
-      // Simulate fetching data for 5 seconds
       await Future.delayed(Duration(seconds: 3));
 
       final List<dynamic> pendingRequestsData = records['ongoing'] ?? [];
@@ -90,7 +102,6 @@ class _LongCoursesUIState extends State<LongCoursesUI> with SingleTickerProvider
             'Accepted Request at index $index: ${acceptedRequestsData[index]}\n');
       }
 
-      // Map pending requests to widgets
       final List<Widget> pendingWidgets = pendingRequestsData.map((request) {
         print('Pending Trip');
         print(request['name']);
@@ -117,7 +128,6 @@ class _LongCoursesUIState extends State<LongCoursesUI> with SingleTickerProvider
         );
       }).toList();
 
-      // Map accepted requests to widgets
       final List<Widget> acceptedWidgets = acceptedRequestsData.map((request) {
         return CourseCard(
           course: Course(
@@ -141,8 +151,6 @@ class _LongCoursesUIState extends State<LongCoursesUI> with SingleTickerProvider
     } catch (e) {
       print('Error fetching trip requests: $e');
       _isFetched = true;
-      //_errorOccurred = true;
-      // Handle error as needed
     }
   }
 
@@ -152,18 +160,14 @@ class _LongCoursesUIState extends State<LongCoursesUI> with SingleTickerProvider
     print('initState called');
     _tabController = TabController(length: 2, vsync: this);
     loadUserProfile();
+    if (!_isFetched) {
+      fetchCourses();
+    }
     Future.delayed(Duration(seconds: 2), () {
       if (widget.shouldRefresh && !_isFetched) {
         loadUserProfile();
-        // Refresh logic here, e.g., fetch data again
         print('Page Loading Done!!');
-        // connectionRequests = [];
-        if (!_isFetched) {
-          fetchCourses();
-          //_isFetched = true; // Set _isFetched to true after the first call
-        }
       }
-      // After 5 seconds, set isLoading to false to stop showing the loading indicator
       setState(() {
         print('Page Loading');
         _pageLoading = false;
@@ -186,7 +190,6 @@ class _LongCoursesUIState extends State<LongCoursesUI> with SingleTickerProvider
         ? Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        // Show circular loading indicator while waiting
         child: CircularProgressIndicator(),
       ),
     )

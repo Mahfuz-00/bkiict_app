@@ -5,11 +5,30 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-
 import '../../Widgets/dropdownoptionsfield.dart';
 import 'registrationacademicinfo.dart';
 
+/// [RegistrationPersonalInformationUI] is a StatefulWidget that represents the
+/// user interface for collecting personal information during registration.
+///
+/// It manages user inputs such as [Full Name], [Email Address],
+/// [Mobile Number], [Date of Birth], and [Gender]. It also allows users
+/// to upload a profile picture. The data entered by the user can be
+/// validated and processed for further use.
+///
+/// **Variables:**
+/// - [scaffoldKey]: GlobalKey to manage the state of the scaffold.
+/// - [Datecontroller]: Controller for the Date of Birth text field.
+/// - [FullNamecontroller]: Controller for the Full Name text field.
+/// - [Emailcontroller]: Controller for the Email Address text field.
+/// - [Phonecontroller]: Controller for the Mobile Number text field.
+/// - [Gendercontroller]: Controller for the Gender text field.
+/// - [imageFile]: Optional File to hold the selected image for the profile picture.
+/// - [gender]: List of DropdownMenuItem for selecting Gender.
+///
+/// **Actions:**
+/// - [dispose]: Disposes the Datecontroller when the widget is removed from the widget tree.
+/// - [build]: Builds the widget tree for the Registration Personal Information UI.
 class RegistrationPersonalInformationUI extends StatefulWidget {
   const RegistrationPersonalInformationUI({super.key});
 
@@ -26,9 +45,6 @@ class _RegistrationPersonalInformationUIState
   late TextEditingController _FullNamecontroller = TextEditingController();
   late TextEditingController _Emailcontroller = TextEditingController();
   late TextEditingController _Phonecontroller = TextEditingController();
-  late TextEditingController _Addresscontroller = TextEditingController();
-  late TextEditingController _PostCodecontroller = TextEditingController();
-  late TextEditingController _Occupationcontroller = TextEditingController();
   late TextEditingController _Gendercontroller = TextEditingController();
   File? _imageFile;
 
@@ -197,13 +213,10 @@ class _RegistrationPersonalInformationUIState
                 child: TextFormField(
                   controller: _Phonecontroller,
                   keyboardType: TextInputType.phone,
-                  //maxLength: 11,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
-                    // Only allow digits
                     LengthLimitingTextInputFormatter(11),
                   ],
-                  // Limit input length to 11 characters
                   validator: (input) {
                     if (input == null || input.isEmpty) {
                       return 'Please enter your mobile number name';
@@ -211,7 +224,7 @@ class _RegistrationPersonalInformationUIState
                     if (input.length != 11) {
                       return 'Mobile number must be 11 digits';
                     }
-                    return null; // Return null if the input is valid
+                    return null;
                   },
                   style: const TextStyle(
                     color: Color.fromRGBO(143, 150, 158, 1),
@@ -269,7 +282,6 @@ class _RegistrationPersonalInformationUIState
                       fontFamily: 'default',
                     ),
                     contentPadding: EdgeInsets.all(10),
-                    //floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: BorderSide(color: Colors.black, width: 1.0),
@@ -291,7 +303,6 @@ class _RegistrationPersonalInformationUIState
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
-                        // Adjust the padding as needed
                         child: Icon(
                           Icons.calendar_today_outlined,
                           size: 30,
@@ -377,7 +388,7 @@ class _RegistrationPersonalInformationUIState
                       errorMaxLines: null,
                       errorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: Colors.red), // Customize error border color
+                            color: Colors.red),
                       ),
                     ),
                     child: Row(
@@ -408,7 +419,6 @@ class _RegistrationPersonalInformationUIState
                             fontFamily: 'default',
                           ),
                         ),
-                        // Customize upload text style
                       ],
                     ),
                   ),
@@ -513,7 +523,6 @@ class _RegistrationPersonalInformationUIState
     await prefs.setString('phone', _Phonecontroller.text);
     await prefs.setString('date_of_birth', _Datecontroller.text);
     await prefs.setString('gender', _Gendercontroller.text);
-    // You can save the image path instead of the whole image if needed
     if (_imageFile != null) {
       await prefs.setString('image_path', _imageFile!.path);
     }
@@ -525,7 +534,6 @@ class _RegistrationPersonalInformationUIState
     print(await prefs.getString('gender'));
     print(await prefs.getString('image_path'));
   }
-
 
   Future<void> _selectImage() async {
     final picker = ImagePicker();
@@ -541,8 +549,6 @@ class _RegistrationPersonalInformationUIState
 
   double _imageHeight = 0;
   double _imageWidth = 0;
-
-  // Function to load image dimensions
   Future<void> _getImageDimensions() async {
     if (_imageFile != null) {
       final data = await _imageFile!.readAsBytes();
@@ -553,5 +559,4 @@ class _RegistrationPersonalInformationUIState
       });
     }
   }
-
 }

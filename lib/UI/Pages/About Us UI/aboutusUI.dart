@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../Login UI/loginUI.dart';
+/// [AboutUsUI] is a StatefulWidget that represents the "About Us" page of the application.
+/// It contains information about the Bangladesh Computer Council (BCC) and the Bangladesh Korea Institute of Information and Communication Technology (BKIICT).
 
+/// The UI layout includes:
+/// - An AppBar with a back button and title.
+/// - A scrollable body containing various [Text] widgets for displaying information and descriptions.
+/// - Several [Row] widgets that feature bullet points represented by small circular [Container] widgets.
 class AboutUsUI extends StatefulWidget {
   const AboutUsUI({super.key});
 
@@ -41,7 +46,6 @@ class _AboutUsUIState extends State<AboutUsUI>{
       body: SingleChildScrollView(
           child: SafeArea(
             child: Container(
-              //height: screenHeight,
               color: Colors.grey[100],
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: Column(

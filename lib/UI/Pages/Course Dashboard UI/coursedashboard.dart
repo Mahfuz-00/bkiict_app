@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:http/http.dart' as http;
-
 import '../../../Data/Data Sources/API Service (Download Course)/apiServiceCourseDownload.dart';
 import '../Admission UI/admissiondashboardUI.dart';
 import '../Customise Course UI/customisedcourses.dart';
@@ -13,6 +12,21 @@ import '../Long Course UI/longcourses.dart';
 import '../Profile UI/profileUI.dart';
 import '../Short Course UI/shortcourses.dart';
 
+/// [CourseDashboardUI] is a widget that provides a dashboard for users to select various courses.
+///
+/// This widget includes the following key variables and actions:
+/// - [scaffoldKey]: A key to manage the state of the Scaffold widget.
+///
+/// The widget features:
+/// - An AppBar with a title and a back button.
+/// - A body containing options to navigate to different course types:
+///   - [Short Courses]
+///   - [Long Courses]
+///   - [Customised Courses]
+///   - A button to [Download Courses Info].
+/// - A bottom navigation bar with links to [Home], [Admission], and [Profile] sections.
+///
+/// The [generatePDF] method triggers the generation of a PDF document with course information.
 class CourseDashboardUI extends StatefulWidget {
   const CourseDashboardUI({super.key});
 
@@ -287,10 +301,8 @@ class _CourseDashboardUIState extends State<CourseDashboardUI>
 
     final apiService = await CourseDownloadAPIService.create();
 
-    // Fetch dashboard data
     final Map<String, dynamic>? dashboardData = await apiService.getResult();
     if (dashboardData == null || dashboardData.isEmpty) {
-      // No data available or an error occurred
       print(
           'No data available or error occurred while fetching dashboard data');
       return;
@@ -300,7 +312,6 @@ class _CourseDashboardUIState extends State<CourseDashboardUI>
     final Map<String, dynamic>? records = dashboardData['data'] ?? [];
     print(records);
     if (records == null || records.isEmpty) {
-      // No records available
       print('No records available');
       return;
     }

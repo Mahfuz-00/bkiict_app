@@ -3,16 +3,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../Login UI/loginUI.dart';
-
-class AdmissionCalenderUI extends StatefulWidget {
-  const AdmissionCalenderUI({super.key});
+/// A StatefulWidget that represents the [AdmissionCalendarUI].
+///
+/// This widget allows users to view and interact with the admission calendar.
+/// It contains a calendar view and displays office schedules.
+/// Users can navigate to different sections of the app via the bottom navigation bar.
+///
+/// [Key] _scaffoldKey: A GlobalKey used to manage the Scaffold state.
+/// [CalendarFormat] _calendarFormat: The format of the calendar (month, week, etc.).
+/// [DateTime] _focusedDay: The currently focused day in the calendar.
+/// [DateTime] _selectedDay: The currently selected day in the calendar.
+///
+/// Actions:
+/// - [initState]: Initializes the state when the widget is first created.
+/// - [dispose]: Disposes of the resources used by the widget.
+/// - [build]: Builds the UI of the admission calendar, including the calendar and the bottom navigation bar.
+class AdmissionCalendarUI extends StatefulWidget {
+  const AdmissionCalendarUI({super.key});
 
   @override
-  State<AdmissionCalenderUI> createState() => _AdmissionCalenderUIState();
+  State<AdmissionCalendarUI> createState() => _AdmissionCalendarUIState();
 }
 
-class _AdmissionCalenderUIState extends State<AdmissionCalenderUI> with SingleTickerProviderStateMixin{
+class _AdmissionCalendarUIState extends State<AdmissionCalendarUI> with SingleTickerProviderStateMixin{
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
@@ -58,11 +71,13 @@ class _AdmissionCalenderUIState extends State<AdmissionCalenderUI> with SingleTi
         backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
         titleSpacing: 5,
         leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.white,),
-          onPressed: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-        ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new_outlined,
+              color: Colors.white,
+            )),
         title: const Text(
           'Admission Calender',
           style: TextStyle(
@@ -71,95 +86,6 @@ class _AdmissionCalenderUIState extends State<AdmissionCalenderUI> with SingleTi
             fontSize: 20,
             fontFamily: 'default',
           ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications_rounded, color: Colors.white,),
-          ),
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.white,),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(134, 188, 66, 1),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    child: Icon(
-                      Icons.person,
-                      size: 35,
-                    ),
-                    radius: 30,
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'User Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              title: Text('Home',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const DashboardUI())); // Close the drawer
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Information',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                /* Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Information()));*/
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Logout',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',)),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginUI())); // Close the drawer
-              },
-            ),
-            Divider(),
-          ],
         ),
       ),
       body: SingleChildScrollView(

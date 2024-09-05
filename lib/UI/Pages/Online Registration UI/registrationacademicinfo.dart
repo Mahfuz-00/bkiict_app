@@ -1,14 +1,35 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../Widgets/dropdownoptionsfield.dart';
 import 'registrationapplicationreview.dart';
 
+/// A widget that manages the UI for capturing and displaying the
+/// academic information during a registration process. This includes
+/// input fields for the user's educational qualifications, disciplines,
+/// passing year, institute name, results, and a certificate upload option.
+///
+/// This widget is a [StatefulWidget] that allows the user to input and
+/// select various educational details. It utilizes several [TextEditingController]
+/// instances for managing text input fields and displays dropdown menus
+/// for selecting education qualifications and disciplines. It also handles
+/// image uploads for certificates.
+///
+/// Variables:
+/// - [_scaffoldKey]: GlobalKey for the Scaffold to manage the UI structure.
+/// - [education]: A list of dropdown items representing various educational qualifications.
+/// - [decipline]: A list of dropdown items representing different disciplines.
+/// - [_Qulificationcontroller]: Controller for the qualification text field.
+/// - [_Deciplinecontroller]: Controller for the discipline text field.
+/// - [_SubjectNamecontroller]: Controller for the subject name text field.
+/// - [_PassingYearcontroller]: Controller for the passing year text field.
+/// - [_Institutecontroller]: Controller for the institute name text field.
+/// - [_Resultcontroller]: Controller for the result text field.
+/// - [Qualification]: Stores the selected qualification value.
+/// - [_imageFile]: Holds the selected image file for the certificate upload.
 class RegistrationAcademicInformationUI extends StatefulWidget {
   const RegistrationAcademicInformationUI({super.key});
 
@@ -38,11 +59,10 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
   late TextEditingController _PassingYearcontroller = TextEditingController();
   late TextEditingController _Institutecontroller = TextEditingController();
   late TextEditingController _Resultcontroller = TextEditingController();
-  late TextEditingController _PassingIDcontroller = TextEditingController();
 
   late String? Qualification = '';
   File? _imageFile;
-
+  late bool isdelayed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +247,7 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                         if (input.length != 4) {
                           return 'passing year must be 4 digits';
                         }
-                        return null; // Return null if the input is valid
+                        return null;
                       },
                       style: const TextStyle(
                         color: Color.fromRGBO(143, 150, 158, 1),
@@ -350,7 +370,7 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                           errorMaxLines: null,
                           errorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.red), // Customize error border color
+                                color: Colors.red),
                           ),
                         ),
                         child: Row(
@@ -381,7 +401,6 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                                 fontFamily: 'default',
                               ),
                             ),
-                            // Customize upload text style
                           ],
                         ),
                       ),
@@ -428,6 +447,9 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                               ),
                             ),
                             onPressed: () {
+                              setState(() {
+                                isdelayed = true;
+                              });
                               saveData();
                               if (validateInputs()) {
                                 saveData();
@@ -439,6 +461,7 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                                         const RegistrationApplicationReviewUI(
                                           shouldRefresh: true,
                                         )));
+                                isdelayed = false;
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -449,7 +472,9 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                                 );
                               }
                             },
-                            child: const Text('Next',
+                            child: isdelayed
+                                ? CircularProgressIndicator()
+                                : const Text('Next',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -527,7 +552,6 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
   double _imageHeight = 0;
   double _imageWidth = 0;
 
-  // Function to load image dimensions
   Future<void> _getImageDimensions() async {
     if (_imageFile != null) {
       final data = await _imageFile!.readAsBytes();
@@ -538,6 +562,4 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
       });
     }
   }
-
-
 }

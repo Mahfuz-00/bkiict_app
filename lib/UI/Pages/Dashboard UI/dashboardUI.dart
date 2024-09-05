@@ -1,24 +1,32 @@
-import 'package:bkiict_app/UI/Pages/Feedback%20UI/feedbackUI.dart';
 import 'package:bkiict_app/UI/Widgets/buttons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:http/http.dart' as http;
 import '../../../Data/Data Sources/API Service (Log Out)/apiServiceLogOut.dart';
 import '../../../Data/Data Sources/API Service (Result)/apiServiceResult.dart';
 import '../../Bloc/auth_cubit.dart';
-import '../../Widgets/feedbackbutton.dart';
 import '../About Us UI/aboutusUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../Admission UI/admissiondashboardUI.dart';
 import '../Course Dashboard UI/coursedashboard.dart';
 import '../Login UI/loginUI.dart';
 import '../Profile UI/profileUI.dart';
 
+/// [DashboardUI] is a stateful widget that represents the main dashboard of the BKIICT application.
+/// It provides access to various functionalities such as courses, admission, and user profile.
+///
+/// Actions:
+/// - Navigate to [CourseDashboardUI] when the Courses button is pressed.
+/// - Navigate to [AdmissionDashboardUI] when the Admission button is pressed.
+/// - Navigate to [AboutUsUI] when the About Us button is pressed.
+/// - Trigger PDF generation when the Result button is pressed.
+/// - Show a logout confirmation dialog when the Log Out button is tapped.
+///
+/// Variables:
+/// - [scaffoldKey]: A GlobalKey used to manage the Scaffold state.
 class DashboardUI extends StatefulWidget {
   const DashboardUI({super.key});
 
@@ -314,7 +322,7 @@ class _DashboardUIState extends State<DashboardUI>
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pop(); // Close the dialog
+                    Navigator.of(context).pop();
                   },
                   child: Text(
                     'Cancel',
@@ -331,18 +339,12 @@ class _DashboardUIState extends State<DashboardUI>
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    // Clear user data from SharedPreferences
                     final prefs = await SharedPreferences.getInstance();
                     await prefs.remove('userName');
                     await prefs.remove('organizationName');
                     await prefs.remove('photoUrl');
-                    // Create an instance of LogOutApiService
                     var logoutApiService = await LogOutApiService.create();
-
-                    // Wait for authToken to be initialized
                     logoutApiService.authToken;
-
-                    // Call the signOut method on the instance
                     if (await logoutApiService.signOut()) {
                       Navigator.pop(context);
                       context.read<AuthCubit>().logout();
@@ -350,7 +352,7 @@ class _DashboardUIState extends State<DashboardUI>
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  LoginUI())); // Close the drawer
+                                  LoginUI()));
                     }
                   },
                   child: Text(
@@ -379,11 +381,8 @@ class _DashboardUIState extends State<DashboardUI>
     print('Print Triggered!!');
 
     final apiService = await ResultAPIService.create();
-
-    // Fetch dashboard data
     final Map<String, dynamic>? dashboardData = await apiService.getResult();
     if (dashboardData == null || dashboardData.isEmpty) {
-      // No data available or an error occurred
       print(
           'No data available or error occurred while fetching dashboard data');
       return;
@@ -393,13 +392,11 @@ class _DashboardUIState extends State<DashboardUI>
     final Map<String, dynamic>? records = dashboardData['data'] ?? [];
     print(records);
     if (records == null || records.isEmpty) {
-      // No records available
       print('No records available');
       return;
     }
 
     String link = records['download_link'];
-
     try {
       print('PDF generated successfully. Download URL: ${link}');
       final Uri url = Uri.parse(link);
@@ -407,7 +404,6 @@ class _DashboardUIState extends State<DashboardUI>
       await Printing.layoutPdf(
           onLayout: (PdfPageFormat format) async => data.bodyBytes);
     } catch (e) {
-      // Handle any errors
       print('Error generating PDF: $e');
     }
   }

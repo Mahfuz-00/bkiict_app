@@ -1,14 +1,34 @@
-import 'package:bkiict_app/UI/Widgets/requestWidget.dart';
 import 'package:bkiict_app/UI/Widgets/requestWidgetShowAll.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../Core/Connection Checker/internetconnectioncheck.dart';
 import '../../../Data/Data Sources/API Service (Course Dashboard)/apiServiceCourseDashboard.dart';
 import '../../Widgets/coursecard.dart';
 import '../../../Data/Models/courseinfo.dart';
 
+/// [ShortCoursesUI] is a StatefulWidget that displays ongoing and upcoming short courses.
+///
+/// Variables:
+/// - [shouldRefresh]: A boolean that indicates whether the UI should refresh.
+///
+/// State Variables:
+/// - [_scaffoldKey]: A GlobalKey for the Scaffold widget.
+/// - [_tabController]: A TabController to manage the tabs for ongoing and upcoming courses.
+/// - [OngoingCourses]: A list of Widgets representing ongoing courses.
+/// - [UpcomingCourses]: A list of Widgets representing upcoming courses.
+/// - [_isFetched]: A boolean indicating whether the course data has been fetched.
+/// - [_isLoading]: A boolean indicating whether the data is currently being loaded.
+/// - [_pageLoading]: A boolean indicating whether the page is loading.
+/// - [_errorOccurred]: A boolean indicating whether an error has occurred during data fetching.
+/// - [userName]: A String representing the user's name.
+/// - [organizationName]: A String representing the user's organization name.
+/// - [photoUrl]: A String representing the user's photo URL.
+/// - [notifications]: A list of Strings containing notifications related to the courses.
+///
+/// Actions:
+/// - [loadUserProfile]: Loads user profile information from SharedPreferences.
+/// - [fetchCourses]: Fetches ongoing and upcoming courses from the API.
 class ShortCoursesUI extends StatefulWidget {
   final bool shouldRefresh;
 
@@ -22,7 +42,6 @@ class _ShortCoursesUIState extends State<ShortCoursesUI>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TabController _tabController;
-
   List<Widget> OngoingCourses = [];
   List<Widget> UpcomingCourses = [];
   bool _isFetched = false;
@@ -52,12 +71,9 @@ class _ShortCoursesUIState extends State<ShortCoursesUI>
     if (_isFetched) return;
     try {
       final apiService = await CourseDashboardAPIService.create();
-
-      // Fetch dashboard data
       final Map<String, dynamic>? dashboardData =
           await apiService.Courses(type: 'short');
       if (dashboardData == null || dashboardData.isEmpty) {
-        // No data available or an error occurred
         print('No data available or error occurred while fetching Course Data');
         return;
       }
@@ -66,20 +82,15 @@ class _ShortCoursesUIState extends State<ShortCoursesUI>
       final Map<String, dynamic>? records = dashboardData['records'] ?? [];
       print(records);
       if (records == null || records.isEmpty) {
-        // No records available
         print('No records available');
         return;
       }
 
-      // Set isLoading to true while fetching data
       setState(() {
         _isLoading = true;
       });
 
-      // Extract notifications
       notifications = List<String>.from(records['notifications'] ?? []);
-
-      // Simulate fetching data for 5 seconds
       await Future.delayed(Duration(seconds: 3));
 
       final List<dynamic> pendingRequestsData = records['ongoing'] ?? [];
@@ -93,7 +104,6 @@ class _ShortCoursesUIState extends State<ShortCoursesUI>
             'Accepted Request at index $index: ${acceptedRequestsData[index]}\n');
       }
 
-      // Map pending requests to widgets
       final List<Widget> pendingWidgets = pendingRequestsData.map((request) {
         print('Pending Trip');
         print(request['name']);
@@ -121,7 +131,6 @@ class _ShortCoursesUIState extends State<ShortCoursesUI>
         );
       }).toList();
 
-      // Map accepted requests to widgets
       final List<Widget> acceptedWidgets = acceptedRequestsData.map((request) {
         return CourseCard(
           course: Course(
@@ -145,8 +154,6 @@ class _ShortCoursesUIState extends State<ShortCoursesUI>
     } catch (e) {
       print('Error fetching trip requests: $e');
       _isFetched = true;
-      //_errorOccurred = true;
-      // Handle error as needed
     }
   }
 
@@ -156,28 +163,19 @@ class _ShortCoursesUIState extends State<ShortCoursesUI>
     print('initState called');
     _tabController = TabController(length: 2, vsync: this);
     loadUserProfile();
+    if (!_isFetched) {
+      fetchCourses();
+    }
     Future.delayed(Duration(seconds: 2), () {
       if (widget.shouldRefresh && !_isFetched) {
         loadUserProfile();
-        // Refresh logic here, e.g., fetch data again
         print('Page Loading Done!!');
-        // connectionRequests = [];
-        if (!_isFetched) {
-          fetchCourses();
-          //_isFetched = true; // Set _isFetched to true after the first call
-        }
       }
-      // After 5 seconds, set isLoading to false to stop showing the loading indicator
       setState(() {
         print('Page Loading');
         _pageLoading = false;
       });
     });
-  }
-
-  // Function to check if more than 10 items are available in the list
-  bool shouldShowSeeAllButton(List list) {
-    return list.length > 10;
   }
 
   @override
@@ -194,7 +192,6 @@ class _ShortCoursesUIState extends State<ShortCoursesUI>
         ? Scaffold(
             backgroundColor: Colors.white,
             body: Center(
-              // Show circular loading indicator while waiting
               child: CircularProgressIndicator(),
             ),
           )

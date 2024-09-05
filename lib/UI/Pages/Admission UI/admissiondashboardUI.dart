@@ -1,13 +1,21 @@
 import 'package:bkiict_app/UI/Widgets/buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../Admission Process UI/admissionprocessUI.dart';
 import '../Course Dashboard UI/coursedashboard.dart';
 import '../Dashboard UI/dashboardUI.dart';
 import '../Online Registration UI/registrationcenter.dart';
 import '../Profile UI/profileUI.dart';
 
+/// A [StatefulWidget] that represents the [AdmissionDashboardUI] for the application.
+///
+/// This widget displays the admission process and registration options for users. It features:
+/// - A [Scaffold] with an [AppBar] containing a title and a back button.
+/// - A body with admission information and buttons for navigating to different screens.
+/// - A bottom navigation bar with options to navigate to the Home, Courses, and Profile screens.
+/// Actions:
+/// - [Navigator.pop(context)]: Navigates back to the previous screen.
+/// - [Navigator.push(context, MaterialPageRoute(...))]: Navigates to a new screen when a button is pressed.
 class AdmissionDashboardUI extends StatefulWidget {
   const AdmissionDashboardUI({super.key});
 

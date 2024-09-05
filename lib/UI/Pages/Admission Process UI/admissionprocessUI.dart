@@ -1,9 +1,17 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../Login UI/loginUI.dart';
-
+/// A [StatefulWidget] that represents the user interface for the [AdmissionProcessUI].
+///
+/// This widget includes a [Scaffold] with an [AppBar] displaying the title
+/// 'Admission Process' and a body that outlines the selection procedure
+/// for BKIICT courses.
+///
+/// The class also includes the following private methods:
+/// - [_buildBox(String text)]: Creates a container box displaying the
+///   provided [text] for each step of the admission process.
+/// - [_buildArrow()]: Returns an arrow icon indicating the flow of the
+///   admission process.
 class AdmissionProcessUI extends StatefulWidget {
   const AdmissionProcessUI({super.key});
 

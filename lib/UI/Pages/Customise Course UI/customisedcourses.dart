@@ -1,12 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../Data/Data Sources/API Service (Course Dashboard)/apiServiceCourseDashboard.dart';
 import '../../Widgets/coursecard.dart';
 import '../../../Data/Models/courseinfo.dart';
 import '../../Widgets/requestWidgetShowAll.dart';
 
+/// This class represents the [CustomisedCoursesUI], which displays ongoing
+/// and upcoming courses for the user.
+///
+/// [shouldRefresh] indicates whether the page should refresh the user profile data.
+///
+/// State management variables:
+/// - [_scaffoldKey]: GlobalKey used for managing the scaffold state.
+/// - [_tabController]: Controls the tab navigation for ongoing and upcoming courses.
+/// - [OngoingCourses]: List of widgets representing ongoing courses.
+/// - [UpcomingCourses]: List of widgets representing upcoming courses.
+/// - [_isFetched]: Indicates whether course data has been fetched.
+/// - [_isLoading]: Indicates whether course data is currently loading.
+/// - [_pageLoading]: Indicates whether the page is in the loading state.
+/// - [_errorOccurred]: Indicates if an error occurred while fetching data.
+/// - [userName]: Stores the user's name.
+/// - [organizationName]: Stores the user's organization name.
+/// - [photoUrl]: Stores the user's photo URL.
+/// - [notifications]: List of notifications related to courses.
+///
+/// Actions:
+/// - [loadUserProfile]: Loads the user's profile data from shared preferences.
+/// - [fetchCourses]: Fetches ongoing and upcoming courses from the API.
 class CustomisedCoursesUI extends StatefulWidget {
   final bool shouldRefresh;
   const CustomisedCoursesUI({Key? key, this.shouldRefresh = false}) : super(key: key);
@@ -49,11 +70,9 @@ class _CustomisedCoursesUIState extends State<CustomisedCoursesUI> with SingleTi
     try {
       final apiService = await CourseDashboardAPIService.create();
 
-      // Fetch dashboard data
       final Map<String, dynamic>? dashboardData =
       await apiService.Courses(type: 'customized');
       if (dashboardData == null || dashboardData.isEmpty) {
-        // No data available or an error occurred
         print('No data available or error occurred while fetching Course Data');
         return;
       }
@@ -62,20 +81,16 @@ class _CustomisedCoursesUIState extends State<CustomisedCoursesUI> with SingleTi
       final Map<String, dynamic>? records = dashboardData['records'] ?? [];
       print(records);
       if (records == null || records.isEmpty) {
-        // No records available
         print('No records available');
         return;
       }
 
-      // Set isLoading to true while fetching data
       setState(() {
         _isLoading = true;
       });
 
-      // Extract notifications
       notifications = List<String>.from(records['notifications'] ?? []);
 
-      // Simulate fetching data for 5 seconds
       await Future.delayed(Duration(seconds: 3));
 
       final List<dynamic> pendingRequestsData = records['ongoing'] ?? [];
@@ -89,7 +104,6 @@ class _CustomisedCoursesUIState extends State<CustomisedCoursesUI> with SingleTi
             'Accepted Request at index $index: ${acceptedRequestsData[index]}\n');
       }
 
-      // Map pending requests to widgets
       final List<Widget> pendingWidgets = pendingRequestsData.map((request) {
         print('Pending Trip');
         print(request['name']);
@@ -116,7 +130,6 @@ class _CustomisedCoursesUIState extends State<CustomisedCoursesUI> with SingleTi
         );
       }).toList();
 
-      // Map accepted requests to widgets
       final List<Widget> acceptedWidgets = acceptedRequestsData.map((request) {
         return CourseCard(
           course: Course(
@@ -140,8 +153,6 @@ class _CustomisedCoursesUIState extends State<CustomisedCoursesUI> with SingleTi
     } catch (e) {
       print('Error fetching trip requests: $e');
       _isFetched = true;
-      //_errorOccurred = true;
-      // Handle error as needed
     }
   }
 
@@ -151,18 +162,14 @@ class _CustomisedCoursesUIState extends State<CustomisedCoursesUI> with SingleTi
     print('initState called');
     _tabController = TabController(length: 2, vsync: this);
     loadUserProfile();
+    if (!_isFetched) {
+      fetchCourses();
+    }
     Future.delayed(Duration(seconds: 2), () {
       if (widget.shouldRefresh && !_isFetched) {
         loadUserProfile();
-        // Refresh logic here, e.g., fetch data again
         print('Page Loading Done!!');
-        // connectionRequests = [];
-        if (!_isFetched) {
-          fetchCourses();
-          //_isFetched = true; // Set _isFetched to true after the first call
-        }
       }
-      // After 5 seconds, set isLoading to false to stop showing the loading indicator
       setState(() {
         print('Page Loading');
         _pageLoading = false;
@@ -314,7 +321,7 @@ class _CustomisedCoursesUIState extends State<CustomisedCoursesUI> with SingleTi
                       listWidget: UpcomingCourses,
                       fetchData: fetchCourses(),),
                   ],
-                ),/**/
+                ),
               ),
             ),
           )

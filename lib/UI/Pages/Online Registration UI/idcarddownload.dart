@@ -1,8 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../Login UI/loginUI.dart';
-
+/// The [IDCardDownloadUI] class represents a screen where users can download
+/// their ID card after completing payment. It contains a button that
+/// navigates back to the previous screen and displays ID card information
+/// such as center name, course name, batch number, user name, and mobile
+/// number. The UI is structured to provide a clear and user-friendly
+/// experience for downloading the ID card.
+///
+/// The [IDCardDownloadUI] widget uses a [Scaffold] to provide basic
+/// visual structure, including an [AppBar] and a [SingleChildScrollView]
+/// for scrolling through the content.
+///
+/// Variables:
+/// - [screenWidth]: The width of the current screen.
+/// - [screenHeight]: The height of the current screen.
+/// - [_scaffoldKey]: A key to uniquely identify the scaffold state.
 class IDCardDownloadUI extends StatefulWidget {
   const IDCardDownloadUI({super.key});
 
@@ -87,7 +100,6 @@ class _IDCardDownloadUIState extends State<IDCardDownloadUI> with SingleTickerPr
                       SizedBox(height: 20,),
                       Container(
                         decoration: BoxDecoration(
-                          //color: Color.fromRGBO(143, 150, 158, 1),
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(
                             color: Color.fromRGBO(143, 150, 158, 1),

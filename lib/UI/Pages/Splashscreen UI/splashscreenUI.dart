@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
-
 import '../Login UI/loginUI.dart';
 import '../Sign Up UI/signupUI.dart';
 
+/// SplashScreenUI is a [StatefulWidget] that displays a splash screen
+/// with animations for fading and sliding effects. It includes navigation
+/// to the login and signup screens after a specified duration.
+///
+/// Variables:
+/// - animationController: [AnimationController] responsible for managing animations.
+/// - FadeAnimation: [Animation<double>] for the fade transition effect.
+/// - SlideAnimation: [Animation<Offset>] for sliding effect during the transition.
+/// - animatedpadding: [Animation<Offset>] for padding animation effect.
 class SplashScreenUI extends StatefulWidget {
   const SplashScreenUI({super.key});
 
@@ -18,23 +26,18 @@ class _SplashScreenUIState extends State<SplashScreenUI>
   late Animation<Offset> SlideAnimation;
   late Animation<Offset> animatedpadding;
 
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 1500));
-
     SlideAnimation = Tween(begin: const Offset(0, 3), end: const Offset(0, 0)).animate(
         CurvedAnimation(parent: animationController, curve: Curves.easeInOutCirc));
     FadeAnimation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(parent: animationController, curve: Curves.easeInOut));
     animatedpadding = Tween(begin: const Offset(0, 0.3), end:Offset.zero).animate(CurvedAnimation(parent: animationController, curve: Curves.easeIn));
-
     Future.delayed(const Duration(seconds: 5), () {
       animationController.forward();
     });
-
   }
 
   @override
@@ -94,7 +97,6 @@ class _SplashScreenUIState extends State<SplashScreenUI>
               height: 50,
             ),
             Stack(
-              //fit: StackFit.expand,
               alignment: Alignment.bottomCenter,
               children: [
                 FadeTransition(
@@ -108,14 +110,6 @@ class _SplashScreenUIState extends State<SplashScreenUI>
                 ),
                 SlideTransition(
                   position: SlideAnimation,
-                  /*CurvedAnimation(
-                    parent: animationController,
-                    curve: Curves.easeInOutCirc, // Adjust values for desired timing
-                  ).drive(Tween<Offset>(
-                    begin: Offset(0, 2), // Start beyond the bottom edge
-                    end: Offset(0, 0),
-                  )),*/
-                  //position: SlideAnimation,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -130,9 +124,7 @@ class _SplashScreenUIState extends State<SplashScreenUI>
                             backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
-                              //side: BorderSide(color: Colors.black, width: 2),
                             ),
-                            //elevation: 3,
                             fixedSize: Size(screenWidth*0.9, 70),
                           ),
                           child: const Text('Login',
@@ -159,7 +151,6 @@ class _SplashScreenUIState extends State<SplashScreenUI>
                               borderRadius: BorderRadius.circular(10),
                               side: const BorderSide(color: Colors.black, width: 2),
                             ),
-                            //elevation: 3,
                             fixedSize: Size(screenWidth*0.9, 70),
                           ),
                           child: const Text('Register',
