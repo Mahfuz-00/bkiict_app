@@ -286,7 +286,7 @@ class _RegistrationApplicationReviewUIState
                           )),
                       child: Column(
                         children: [
-                          Text('Information Details',
+                          Text('Course Information Details',
                           style: TextStyle(
                             color: Color.fromRGBO(134, 188, 66, 1),
                             letterSpacing: 1.2,

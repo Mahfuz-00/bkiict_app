@@ -24,7 +24,6 @@ class PasswordChangedUI extends StatefulWidget {
 }
 
 class _PasswordChangedUIState extends State<PasswordChangedUI> {
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -39,7 +38,7 @@ class _PasswordChangedUIState extends State<PasswordChangedUI> {
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children:[
+                children: [
                   Center(
                     child: Image(
                       image: AssetImage('Assets/Images/Success-Mark.png'),
@@ -48,7 +47,9 @@ class _PasswordChangedUIState extends State<PasswordChangedUI> {
                       alignment: Alignment.center,
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Text(
                     'Password Changed!',
                     textAlign: TextAlign.center,
@@ -70,20 +71,24 @@ class _PasswordChangedUIState extends State<PasswordChangedUI> {
                       fontFamily: 'default',
                     ),
                   ),
-                  SizedBox(height: 50,),
+                  SizedBox(
+                    height: 50,
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       final emailCubit = EmailCubit();
                       emailCubit.clearEmail();
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginUI()));
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginUI()),
+                          (route) => false);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromRGBO(134, 188, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      fixedSize: Size(screenWidth*0.9, 70),
+                      fixedSize: Size(screenWidth * 0.9, 70),
                     ),
                     child: Text(
                       'Back to Login',

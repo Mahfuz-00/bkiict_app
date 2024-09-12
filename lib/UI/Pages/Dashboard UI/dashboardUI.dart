@@ -43,7 +43,7 @@ class _DashboardUIState extends State<DashboardUI>
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return PopScope(
-      canPop: false,
+  /*    canPop: false,*/
       child: Scaffold(
         backgroundColor: Colors.grey[100],
         appBar: AppBar(

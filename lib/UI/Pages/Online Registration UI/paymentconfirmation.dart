@@ -22,10 +22,11 @@ class PaymentConfirmationUI extends StatefulWidget {
   State<PaymentConfirmationUI> createState() => _PaymentConfirmationUIState();
 }
 
-class _PaymentConfirmationUIState extends State<PaymentConfirmationUI> with SingleTickerProviderStateMixin{
+class _PaymentConfirmationUIState extends State<PaymentConfirmationUI>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TextEditingController _paymentConfirmationController =
-  TextEditingController();
+      TextEditingController();
   bool buttonloading = false;
 
   @override
@@ -72,7 +73,9 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI> with Sing
                           alignment: Alignment.center,
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Center(
                         child: Text(
                           'Congratulations, Your Registration Successfully Submitted',
@@ -94,8 +97,11 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI> with Sing
                           borderRadius: BorderRadius.circular(5),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                              fixedSize: Size(MediaQuery.of(context).size.width* 0.85, MediaQuery.of(context).size.height * 0.08),
+                              backgroundColor:
+                                  const Color.fromRGBO(134, 188, 66, 1),
+                              fixedSize: Size(
+                                  MediaQuery.of(context).size.width * 0.85,
+                                  MediaQuery.of(context).size.height * 0.08),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                               ),
@@ -138,27 +144,35 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI> with Sing
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Text('Bkash Payment',
+                  child: Text(
+                    'Bkash Payment',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color.fromRGBO(134, 188, 66, 1),
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                       fontFamily: 'default',
-                    ),),
+                    ),
+                  ),
                 ),
               ),
               Divider(),
-              SizedBox(height: 20,),
-              Text('Trx ID',
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Trx ID',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Color.fromRGBO(134, 188, 66, 1),
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                   fontFamily: 'default',
-                ),),
-              SizedBox(height: 10,),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               Center(
                 child: Container(
                   width: 380,
@@ -186,15 +200,19 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI> with Sing
                   ),
                 ),
               ),
-              SizedBox(height: 2,),
-              Text('Enter the Transaction ID from Bkash Payment',
+              SizedBox(
+                height: 2,
+              ),
+              Text(
+                'Enter the Transaction ID from Bkash Payment',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Color.fromRGBO(143, 150, 158, 1),
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
                   fontFamily: 'default',
-                ),),
+                ),
+              ),
               SizedBox(height: 45),
               Center(
                 child: Material(
@@ -203,7 +221,8 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI> with Sing
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                      fixedSize: Size(MediaQuery.of(context).size.width* 0.9, MediaQuery.of(context).size.height * 0.08),
+                      fixedSize: Size(MediaQuery.of(context).size.width * 0.9,
+                          MediaQuery.of(context).size.height * 0.08),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
@@ -213,28 +232,29 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI> with Sing
                         buttonloading = true;
                       });
                       SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
+                          await SharedPreferences.getInstance();
                       int id = prefs.getInt('exam_registration_id') ?? 0;
                       print(id);
                       final apiService = await PaymentAPIService.create();
 
                       final registrationSuccessful =
-                      await apiService.sendIdsFromSharedPreferences(
-                          _paymentConfirmationController.text, id);
-                      Navigator.push(
+                          await apiService.sendIdsFromSharedPreferences(
+                              _paymentConfirmationController.text, id);
+                      Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const DashboardUI()));
+                              builder: (context) => const DashboardUI()),
+                          (route) => false);
                     },
-                    child:  buttonloading
+                    child: buttonloading
                         ? CircularProgressIndicator()
                         : const Text('Confirm',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'default',
-                        )),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'default',
+                            )),
                   ),
                 ),
               ),
