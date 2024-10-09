@@ -537,14 +537,128 @@ class _RegistrationPersonalInformationUIState
 
   Future<void> _selectImage() async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              'Choose an option',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Color.fromRGBO(25, 192, 122, 1),
+                fontWeight: FontWeight.bold,
+                fontFamily: 'default',
+                fontSize: 22,
+              ),
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: Icon(Icons.photo_library),
+                title: Text(
+                  'Gallery',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'default',
+                    fontSize: 18,
+                  ),
+                ),
+                onTap: () async {
+                  Navigator.pop(context);
+                  final pickedFile =
+                  await picker.pickImage(source: ImageSource.gallery);
+                  if (pickedFile != null) {
+                    // Check the file size
+                    final file = File(pickedFile.path);
+                    final fileSize = await file.length();
+                    if (fileSize <= 5 * 1024 * 1024) {
+                      // 5 MB
+                      setState(() {
+                        _imageFile = file;
+                      });
+                      await _getImageDimensions();
+                    } else {
+                      _showErrorDialog("Image must be less than 5 MB.");
+                    }
+                  }
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.camera_alt),
+                title: Text(
+                  'Camera',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'default',
+                    fontSize: 18,
+                  ),
+                ),
+                onTap: () async {
+                  Navigator.pop(context);
+                  final pickedFile =
+                  await picker.pickImage(source: ImageSource.camera);
+                  if (pickedFile != null) {
+                    // Check the file size
+                    final file = File(pickedFile.path);
+                    final fileSize = await file.length();
+                    if (fileSize <= 5 * 1024 * 1024) {
+                      // 5 MB
+                      setState(() {
+                        _imageFile = file;
+                      });
+                      await _getImageDimensions();
+                    } else {
+                      _showErrorDialog("Image must be less than 5 MB.");
+                    }
+                  }
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
-    if (pickedFile != null) {
-      setState(() {
-        _imageFile = File(pickedFile.path);
-      });
-      await _getImageDimensions();
-    }
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            "Error",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Color.fromRGBO(25, 192, 122, 1),
+              fontWeight: FontWeight.bold,
+              fontFamily: 'default',
+              fontSize: 22,
+            ),
+          ),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                "OK",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'default',
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   double _imageHeight = 0;

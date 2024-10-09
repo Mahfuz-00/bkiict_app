@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'overlaytext.dart';
+
 /// A custom [TextFormField] widget that encapsulates a [TextEditingController],
 /// label text, validation logic, keyboard type, input formatters, It is designed for consistent styling
 /// and usability across various input types.
@@ -20,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
+  final String? hinttext;
   final bool? obscureText;
   final Widget? suffixIcon;
 
@@ -30,6 +33,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.validator,
     this.keyboardType,
     this.inputFormatters,
+    this.hinttext,
     this.obscureText,
     this.suffixIcon,
   }) : super(key: key);
@@ -42,6 +46,9 @@ class CustomTextFormField extends StatelessWidget {
       child: Stack(
         children: [
           TextFormField(
+            onTap: () {
+              showCustomOverlay(context, hinttext!);
+            },
             controller: controller,
             validator: validator,
             keyboardType: keyboardType,
