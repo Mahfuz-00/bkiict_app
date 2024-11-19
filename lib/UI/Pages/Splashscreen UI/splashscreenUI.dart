@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../../../Data/Data Sources/API Service (Profile)/apiserviceprofile.dart';
+import '../../../Data/Models/profilemodel.dart';
+import '../../Bloc/auth_cubit.dart';
+import '../Dashboard UI/dashboardUI.dart';
 import '../Login UI/loginUI.dart';
 import '../Sign Up UI/signupUI.dart';
 
@@ -35,8 +41,122 @@ class _SplashScreenUIState extends State<SplashScreenUI>
         CurvedAnimation(parent: animationController, curve: Curves.easeInOutCirc));
     FadeAnimation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(parent: animationController, curve: Curves.easeInOut));
     animatedpadding = Tween(begin: const Offset(0, 0.3), end:Offset.zero).animate(CurvedAnimation(parent: animationController, curve: Curves.easeIn));
-    Future.delayed(const Duration(seconds: 5), () {
-      animationController.forward();
+
+    _checkAuthAndNavigate(context);
+  }
+
+  final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+
+// In the SplashScreen widget:
+  Future<void> _checkAuthAndNavigate(BuildContext context) async {
+    final authCubit = context.read<AuthCubit>();
+    print('Auth Invoked');
+    try {
+      // Retrieve the token and user type from secure storage
+      final token = await _secureStorage.read(key: 'auth_token');
+
+      print(token);
+
+      // If token or userType is missing, handle this case appropriately
+      if (token == null ||
+          token.isEmpty) {
+        print('No token or user type found, staying on current screen');
+        animationController.forward();
+        // You can either show a message, keep the user on the page, or handle differently
+        return; // Stay on the current screen without navigating
+      }
+
+      // If token and userType exist, check if the state is AuthInitial or AuthAuthenticated
+      if (authCubit.state is AuthInitial) {
+        // Proceed with fetching the user profile
+        await _fetchUserProfile(token, context);
+      } else if (authCubit.state is AuthAuthenticated) {
+        // If already authenticated, navigate based on the user type
+        final currentState = authCubit.state as AuthAuthenticated;
+        final userProfile = currentState.userProfile;
+
+        print(
+            'User Profile from State: ${userProfile.name}, ${userProfile.Id}, ${userProfile.photo}');
+        await _fetchUserProfile(token, context);
+        print(
+            'User Profile from State: ${userProfile.name}, ${userProfile.Id}, ${userProfile.photo}');
+        _navigateToAppropriateDashboard(context);
+      }
+    } catch (e) {
+      print('Error while checking authentication: $e');
+      _navigateToLogin(context);
+    }
+  }
+
+  Future<void> _fetchUserProfile(
+      String token, BuildContext context) async {
+    try {
+      // Fetch user profile from the API
+      final apiService = ProfileAPIService();
+      final profile = await apiService.fetchUserProfile(token);
+
+      // If profile is fetched successfully, create the UserProfile and login
+      final userProfile = UserProfile.fromJson(profile);
+
+      print('Profile Loaded: $userProfile');
+
+      // Log the user in via the AuthCubit
+      context.read<AuthCubit>().login(userProfile, token);
+
+      // Navigate to the appropriate dashboard after login
+      _navigateToAppropriateDashboard(context);
+    } catch (e) {
+      print('Error fetching user profile: $e');
+      _navigateToLogin(context);
+    }
+  }
+
+  void _navigateToLogin(BuildContext context) {
+    print('Navigating to login');
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginUI()),
+    );
+  }
+
+  void _navigateToAppropriateDashboard(BuildContext context) {
+    print('Navigating to appropriate dashboard');
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => DashboardUI()),
+            (route) => false,
+      );
+  }
+
+  void showTopToast(BuildContext context, String message) {
+    OverlayState? overlayState = Overlay.of(context);
+    OverlayEntry overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: MediaQuery.of(context).padding.top + 10,
+        left: 20,
+        right: 20,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              message,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    overlayState?.insert(overlayEntry);
+
+    Future.delayed(Duration(seconds: 3)).then((_) {
+      overlayEntry.remove();
     });
   }
 
