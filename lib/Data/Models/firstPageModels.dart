@@ -96,7 +96,7 @@ class Course {
 /// - [fromJson]: A factory constructor that creates a BatchNo instance from a JSON map.
 class BatchNo {
   final int id;
-  final String number;
+  final int number;
   final String name;
 
   BatchNo({

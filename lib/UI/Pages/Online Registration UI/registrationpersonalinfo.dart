@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bkiict_app/UI/Widgets/labelText.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,6 +48,7 @@ class _RegistrationPersonalInformationUIState
   late TextEditingController _Phonecontroller = TextEditingController();
   late TextEditingController _Gendercontroller = TextEditingController();
   File? _imageFile;
+  final _formKey = GlobalKey<FormState>();
 
   List<DropdownMenuItem<String?>> gender = [
     DropdownMenuItem(child: Text("Male"), value: "Male"),
@@ -94,6 +96,7 @@ class _RegistrationPersonalInformationUIState
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Center(
                 child: Text(
@@ -107,221 +110,203 @@ class _RegistrationPersonalInformationUIState
                 ),
               ),
               const SizedBox(height: 25),
-              Text(
-                'Your Full Name',
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 150, 158, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'default',
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                width: screenWidth * 0.9,
-                height: 70,
-                child: TextFormField(
-                  controller: _FullNamecontroller,
-                  style: const TextStyle(
-                    color: Color.fromRGBO(143, 150, 158, 1),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',
-                  ),
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(),
-                    labelText: 'Full Name',
-                    labelStyle: TextStyle(
-                      color: Colors.black87,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      fontFamily: 'default',
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                'Your Email Address',
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 150, 158, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'default',
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                width: screenWidth * 0.9,
-                height: 70,
-                child: TextFormField(
-                  controller: _Emailcontroller,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (input) {
-                    if (input!.isEmpty) {
-                      return 'Please enter your email address';
-                    }
-                    final emailRegex =
-                        RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                    if (!emailRegex.hasMatch(input)) {
-                      return 'Please enter a valid email address';
-                    }
-                    return null;
-                  },
-                  style: const TextStyle(
-                    color: Color.fromRGBO(143, 150, 158, 1),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',
-                  ),
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(),
-                    labelText: 'Email Address',
-                    labelStyle: TextStyle(
-                      color: Colors.black87,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      fontFamily: 'default',
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                'Your Mobile Number',
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 150, 158, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'default',
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                width: screenWidth * 0.9,
-                height: 70,
-                child: TextFormField(
-                  controller: _Phonecontroller,
-                  keyboardType: TextInputType.phone,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(11),
-                  ],
-                  validator: (input) {
-                    if (input == null || input.isEmpty) {
-                      return 'Please enter your mobile number name';
-                    }
-                    if (input.length != 11) {
-                      return 'Mobile number must be 11 digits';
-                    }
-                    return null;
-                  },
-                  style: const TextStyle(
-                    color: Color.fromRGBO(143, 150, 158, 1),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',
-                  ),
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(),
-                    labelText: 'Mobile No',
-                    labelStyle: TextStyle(
-                      color: Colors.black87,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      fontFamily: 'default',
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                'Your Date of Birth',
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 150, 158, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'default',
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                width: screenWidth * 0.9,
-                height: 60,
-                child: TextFormField(
-                  controller: _Datecontroller,
-                  readOnly: true,
-                  enableInteractiveSelection: false,
-                  enableSuggestions: false,
-                  style: const TextStyle(
-                    color: Color.fromRGBO(143, 150, 158, 1),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'default',
-                  ),
-                  decoration: InputDecoration(
-                    labelText: 'Date of Birth',
-                    labelStyle: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      fontFamily: 'default',
-                    ),
-                    contentPadding: EdgeInsets.all(10),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(color: Colors.black, width: 1.0),
-                    ),
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime(2100),
-                        ).then((selectedDate) {
-                          if (selectedDate != null) {
-                            final formattedDate =
-                            DateFormat('yyyy-MM-dd').format(selectedDate);
-                            _Datecontroller.text = formattedDate;
-                          }
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Icon(
-                          Icons.calendar_today_outlined,
-                          size: 30,
+              Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      LabeledTextWithAsterisk(text: 'Your Full Name'),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: screenWidth * 0.9,
+                        height: 70,
+                        child: TextFormField(
+                          controller: _FullNamecontroller,
+                          validator: (input) {
+                            if (input == null || input.isEmpty) {
+                              return 'Please enter your full name';
+                            }
+                            return null;
+                          },
+                          style: const TextStyle(
+                            color: Color.fromRGBO(143, 150, 158, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          ),
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            labelText: 'Full Name',
+                            labelStyle: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontFamily: 'default',
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
+                      const SizedBox(height: 5),
+                      LabeledTextWithAsterisk(text: 'Your Email Address'),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: screenWidth * 0.9,
+                        height: 70,
+                        child: TextFormField(
+                          controller: _Emailcontroller,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (input) {
+                            if (input == null || input.isEmpty) {
+                              return 'Please enter your email address';
+                            }
+                            final emailRegex =
+                                RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                            if (!emailRegex.hasMatch(input)) {
+                              return 'Please enter a valid email address';
+                            }
+                            return null;
+                          },
+                          style: const TextStyle(
+                            color: Color.fromRGBO(143, 150, 158, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          ),
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            labelText: 'Email Address',
+                            labelStyle: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontFamily: 'default',
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      LabeledTextWithAsterisk(text: 'Your Mobile Number'),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: screenWidth * 0.9,
+                        height: 70,
+                        child: TextFormField(
+                          controller: _Phonecontroller,
+                          keyboardType: TextInputType.phone,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(11),
+                          ],
+                          validator: (input) {
+                            if (input == null || input.isEmpty) {
+                              return 'Please enter your mobile number name';
+                            }
+                            if (input.length != 11) {
+                              return 'Mobile number must be 11 digits';
+                            }
+                            return null;
+                          },
+                          style: const TextStyle(
+                            color: Color.fromRGBO(143, 150, 158, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          ),
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            labelText: 'Mobile No',
+                            labelStyle: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontFamily: 'default',
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      LabeledTextWithAsterisk(text: 'Your Date of Birth'),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: screenWidth * 0.9,
+                        height: 60,
+                        child: TextFormField(
+                          controller: _Datecontroller,
+                          readOnly: true,
+                          enableInteractiveSelection: false,
+                          enableSuggestions: false,
+                          validator: (input) {
+                            if (input == null || input.isEmpty) {
+                              return 'Please enter your date of birth';
+                            }
+                            return null;
+                          },
+                          style: const TextStyle(
+                            color: Color.fromRGBO(143, 150, 158, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          ),
+                          decoration: InputDecoration(
+                            labelText: 'Date of Birth',
+                            labelStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontFamily: 'default',
+                            ),
+                            contentPadding: EdgeInsets.all(10),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              borderSide:
+                                  BorderSide(color: Colors.black, width: 1.0),
+                            ),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1900),
+                                  lastDate: DateTime(2100),
+                                ).then((selectedDate) {
+                                  if (selectedDate != null) {
+                                    final formattedDate =
+                                        DateFormat('yyyy-MM-dd')
+                                            .format(selectedDate);
+                                    _Datecontroller.text = formattedDate;
+                                  }
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Icon(
+                                  Icons.calendar_today_outlined,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
               const SizedBox(height: 15),
-              Text(
-                'Your Gender',
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 150, 158, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'default',
-                ),
-              ),
+              LabeledTextWithAsterisk(text: 'Your Gender'),
               SizedBox(
                 height: 5,
               ),
@@ -352,15 +337,7 @@ class _RegistrationPersonalInformationUIState
                 ),
               ),
               const SizedBox(height: 15),
-              Text(
-                'Upload Your Profile Picture',
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 150, 158, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'default',
-                ),
-              ),
+              LabeledTextWithAsterisk(text: 'Upload Your Profile Picture'),
               SizedBox(
                 height: 5,
               ),
@@ -387,8 +364,7 @@ class _RegistrationPersonalInformationUIState
                       ),
                       errorMaxLines: null,
                       errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.red),
+                        borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
                     child: Row(
@@ -396,15 +372,15 @@ class _RegistrationPersonalInformationUIState
                         Expanded(
                           child: _imageFile != null
                               ? Image.file(
-                            _imageFile!,
-                            width: null,
-                            height: null,
-                            fit: BoxFit.contain,
-                          )
+                                  _imageFile!,
+                                  width: null,
+                                  height: null,
+                                  fit: BoxFit.contain,
+                                )
                               : Center(
-                            child: Icon(Icons.image,
-                                size: 60, color: Colors.grey),
-                          ),
+                                  child: Icon(Icons.image,
+                                      size: 60, color: Colors.grey),
+                                ),
                         ),
                         SizedBox(width: 8),
                         VerticalDivider(
@@ -476,7 +452,7 @@ class _RegistrationPersonalInformationUIState
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                  const RegistrationAcademicInformationUI()));
+                                      const RegistrationAcademicInformationUI()));
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -505,15 +481,19 @@ class _RegistrationPersonalInformationUIState
   }
 
   bool validateInputs() {
-    if (_FullNamecontroller.text.isEmpty ||
-        _Emailcontroller.text.isEmpty ||
-        _Phonecontroller.text.isEmpty ||
-        _Datecontroller.text.isEmpty ||
-        _Gendercontroller.text.isEmpty ||
-        _imageFile == null) {
+    if (_formKey.currentState!.validate()) {
+      if (_FullNamecontroller.text.isEmpty ||
+          _Emailcontroller.text.isEmpty ||
+          _Phonecontroller.text.isEmpty ||
+          _Datecontroller.text.isEmpty ||
+          _Gendercontroller.text.isEmpty ||
+          _imageFile == null) {
+        return false;
+      }
+      return true;
+    } else {
       return false;
     }
-    return true;
   }
 
   Future<void> saveData() async {
@@ -571,7 +551,7 @@ class _RegistrationPersonalInformationUIState
                 onTap: () async {
                   Navigator.pop(context);
                   final pickedFile =
-                  await picker.pickImage(source: ImageSource.gallery);
+                      await picker.pickImage(source: ImageSource.gallery);
                   if (pickedFile != null) {
                     // Check the file size
                     final file = File(pickedFile.path);
@@ -602,7 +582,7 @@ class _RegistrationPersonalInformationUIState
                 onTap: () async {
                   Navigator.pop(context);
                   final pickedFile =
-                  await picker.pickImage(source: ImageSource.camera);
+                      await picker.pickImage(source: ImageSource.camera);
                   if (pickedFile != null) {
                     // Check the file size
                     final file = File(pickedFile.path);
@@ -663,6 +643,7 @@ class _RegistrationPersonalInformationUIState
 
   double _imageHeight = 0;
   double _imageWidth = 0;
+
   Future<void> _getImageDimensions() async {
     if (_imageFile != null) {
       final data = await _imageFile!.readAsBytes();

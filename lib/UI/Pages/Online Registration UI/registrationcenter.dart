@@ -1,3 +1,4 @@
+import 'package:bkiict_app/UI/Widgets/labelTextTemplate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,6 +8,7 @@ import '../../../Data/Data Sources/API Service (Center-Course)/apiServiceCourse.
 import '../../../Data/Models/firstPageModels.dart';
 import '../../Widgets/dropdownfield.dart';
 import '../../Widgets/dropdownoptionsfield.dart';
+import '../../Widgets/labelText.dart';
 import 'registrationpersonalinfo.dart';
 
 /// A UI widget for the registration center, allowing users to select
@@ -81,6 +83,10 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
     if (_isFetched) return;
     setState(() {
       isLoadingCenters = true;
+      courses = [];
+      _courseID = '';
+      batches = [];
+      _batchID = '';
     });
     try {
       final apiService = await CenterAPIService.create();
@@ -101,6 +107,10 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
       await handleCenters(records);
       setState(() {
         _isFetched = true;
+        courses = [];
+        _courseID = '';
+        batches = [];
+        _batchID = '';
       });
     } catch (e) {
       print('Error fetching center datas: $e');
@@ -137,6 +147,8 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
     if (_isFetchedCourse) return;
     setState(() {
       isLoadingCourse = true;
+      batches = [];
+      _batchID = '';
     });
     try {
       final apiService = await CourseOptionAPIService.create();
@@ -150,12 +162,24 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
 
       final List<dynamic> records = dashboardData['records'];
       if (records == null || records.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('No Course is available right now'),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        setState(() {
+          isLoadingCourse = false;
+        });
         print('No records available');
         return;
       }
       await handleCourse(records);
       setState(() {
         _isFetchedCourse = true;
+        isLoadingCourse = false;
+        batches = [];
+        _batchID = '';
       });
     } catch (e) {
       print('Error fetching course datas: $e');
@@ -164,6 +188,17 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
   }
 
   Future<void> handleCourse(List<dynamic> courseData) async {
+    if(courseData == []){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('No Course is available right now'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      setState(() {
+        isLoadingCourse = false;
+      });
+    }
     List<Course> fetchedCourses = [];
     try {
       for (dynamic course in courseData) {
@@ -205,6 +240,15 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
 
       final List<dynamic> records = dashboardData['records'];
       if (records == null || records.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('No Batch is available right now'),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        setState(() {
+          isLoadingBatch = false;
+        });
         print('No records available');
         return;
       }
@@ -220,6 +264,17 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
   }
 
   Future<void> handleBatch(List<dynamic> batchData) async {
+    if(batchData == []){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('No Batch is available right now'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      setState(() {
+        isLoadingBatch = false;
+      });
+    }
     List<BatchNo> fetchedBatches = [];
     try {
       for (dynamic course in batchData) {
@@ -310,15 +365,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
               SizedBox(
                 height: 15,
               ),
-              Text(
-                'Select a Center',
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 150, 158, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'default',
-                ),
-              ),
+             LabeledTextWithAsterisk(text: 'Select a Center'),
               SizedBox(
                 height: 5,
               ),
@@ -352,6 +399,13 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
                         onChanged: (newValue) {
                           setState(() {
                             selectedCenterValue = newValue!;
+                            courses = [];
+                            _courseID = '';
+                            batches = [];
+                            _batchID = '';
+                            _Fee = '';
+                            _isFetchedBatch = false;
+                            _isFetchedCourse = false;
                           });
                           if (newValue != null) {
                             CenterOption selectedCenterObject =
@@ -361,6 +415,10 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
                             if (selectedCenterObject != null) {
                               _centerID = selectedCenterObject.id.toString();
                               print(_centerID);
+                            }
+                            if (_centerID != 0 &&
+                                _CourseTypecontroller.text.isNotEmpty) {
+                              fetchCourse(_centerID, _CourseTypecontroller.text);
                             }
                           }
                         },
@@ -372,15 +430,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
               SizedBox(
                 height: 15,
               ),
-              Text(
-                'Select a Course Type',
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 150, 158, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'default',
-                ),
-              ),
+              LabeledTextWithAsterisk(text: 'Select a Course Type'),
               SizedBox(
                 height: 5,
               ),
@@ -407,6 +457,13 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
                         setState(() {
                           _CourseTypecontroller.text = value!;
                           print('Center ID: $_centerID');
+                          courses = [];
+                          _courseID = '';
+                          batches = [];
+                          _batchID = '';
+                          _Fee = '';
+                          _isFetchedCourse = false;
+                          _isFetchedBatch = false;
                         });
                         if (_centerID != 0 &&
                             _CourseTypecontroller.text.isNotEmpty) {
@@ -418,15 +475,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
               SizedBox(
                 height: 15,
               ),
-              Text(
-                'Select a Course',
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 150, 158, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'default',
-                ),
-              ),
+              LabeledTextWithAsterisk(text: 'Select a Course'),
               SizedBox(
                 height: 5,
               ),
@@ -460,6 +509,10 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
                         onChanged: (newValue) {
                           setState(() {
                             selectedCourse = newValue!;
+                            batches = [];
+                            _Fee = '';
+                            _batchID = '';
+                            _isFetchedBatch = false;
                           });
                           if (newValue != null) {
                             Course selectedCourseObject = courses.firstWhere(
@@ -482,15 +535,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
               SizedBox(
                 height: 15,
               ),
-              Text(
-                'Course Free : ',
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 150, 158, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'default',
-                ),
-              ),
+              LabeledTextWithoutAsterisk(text: 'Course Free'),
               SizedBox(
                 height: 5,
               ),
@@ -523,15 +568,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
               SizedBox(
                 height: 15,
               ),
-              Text(
-                'Select a Batch no',
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 150, 158, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'default',
-                ),
-              ),
+              LabeledTextWithAsterisk(text: 'Select a Batch no'),
               SizedBox(
                 height: 5,
               ),
@@ -640,7 +677,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Fill up all required fields'),
+                            content: Text('Pick all required fields'),
                             behavior: SnackBarBehavior.floating,
                           ),
                         );

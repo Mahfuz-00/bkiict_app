@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bkiict_app/UI/Widgets/labelText.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,17 +35,23 @@ class RegistrationAcademicInformationUI extends StatefulWidget {
   const RegistrationAcademicInformationUI({super.key});
 
   @override
-  State<RegistrationAcademicInformationUI> createState() => _RegistrationAcademicInformationUIState();
+  State<RegistrationAcademicInformationUI> createState() =>
+      _RegistrationAcademicInformationUIState();
 }
 
-class _RegistrationAcademicInformationUIState extends State<RegistrationAcademicInformationUI> with SingleTickerProviderStateMixin{
+class _RegistrationAcademicInformationUIState
+    extends State<RegistrationAcademicInformationUI>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<DropdownMenuItem<String>> education = [
-    DropdownMenuItem(child: Text("SSC or Equivalent"), value: "SSC or Equivalent"),
-    DropdownMenuItem(child: Text("HSC or Equivalent"), value: "HSC or Equivalent"),
-    DropdownMenuItem(child: Text("BSc or Equivalent"), value: "BSc or Equivalent"),
-    DropdownMenuItem(child: Text("Diploma or Equivalent"), value: "Diploma or Equivalent"),
-
+    DropdownMenuItem(
+        child: Text("SSC or Equivalent"), value: "SSC or Equivalent"),
+    DropdownMenuItem(
+        child: Text("HSC or Equivalent"), value: "HSC or Equivalent"),
+    DropdownMenuItem(
+        child: Text("BSc or Equivalent"), value: "BSc or Equivalent"),
+    DropdownMenuItem(
+        child: Text("Diploma or Equivalent"), value: "Diploma or Equivalent"),
   ];
 
   List<DropdownMenuItem<String>> decipline = [
@@ -63,6 +70,7 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
   late String? Qualification = '';
   File? _imageFile;
   late bool isdelayed = false;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -93,259 +101,255 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
         ),
       ),
       body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
+          scrollDirection: Axis.vertical,
           child: SafeArea(
             child: Container(
               color: Colors.grey[100],
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Center(
-                    child: Text('Academic Information(s)',
+                    child: Text(
+                      'Academic Information(s)',
                       style: TextStyle(
                         color: Color.fromRGBO(143, 150, 158, 1),
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'default',
-                      ),),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 25),
-                  Text('Your Education Qualification',
-                    style: TextStyle(
-                      color: Color.fromRGBO(143, 150, 158, 1),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),),
-                  SizedBox(height: 5,),
-                  Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(5),
-                    child: Container(
-                      width: screenWidth * 0.9,
-                      height: screenHeight * 0.075,
-                      padding: EdgeInsets.only(left: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color: Colors.grey),
-                      ),
-                      child: DropdownField(
-                          hintText: 'Education Qualification',
-                          dropdownItems: education,
-                          initialValue: null,
-                          onChanged: (value) {
-                            setState(() {
-                              _Qulificationcontroller.text = value!;
-                              Qualification = value!;
-                            });
-                          }),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  if(Qualification == 'SSC or Equivalent'  || Qualification == 'HSC or Equivalent')  ...[
-                    Text(
-                      'Decipline',
-                      style: TextStyle(
-                        color: Color.fromRGBO(143, 150, 158, 1),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'default',
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(5),
-                      child: Container(
-                        width: screenWidth * 0.9,
-                        height: screenHeight * 0.075,
-                        padding: EdgeInsets.only(left: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(color: Colors.grey),
-                        ),
-                        child: DropdownField(
-                            hintText: 'Decipline',
-                            dropdownItems: decipline,
-                            initialValue: null,
-                            onChanged: (value) {
-                              setState(() {
-                                _Deciplinecontroller.text = value!;
-                              });
-                            }),
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                  ],
-                  if(Qualification == 'BSc or Equivalent'  || Qualification == 'Diploma or Equivalent') ...[
-                    Text(
-                      'Subject',
-                      style: TextStyle(
-                        color: Color.fromRGBO(143, 150, 158, 1),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'default',
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      width: screenWidth * 0.9,
-                      height: 70,
-                      child: TextFormField(
-                        controller: _SubjectNamecontroller,
-                        style: const TextStyle(
-                          color: Color.fromRGBO(143, 150, 158, 1),
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'default',
-                        ),
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(),
-                          labelText: 'Subject Name',
-                          labelStyle: TextStyle(
-                            color: Colors.black87,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            fontFamily: 'default',
+                  Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          LabeledTextWithAsterisk(
+                              text: 'Your Education Qualification'),
+                          SizedBox(
+                            height: 5,
                           ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                  ],
-                  Text('Passing Year',
-                    style: TextStyle(
-                      color: Color.fromRGBO(143, 150, 158, 1),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),),
-                  SizedBox(height: 5,),
-                  Container(
-                    width: screenWidth * 0.9,
-                    height: 70,
-                    child: TextFormField(
-                      controller: _PassingYearcontroller,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(4),
-                      ],
-                      validator: (input) {
-                        if (input == null || input.isEmpty) {
-                          return 'Please enter your Passing year';
-                        }
-                        if (input.length != 4) {
-                          return 'passing year must be 4 digits';
-                        }
-                        return null;
-                      },
-                      style: const TextStyle(
-                        color: Color.fromRGBO(143, 150, 158, 1),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'default',
-                      ),
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
-                        labelText: 'Passing Year',
-                        labelStyle: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'default',
-                        ),
-                      ),
-                    ),
-                  ),
+                          Material(
+                            elevation: 5,
+                            borderRadius: BorderRadius.circular(5),
+                            child: Container(
+                              width: screenWidth * 0.9,
+                              height: screenHeight * 0.075,
+                              padding: EdgeInsets.only(left: 10),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(color: Colors.grey),
+                              ),
+                              child: DropdownField(
+                                  hintText: 'Education Qualification',
+                                  dropdownItems: education,
+                                  initialValue: null,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _Qulificationcontroller.text = value!;
+                                      Qualification = value!;
+                                    });
+                                  }),
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          if (Qualification == 'SSC or Equivalent' ||
+                              Qualification == 'HSC or Equivalent') ...[
+                            LabeledTextWithAsterisk(text: 'Decipline'),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Material(
+                              elevation: 5,
+                              borderRadius: BorderRadius.circular(5),
+                              child: Container(
+                                width: screenWidth * 0.9,
+                                height: screenHeight * 0.075,
+                                padding: EdgeInsets.only(left: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(color: Colors.grey),
+                                ),
+                                child: DropdownField(
+                                    hintText: 'Decipline',
+                                    dropdownItems: decipline,
+                                    initialValue: null,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _Deciplinecontroller.text = value!;
+                                      });
+                                    }),
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                          ],
+                          if (Qualification == 'BSc or Equivalent' ||
+                              Qualification == 'Diploma or Equivalent') ...[
+                            LabeledTextWithAsterisk(text: 'Subject'),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              width: screenWidth * 0.9,
+                              height: 70,
+                              child: TextFormField(
+                                controller: _SubjectNamecontroller,
+                                validator: (input) {
+                                  if (input == null || input.isEmpty) {
+                                    return 'Please enter your Passing subject name';
+                                  }
+                                  return null;
+                                },
+                                style: const TextStyle(
+                                  color: Color.fromRGBO(143, 150, 158, 1),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'default',
+                                ),
+                                decoration: const InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Subject Name',
+                                  labelStyle: TextStyle(
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    fontFamily: 'default',
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                          ],
+                          LabeledTextWithAsterisk(text: 'Passing Year'),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            width: screenWidth * 0.9,
+                            height: 70,
+                            child: TextFormField(
+                              controller: _PassingYearcontroller,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                LengthLimitingTextInputFormatter(4),
+                              ],
+                              validator: (input) {
+                                if (input == null || input.isEmpty) {
+                                  return 'Please enter your Passing year';
+                                }
+                                if (input.length != 4) {
+                                  return 'passing year must be 4 digits';
+                                }
+                                return null;
+                              },
+                              style: const TextStyle(
+                                color: Color.fromRGBO(143, 150, 158, 1),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'default',
+                              ),
+                              decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                                labelText: 'Passing Year',
+                                labelStyle: TextStyle(
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  fontFamily: 'default',
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          LabeledTextWithAsterisk(text: 'Institute'),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            width: screenWidth * 0.9,
+                            height: 70,
+                            child: TextFormField(
+                              controller: _Institutecontroller,
+                              validator: (input) {
+                                if (input == null || input.isEmpty) {
+                                  return 'Please enter your Passing institution';
+                                }
+                                return null;
+                              },
+                              style: const TextStyle(
+                                color: Color.fromRGBO(143, 150, 158, 1),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'default',
+                              ),
+                              decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                                labelText: 'Institute',
+                                labelStyle: TextStyle(
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  fontFamily: 'default',
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          LabeledTextWithAsterisk(text: 'Result'),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            width: screenWidth * 0.9,
+                            height: 70,
+                            child: TextFormField(
+                              controller: _Resultcontroller,
+                              validator: (input) {
+                                if (input == null || input.isEmpty) {
+                                  return 'Please enter your Passing result';
+                                }
+                                return null;
+                              },
+                              style: const TextStyle(
+                                color: Color.fromRGBO(143, 150, 158, 1),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'default',
+                              ),
+                              decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                                labelText: 'Result',
+                                labelStyle: TextStyle(
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  fontFamily: 'default',
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
                   const SizedBox(height: 5),
-                  Text('Institute',
-                    style: TextStyle(
-                      color: Color.fromRGBO(143, 150, 158, 1),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),),
-                  SizedBox(height: 5,),
-                  Container(
-                    width: screenWidth * 0.9,
-                    height: 70,
-                    child: TextFormField(
-                      controller: _Institutecontroller,
-                      style: const TextStyle(
-                        color: Color.fromRGBO(143, 150, 158, 1),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'default',
-                      ),
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
-                        labelText: 'Institute',
-                        labelStyle: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'default',
-                        ),
-                      ),
-                    ),
+                  LabeledTextWithAsterisk(text: 'Certificate'),
+                  SizedBox(
+                    height: 5,
                   ),
-                  const SizedBox(height: 5),
-                  Text('Result',
-                    style: TextStyle(
-                      color: Color.fromRGBO(143, 150, 158, 1),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),),
-                  SizedBox(height: 5,),
-                  Container(
-                    width: screenWidth * 0.9,
-                    height: 70,
-                    child: TextFormField(
-                      controller: _Resultcontroller,
-                      style: const TextStyle(
-                        color: Color.fromRGBO(143, 150, 158, 1),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'default',
-                      ),
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
-                        labelText: 'Result',
-                        labelStyle: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'default',
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text('Certificate',
-                    style: TextStyle(
-                      color: Color.fromRGBO(143, 150, 158, 1),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'default',
-                    ),),
-                  SizedBox(height: 5,),
                   Container(
                     width: (_imageWidth != 0
                         ? (_imageWidth + 10).clamp(0, screenWidth * 0.9)
@@ -369,8 +373,7 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                           ),
                           errorMaxLines: null,
                           errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.red),
+                            borderSide: BorderSide(color: Colors.red),
                           ),
                         ),
                         child: Row(
@@ -378,15 +381,15 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                             Expanded(
                               child: _imageFile != null
                                   ? Image.file(
-                                _imageFile!,
-                                width: null,
-                                height: null,
-                                fit: BoxFit.contain,
-                              )
+                                      _imageFile!,
+                                      width: null,
+                                      height: null,
+                                      fit: BoxFit.contain,
+                                    )
                                   : Center(
-                                child: Icon(Icons.image,
-                                    size: 60, color: Colors.grey),
-                              ),
+                                      child: Icon(Icons.image,
+                                          size: 60, color: Colors.grey),
+                                    ),
                             ),
                             SizedBox(width: 8),
                             VerticalDivider(
@@ -406,7 +409,9 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                       ),
                     ),
                   ),
-                  SizedBox(height: 15,),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.08,
                     child: Row(
@@ -417,7 +422,9 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
-                              fixedSize: Size(MediaQuery.of(context).size.width* 0.4, MediaQuery.of(context).size.height * 0.08),
+                              fixedSize: Size(
+                                  MediaQuery.of(context).size.width * 0.4,
+                                  MediaQuery.of(context).size.height * 0.08),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                               ),
@@ -434,14 +441,19 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                                 )),
                           ),
                         ),
-                        SizedBox(width: 20,),
+                        SizedBox(
+                          width: 20,
+                        ),
                         Material(
                           elevation: 5,
                           borderRadius: BorderRadius.circular(5),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                              fixedSize: Size(MediaQuery.of(context).size.width* 0.4, MediaQuery.of(context).size.height * 0.08),
+                              backgroundColor:
+                                  const Color.fromRGBO(134, 188, 66, 1),
+                              fixedSize: Size(
+                                  MediaQuery.of(context).size.width * 0.4,
+                                  MediaQuery.of(context).size.height * 0.08),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                               ),
@@ -458,15 +470,20 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                        const RegistrationApplicationReviewUI(
-                                          shouldRefresh: true,
-                                        )));
-                                isdelayed = false;
+                                            const RegistrationApplicationReviewUI(
+                                              shouldRefresh: true,
+                                            )));
+                                setState(() {
+                                  isdelayed = false;
+                                });
                               } else {
+                                setState(() {
+                                  isdelayed = false;
+                                });
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content:
-                                    Text('Fill up all required fields'),
+                                        Text('Fill up all required fields'),
                                     behavior: SnackBarBehavior.floating,
                                   ),
                                 );
@@ -475,12 +492,12 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                             child: isdelayed
                                 ? CircularProgressIndicator()
                                 : const Text('Next',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'default',
-                                )),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'default',
+                                    )),
                           ),
                         ),
                       ],
@@ -489,31 +506,37 @@ class _RegistrationAcademicInformationUIState extends State<RegistrationAcademic
                 ],
               ),
             ),
-          )
-      ),
+          )),
     );
   }
 
   bool validateInputs() {
-    if(Qualification == 'SSC or Equivalent'  || Qualification == 'HSC or Equivalent')  {
-      if(_Deciplinecontroller.text.isEmpty){
+    if (_formKey.currentState!.validate()) {
+      if (Qualification == 'SSC or Equivalent' ||
+          Qualification == 'HSC or Equivalent') {
+        if (_Deciplinecontroller.text.isEmpty) {
+          return false;
+        }
+        return true;
+      }
+      if (Qualification == 'BSc or Equivalent' ||
+          Qualification == 'Diploma or Equivalent') {
+        if (_SubjectNamecontroller.text.isEmpty) {
+          return false;
+        }
+        return true;
+      }
+      if (_Qulificationcontroller.text.isEmpty ||
+          _PassingYearcontroller.text.isEmpty ||
+          _Institutecontroller.text.isEmpty ||
+          _Resultcontroller.text.isEmpty ||
+          _imageFile == null) {
         return false;
       }
       return true;
-    }
-    if(Qualification == 'BSc or Equivalent'  || Qualification == 'Diploma or Equivalent') {
-      if(_SubjectNamecontroller.text.isEmpty){
-        return false;
-      }
-      return true;
-    }
-    if (_Qulificationcontroller.text.isEmpty ||
-        _PassingYearcontroller.text.isEmpty ||
-        _Institutecontroller.text.isEmpty ||
-        _Resultcontroller.text.isEmpty || _imageFile == null) {
+    } else {
       return false;
     }
-    return true;
   }
 
   Future<void> saveData() async {
