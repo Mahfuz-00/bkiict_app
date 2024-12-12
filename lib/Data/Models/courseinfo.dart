@@ -17,15 +17,15 @@
 /// - [fromJson]: A factory constructor that creates a Course instance from a JSON map.
 /// - [toJson]: A method that converts the Course instance to a JSON map.
 class Course {
-  final int courseId;
-  final String courseName;
-  final String batchNo;
-  final String courseFee;
-  final String classes;
-  final String duration;
-  final String classStart;
-  final String shift;
-  final String regDeadline;
+  final dynamic courseId;
+  final dynamic courseName;
+  final dynamic batchNo;
+  final dynamic courseFee;
+  final dynamic classes;
+  final dynamic duration;
+  final dynamic classStart;
+  final dynamic shift;
+  final dynamic regDeadline;
 
   Course({
     required this.courseId,

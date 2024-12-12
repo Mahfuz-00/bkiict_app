@@ -68,13 +68,13 @@ class CourseCard extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  _buildRow('Batch No', course.batchNo),
-                 _buildRow('Course Fee', '${course.courseFee} TK'),
-                  _buildRow('Classes', course.classes),
-                  _buildRow('Duration', course.duration),
-                  _buildRowTime('Class Starts', course.classStart),
-                  _buildRow('Class Shift', course.shift),
-                  _buildRow('Registration Before', course.regDeadline),
+                  _buildRow('Batch No', course.batchNo.toString() ?? 'N/A'),
+                  _buildRow('Course Fee', '${course.courseFee.toString()} TK' ?? 'N/A'),
+                  _buildRow('Classes', course.classes.toString() ?? 'N/A'),
+                  _buildRow('Duration', course.duration.toString() ?? 'N/A'),
+                  _buildRowTime('Class Starts', course.classStart.toString() ?? 'N/A'),
+                  _buildRow('Class Shift', course.shift.toString() ?? 'N/A'),
+                  _buildRow('Registration Before', course.regDeadline.toString() ?? 'N/A'),
                 ],
               ),
             ),
@@ -83,7 +83,7 @@ class CourseCard extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => CourseDetails(courseId: course.courseId, shouldRefresh: true, batch: int.parse(course.batchNo,))));
+                        builder: (context) => CourseDetails(courseId: course.courseId, shouldRefresh: true, batch: course.batchNo /*int.parse(course.batchNo,)*/)));
               },
               child: Container(
                   width: screenWidth * 0.9,

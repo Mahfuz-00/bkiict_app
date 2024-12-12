@@ -5,6 +5,7 @@ import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:http/http.dart' as http;
 import '../../../Data/Data Sources/API Service (Log Out)/apiServiceLogOut.dart';
+import '../../../Data/Data Sources/API Service (Notice)/apiServiceNotice.dart';
 import '../../../Data/Data Sources/API Service (Result)/apiServiceResult.dart';
 import '../../Bloc/auth_cubit.dart';
 import '../About Us UI/aboutusUI.dart';
@@ -152,7 +153,11 @@ class _DashboardUIState extends State<DashboardUI>
                   SizedBox(
                     height: 20,
                   ),
-                  Buttons(onPressed: generatePDF, name: 'Result'),
+                  Buttons(onPressed: NoticegeneratePDF, name: 'Download Notice'),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Buttons(onPressed: ResultgeneratePDF, name: 'Download Result'),
                 ],
               ),
             ),
@@ -373,7 +378,7 @@ class _DashboardUIState extends State<DashboardUI>
     );
   }
 
-  Future<void> generatePDF() async {
+  Future<void> ResultgeneratePDF() async {
     const snackBar = SnackBar(
       content: Text('Preparing Printing, Please wait'),
     );
@@ -404,6 +409,59 @@ class _DashboardUIState extends State<DashboardUI>
       await Printing.layoutPdf(
           onLayout: (PdfPageFormat format) async => data.bodyBytes);
     } catch (e) {
+      const snackBar = SnackBar(
+        content: Text('Download Failed. Please try again'),
+      );
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(snackBar);
+      print('Error generating PDF: $e');
+    }
+  }
+
+  Future<void> NoticegeneratePDF() async {
+    const snackBar = SnackBar(
+      content: Text('Preparing Printing, Please wait'),
+    );
+    ScaffoldMessenger.of(context as BuildContext).showSnackBar(snackBar);
+    print('Print Triggered!!');
+
+    final apiService = await NoticeAPIService.create();
+    final Map<String, dynamic>? dashboardData = await apiService.getNotice();
+/*    final snackBar1 = SnackBar(
+      content: Text('$dashboardData'),
+    );
+    ScaffoldMessenger.of(context as BuildContext).showSnackBar(snackBar1);*/
+    print('Print Triggered!!');
+    if (dashboardData == null || dashboardData.isEmpty) {
+      print(
+          'No data available or error occurred while fetching dashboard data');
+      return;
+    }
+    print(dashboardData);
+
+    final Map<String, dynamic>? records = dashboardData['data'] ?? [];
+    print(records);
+    if (records == null || records.isEmpty) {
+      print('No records available');
+      return;
+    }
+
+ /*   final snackBar2 = SnackBar(
+      content: Text('$records'),
+    );
+    ScaffoldMessenger.of(context as BuildContext).showSnackBar(snackBar2);*/
+
+    String link = records['download_link'];
+    try {
+      print('PDF generated successfully. Download URL: ${link}');
+      final Uri url = Uri.parse(link);
+      var data = await http.get(url);
+      await Printing.layoutPdf(
+          onLayout: (PdfPageFormat format) async => data.bodyBytes);
+    } catch (e) {
+      const snackBar = SnackBar(
+        content: Text('Download Failed. Please try again'),
+      );
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(snackBar);
       print('Error generating PDF: $e');
     }
   }

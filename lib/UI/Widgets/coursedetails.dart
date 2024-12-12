@@ -41,27 +41,27 @@ class _CourseDetailsState extends State<CourseDetails> {
   bool _errorOccurred = false;
   late CourseDetails _course;
 
-  late int _id = 0;
-  late String _name = '';
-  late String _overview = '';
-  late String _requirements = '';
-  late String _project = '';
-  late String _tools = '';
-  late String _outline = '';
-  late String _duration = '';
-  late String _hours = '';
-  late String _fee = '';
-  late String _shift = '';
-  late String _classes = '';
-  late String _type = '';
-  late String _center = '';
-  late String _status = '';
-  late String _batch = '';
-  late String _regdeadline = '';
-  late String _startdate = '';
-  late String _batchenddate = '';
-  late String _cordinatorName = '';
-  late String _coordinatorImage = '';
+  late dynamic _id = 0;
+  late dynamic _name = '';
+  late dynamic _overview = '';
+  late dynamic _requirements = '';
+  late dynamic _project = '';
+  late dynamic _tools = '';
+  late dynamic _outline = '';
+  late dynamic _duration = '';
+  late dynamic _hours = '';
+  late dynamic _fee = '';
+  late dynamic _shift = '';
+  late dynamic _classes = '';
+  late dynamic _type = '';
+  late dynamic _center = '';
+  late dynamic _status = '';
+  late dynamic _batch = '';
+  late dynamic _regdeadline = '';
+  late dynamic _startdate = '';
+  late dynamic _batchenddate = '';
+  late dynamic _cordinatorName = '';
+  late dynamic _coordinatorImage = '';
   late Coordinator _coordinator = Coordinator(name: '', photo: '');
   late List<Instructor> _instructors = [];
 
@@ -90,26 +90,26 @@ class _CourseDetailsState extends State<CourseDetails> {
       }
 
       _id = records['id'];
-      _name = records['name'];
-      _overview = records['overview'];
-      _requirements = records['requirements'];
-      _project = records['project'];
-      _tools = records['tools'];
-      _outline = records['outline'];
-      _duration = records['duration'];
-      _hours = records['hours'];
-      _fee = records['fee'];
-      _shift = records['shift'];
-      _classes = records['classes'];
-      _type = records['type'];
-      _center = records['center'];
-      _status = records['status'];
-      _batch = records['batch_number'];
-      _regdeadline = records['reg_deadline'];
-      _startdate = records['class_start'];
-      _batchenddate = records['batch_end'];
-      _cordinatorName = records['cordinator']['name'];
-      _coordinatorImage = records['cordinator']['photo'];
+      _name = records['name'].toString();
+      _overview = records['overview'].toString();
+      _requirements = records['requirements'].toString();
+      _project = records['project'].toString();
+      _tools = records['tools'].toString();
+      _outline = records['outline'].toString();
+      _duration = records['duration'].toString();
+      _hours = records['hours'].toString();
+      _fee = records['fee'].toString();
+      _shift = records['shift'].toString();
+      _classes = records['classes'].toString();
+      _type = records['type'].toString();
+      _center = records['center'].toString();
+      _status = records['status'].toString();
+      _batch = records['batch_number'].toString();
+      _regdeadline = records['reg_deadline'].toString();
+      _startdate = records['class_start'].toString();
+      _batchenddate = records['batch_end'].toString();
+      _cordinatorName = records['cordinator']['name'].toString();
+      _coordinatorImage = records['cordinator']['photo'].toString();
       _instructors = List<Instructor>.from(
           records['instructors'].map((x) => Instructor.fromJson(x)));
 
@@ -222,7 +222,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                     children: [
                       Center(
                         child: Text(
-                          _name,
+                          _name.toString() ?? 'N/A',
                           style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
@@ -247,7 +247,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          _overview,
+                          _overview.toString() ?? 'N/A',
                           style: TextStyle(
                             color: Color.fromRGBO(143, 150, 158, 1),
                             fontSize: 18,
@@ -273,7 +273,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          _requirements,
+                          _requirements.toString() ?? 'N/A',
                           style: TextStyle(
                             color: Color.fromRGBO(143, 150, 158, 1),
                             fontSize: 18,
@@ -299,7 +299,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          _project,
+                          _project.toString() ?? 'N/A',
                           style: TextStyle(
                             color: Color.fromRGBO(143, 150, 158, 1),
                             fontSize: 18,
@@ -325,7 +325,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          _tools,
+                          _tools.toString() ?? 'N/A',
                           style: TextStyle(
                             color: Color.fromRGBO(143, 150, 158, 1),
                             fontSize: 18,
@@ -351,7 +351,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          _outline,
+                          _outline.toString() ?? 'N/A',
                           style: TextStyle(
                             color: Color.fromRGBO(143, 150, 158, 1),
                             fontSize: 18,
@@ -405,19 +405,19 @@ class _CourseDetailsState extends State<CourseDetails> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   //mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    _buildRow('Course Type', _type),
-                                    _buildRow('Course Duration', _duration),
-                                    _buildRow('Course Hour(s)', _hours),
-                                    _buildRow('Classes', _classes),
-                                    _buildRow('Course Fee', _fee),
-                                    _buildRow('Batch No', _batch),
-                                    _buildRow('Center', _center),
+                                    _buildRow('Course Type', _type.toString() ?? 'N/A'),
+                                    _buildRow('Course Duration', _duration.toString() ?? 'N/A'),
+                                    _buildRow('Course Hour(s)', _hours.toString() ?? 'N/A'),
+                                    _buildRow('Classes', _classes.toString() ?? 'N/A'),
+                                    _buildRow('Course Fee', _fee.toString() ?? 'N/A'),
+                                    _buildRow('Batch No', _batch.toString() ?? 'N/A'),
+                                    _buildRow('Center', _center.toString() ?? 'N/A'),
                                     _buildRow(
-                                        'Registration Deadline', _regdeadline),
-                                    _buildRow('Class Shift', _shift),
-                                    _buildRow('Class Start', _startdate),
-                                    _buildRow('Class End', _batchenddate),
-                                    _buildRow('Course Status', _status)
+                                        'Registration Deadline', _regdeadline.toString() ?? 'N/A'),
+                                    _buildRow('Class Shift', _shift.toString() ?? 'N/A'),
+                                    _buildRow('Class Start', _startdate.toString() ?? 'N/A'),
+                                    _buildRow('Class End', _batchenddate.toString() ?? 'N/A'),
+                                    _buildRow('Course Status', _status.toString() ?? 'N/A')
                                   ],
                                 ),
                               ),
@@ -536,7 +536,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                                       height: 15,
                                     ),
                                     Center(
-                                      child: Text(_cordinatorName,
+                                      child: Text(_cordinatorName.toString() ?? 'N/A',
                                           style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
@@ -619,7 +619,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                                                   ),
                                             SizedBox(height: 10),
                                             Text(
-                                              instructor.name,
+                                              instructor.name.toString() ?? 'N/A',
                                               style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold,

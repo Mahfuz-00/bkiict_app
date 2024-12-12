@@ -26,7 +26,7 @@ import '../Short Course UI/shortcourses.dart';
 ///   - A button to [Download Courses Info].
 /// - A bottom navigation bar with links to [Home], [Admission], and [Profile] sections.
 ///
-/// The [generatePDF] method triggers the generation of a PDF document with course information.
+/// The [ResultgeneratePDF] method triggers the generation of a PDF document with course information.
 class CourseDashboardUI extends StatefulWidget {
   const CourseDashboardUI({super.key});
 

@@ -361,6 +361,7 @@ class _LoginUIState extends State<LoginUI> {
   }
 
   Future<bool> validateAndSave(GlobalKey<FormState> formKey, BuildContext context) async {
+    print('validateAndSave');
     final form = formKey.currentState;
     if (form != null && form.validate()) {
       form.save();
@@ -369,8 +370,10 @@ class _LoginUIState extends State<LoginUI> {
         Email: _emailController.text,
         Password: _passwordController.text,
       );
+      print('Email: ${_emailController.text}, Password: ${_passwordController.text}');
       try {
         final response = await apiService.login(loginRequestModel);
+        print('Response: ${response}');
         if (response != null) {
           storeTokenLocally(response.token);
           userType = response.userType;
@@ -382,6 +385,7 @@ class _LoginUIState extends State<LoginUI> {
           return false;
         }
       } catch (e) {
+        print('Error: $e');
         String errorMessage = 'Incorrect Email and Password.';
         if (e.toString().contains('The selected email is invalid.')) {
           errorMessage = 'Invalid User!, Please enter a valid email address.';

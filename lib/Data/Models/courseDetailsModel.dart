@@ -55,8 +55,8 @@ class Instructor {
 
   factory Instructor.fromJson(Map<String, dynamic> json) {
     return Instructor(
-      name: json['name'],
-      photo: json['photo'],
+      name: json['name'].toString(),
+      photo: json['photo'].toString(),
     );
   }
 
