@@ -38,10 +38,14 @@ class _SplashScreenUIState extends State<SplashScreenUI>
     super.initState();
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 1500));
-    SlideAnimation = Tween(begin: const Offset(0, 3), end: const Offset(0, 0)).animate(
-        CurvedAnimation(parent: animationController, curve: Curves.easeInOutCirc));
-    FadeAnimation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(parent: animationController, curve: Curves.easeInOut));
-    animatedpadding = Tween(begin: const Offset(0, 0.3), end:Offset.zero).animate(CurvedAnimation(parent: animationController, curve: Curves.easeIn));
+    SlideAnimation = Tween(begin: const Offset(0, 3), end: const Offset(0, 0))
+        .animate(CurvedAnimation(
+            parent: animationController, curve: Curves.easeInOutCirc));
+    FadeAnimation = Tween(begin: 1.0, end: 0.0).animate(
+        CurvedAnimation(parent: animationController, curve: Curves.easeInOut));
+    animatedpadding = Tween(begin: const Offset(0, 0.3), end: Offset.zero)
+        .animate(
+            CurvedAnimation(parent: animationController, curve: Curves.easeIn));
 
     checkForUpdate(context);
     _checkAuthAndNavigate(context);
@@ -60,8 +64,7 @@ class _SplashScreenUIState extends State<SplashScreenUI>
       print(token);
 
       // If token or userType is missing, handle this case appropriately
-      if (token == null ||
-          token.isEmpty) {
+      if (token == null || token.isEmpty) {
         print('No token or user type found, staying on current screen');
         animationController.forward();
         // You can either show a message, keep the user on the page, or handle differently
@@ -90,8 +93,7 @@ class _SplashScreenUIState extends State<SplashScreenUI>
     }
   }
 
-  Future<void> _fetchUserProfile(
-      String token, BuildContext context) async {
+  Future<void> _fetchUserProfile(String token, BuildContext context) async {
     try {
       // Fetch user profile from the API
       final apiService = ProfileAPIService();
@@ -124,12 +126,11 @@ class _SplashScreenUIState extends State<SplashScreenUI>
 
   void _navigateToAppropriateDashboard(BuildContext context) {
     print('Navigating to appropriate dashboard');
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => DashboardUI()),
-            (route) => false,
-      );
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => DashboardUI()),
+      (route) => false,
+    );
   }
 
   void showTopToast(BuildContext context, String message) {
@@ -173,40 +174,54 @@ class _SplashScreenUIState extends State<SplashScreenUI>
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Update Available",
+            title: Text(
+              "Update Available",
               style: TextStyle(
-                color: Color.fromRGBO(0, 162, 222, 1),
+                color: Color.fromRGBO(134, 188, 66, 1),
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'default',
-              ),),
-            content: Text("A new version of the app is available. Please update to the latest version.",
+              ),
+            ),
+            content: Text(
+              "A new version of the app is available. Please update to the latest version.",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'default',
-              ),),
+              ),
+            ),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
                   // Trigger the immediate update
                   InAppUpdate.performImmediateUpdate();
                 },
-                child: Text("Update",
+                child: Text(
+                  "Update",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'default',
-                  ),),
+                  ),
+                ),
               ),
               TextButton(
                 onPressed: () {
                   // Close the dialog without updating
                   Navigator.of(context).pop();
                 },
-                child: Text("Later"),
+                child: Text(
+                  "Later",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'default',
+                  ),
+                ),
               ),
             ],
           );
@@ -296,11 +311,12 @@ class _SplashScreenUIState extends State<SplashScreenUI>
                                     builder: (context) => const LoginUI()));
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                            backgroundColor:
+                                const Color.fromRGBO(134, 188, 66, 1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            fixedSize: Size(screenWidth*0.9, 70),
+                            fixedSize: Size(screenWidth * 0.9, 70),
                           ),
                           child: const Text('Login',
                               textAlign: TextAlign.center,
@@ -324,9 +340,10 @@ class _SplashScreenUIState extends State<SplashScreenUI>
                             backgroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
-                              side: const BorderSide(color: Colors.black, width: 2),
+                              side: const BorderSide(
+                                  color: Colors.black, width: 2),
                             ),
-                            fixedSize: Size(screenWidth*0.9, 70),
+                            fixedSize: Size(screenWidth * 0.9, 70),
                           ),
                           child: const Text('Register',
                               textAlign: TextAlign.center,
