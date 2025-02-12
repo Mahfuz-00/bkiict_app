@@ -61,8 +61,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Color.fromRGBO(
-          134, 188, 66, 1),
+      statusBarColor: Color(0xFFFF5202),
     ));
 
     return MultiBlocProvider(
@@ -75,7 +74,7 @@ class MyApp extends StatelessWidget {
         title: 'BKIICT Student App',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
-              seedColor: Color.fromRGBO(134, 188, 66, 1)),
+              seedColor: Color(0xFFFF5202)),
           useMaterial3: true,
         ),
         home: const SplashScreenUI(),

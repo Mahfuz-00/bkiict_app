@@ -331,7 +331,7 @@ class _SignupUIState extends State<SignupUI> {
                       ElevatedButton(
                           onPressed: _registerUser,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromRGBO(134, 188, 66, 1),
+                            backgroundColor: Color(0xFFFF5202),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -379,7 +379,7 @@ class _SignupUIState extends State<SignupUI> {
                                   'Login now',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: Color.fromRGBO(134, 188, 66, 1),
+                                    color: Color(0xFFFF5202),
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'default',
@@ -516,7 +516,7 @@ class _SignupUIState extends State<SignupUI> {
               'Choose an option',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color.fromRGBO(0, 162, 222, 1),
+                color: Color(0xFFFF5202),
                 fontWeight: FontWeight.bold,
                 fontFamily: 'default',
                 fontSize: 22,
@@ -604,7 +604,7 @@ class _SignupUIState extends State<SignupUI> {
             "Error",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Color.fromRGBO(0, 162, 222, 1),
+              color: Color(0xFFFF5202),
               fontWeight: FontWeight.bold,
               fontFamily: 'default',
               fontSize: 22,

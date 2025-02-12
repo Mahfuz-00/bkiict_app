@@ -141,7 +141,7 @@ class _OPTVerficationUIState extends State<OPTVerficationUI> {
                         padding: EdgeInsets.only(left: 8),
                         decoration: BoxDecoration(
                           border: Border.all(
-                              color: Color.fromRGBO(134, 188, 66, 1),
+                              color: Color(0xFFFF5202),
                               width: 2),
                           // Border properties
                           borderRadius: BorderRadius.circular(
@@ -157,7 +157,7 @@ class _OPTVerficationUIState extends State<OPTVerficationUI> {
                           iconSize: 30,
                           padding: EdgeInsets.all(10),
                           splashRadius: 30,
-                          color: Color.fromRGBO(134, 188, 66, 1),
+                          color: Color(0xFFFF5202),
                           splashColor: Colors.grey,
                           highlightColor: Colors.transparent,
                           hoverColor: Colors.transparent,
@@ -177,7 +177,7 @@ class _OPTVerficationUIState extends State<OPTVerficationUI> {
                                 'OTP Verification',
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    color: Color.fromRGBO(134, 188, 66, 1),
+                                    color: Color(0xFFFF5202),
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'default'),
@@ -252,7 +252,7 @@ class _OPTVerficationUIState extends State<OPTVerficationUI> {
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor:
-                                    Color.fromRGBO(134, 188, 66, 1),
+                                    Color(0xFFFF5202),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
@@ -309,7 +309,7 @@ class _OPTVerficationUIState extends State<OPTVerficationUI> {
                                   'Resend',
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
-                                    color: Color.fromRGBO(134, 188, 66, 1),
+                                    color: Color(0xFFFF5202),
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'default',

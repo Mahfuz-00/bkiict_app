@@ -29,7 +29,7 @@ class _AdmissionProcessUIState extends State<AdmissionProcessUI> with SingleTick
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+        backgroundColor: const Color(0xFFFF5202),
         titleSpacing: 5,
         leading: IconButton(
             onPressed: () {

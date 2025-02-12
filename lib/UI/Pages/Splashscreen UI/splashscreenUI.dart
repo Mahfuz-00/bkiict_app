@@ -259,7 +259,7 @@ class _SplashScreenUIState extends State<SplashScreenUI>
           children: [
             const Image(
               image: AssetImage(
-                'Assets/Images/BCC-Logo.png',
+                'Assets/Images/Learning Engineering Institute-Logo.png',
               ),
               width: 200,
               height: 200,
@@ -272,7 +272,7 @@ class _SplashScreenUIState extends State<SplashScreenUI>
               child: const Padding(
                 padding: EdgeInsets.all(30),
                 child: Text(
-                  'Bangladesh Korea Institute of Information and Communication Technology (BKIICT)',
+                  'Learning Engineering Institute',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
@@ -312,7 +312,7 @@ class _SplashScreenUIState extends State<SplashScreenUI>
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromRGBO(134, 188, 66, 1),
+                                const Color(0xFFFF5202),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),

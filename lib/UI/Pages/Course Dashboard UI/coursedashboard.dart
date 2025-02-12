@@ -45,7 +45,7 @@ class _CourseDashboardUIState extends State<CourseDashboardUI>
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+        backgroundColor: const Color(0xFFFF5202),
         titleSpacing: 5,
         leading: IconButton(
             onPressed: () {
@@ -164,7 +164,7 @@ class _CourseDashboardUIState extends State<CourseDashboardUI>
       ),
       bottomNavigationBar: Container(
         height: screenHeight * 0.08,
-        color: const Color.fromRGBO(134, 188, 66, 1),
+        color: const Color(0xFFFF5202),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -102,7 +102,7 @@ class CourseCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(134, 188, 66, 1),
+                        color: Color(0xFFFF5202),
                         fontFamily: 'default',
                       ),
                     ),

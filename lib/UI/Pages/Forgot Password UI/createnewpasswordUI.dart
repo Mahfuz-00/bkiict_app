@@ -121,12 +121,12 @@ class _CreateNewPasswordUIState extends State<CreateNewPasswordUI> {
                           decoration: BoxDecoration(
                             border: Border.all(
                                 width: 2,
-                                color: Color.fromRGBO(134, 188, 66, 1)),
+                                color: Color(0xFFFF5202)),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: IconButton(
                             icon: Icon(Icons.arrow_back_ios,
-                                color: Color.fromRGBO(134, 188, 66, 1)),
+                                color: Color(0xFFFF5202)),
                             onPressed: () {
                               Navigator.of(context)
                                   .pop(); // Navigate back to the previous screen
@@ -147,7 +147,7 @@ class _CreateNewPasswordUIState extends State<CreateNewPasswordUI> {
                                 'Enter new password',
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    color: Color.fromRGBO(134, 188, 66, 1),
+                                    color: Color(0xFFFF5202),
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'default'),
@@ -278,7 +278,7 @@ class _CreateNewPasswordUIState extends State<CreateNewPasswordUI> {
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor:
-                                    Color.fromRGBO(134, 188, 66, 1),
+                                    Color(0xFFFF5202),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),

@@ -23,7 +23,7 @@ class _AboutUsUIState extends State<AboutUsUI>{
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+        backgroundColor: const Color(0xFFFF5202),
         titleSpacing: 5,
         leading: IconButton(
             onPressed: () {

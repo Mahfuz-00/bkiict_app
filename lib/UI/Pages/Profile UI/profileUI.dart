@@ -144,7 +144,7 @@ class _ProfileUIState extends State<ProfileUI> {
         child: Scaffold(
           backgroundColor: Colors.grey[100],
           appBar: AppBar(
-              backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+              backgroundColor: const Color(0xFFFF5202),
               title: Text(
                 'Profile Overview',
                 style: TextStyle(
@@ -187,7 +187,7 @@ class _ProfileUIState extends State<ProfileUI> {
               :SingleChildScrollView(
             child: SafeArea(
               child: Container(
-                color: const Color.fromRGBO(134, 188, 66, 1),
+                color: const Color(0xFFFF5202),
                 child: Padding(
                   padding: const EdgeInsets.only(top: 50.0),
                   child: Column(
@@ -345,14 +345,14 @@ class _ProfileUIState extends State<ProfileUI> {
                                 Center(
                                     child: Icon(
                                   Icons.home,
-                                  color: const Color.fromRGBO(134, 188, 66, 1),
+                                  color: const Color(0xFFFF5202),
                                 )),
                                 SizedBox(
                                   width: 10,
                                 ),
                                 const Text('Back to Home',
                                     style: TextStyle(
-                                      color: const Color.fromRGBO(134, 188, 66, 1),
+                                      color: const Color(0xFFFF5202),
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'default',
@@ -382,7 +382,7 @@ class _ProfileUIState extends State<ProfileUI> {
               color: Colors.white,
               size: 30,
             ),
-            backgroundColor: const  Color.fromRGBO(134, 188, 66, 1),
+            backgroundColor: const Color(0xFFFF5202),
             elevation: 8,
             highlightElevation: 12,
             shape: RoundedRectangleBorder(
@@ -482,7 +482,7 @@ class _ProfileUIState extends State<ProfileUI> {
           content: Text(
             'Are you sure you want to log out?',
             style: TextStyle(
-              color: const Color.fromRGBO(134, 188, 66, 1),
+              color: const Color(0xFFFF5202),
               fontWeight: FontWeight.bold,
               fontSize: 16,
               fontFamily: 'default',
@@ -499,7 +499,7 @@ class _ProfileUIState extends State<ProfileUI> {
                   child: Text(
                     'Cancel',
                     style: TextStyle(
-                      color: const Color.fromRGBO(134, 188, 66, 1),
+                      color: const Color(0xFFFF5202),
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                       fontFamily: 'default',
@@ -587,7 +587,7 @@ class _ProfileUIState extends State<ProfileUI> {
                 Center(
                   child: TextButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const  Color.fromRGBO(134, 188, 66, 1),
+                      backgroundColor: const Color(0xFFFF5202),
                       fixedSize: Size(MediaQuery
                           .of(context)
                           .size
@@ -618,7 +618,7 @@ class _ProfileUIState extends State<ProfileUI> {
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const  Color.fromRGBO(134, 188, 66, 1),
+                    backgroundColor: const Color(0xFFFF5202),
                     fixedSize: Size(MediaQuery
                         .of(context)
                         .size

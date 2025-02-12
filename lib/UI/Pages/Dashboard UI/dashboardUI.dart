@@ -48,7 +48,7 @@ class _DashboardUIState extends State<DashboardUI>
       child: Scaffold(
         backgroundColor: Colors.grey[100],
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+          backgroundColor: const Color(0xFFFF5202),
           automaticallyImplyLeading: false,
           title: Row(
             children: [
@@ -56,7 +56,7 @@ class _DashboardUIState extends State<DashboardUI>
                 width: 28,
               ),
               const Text(
-                'BKIICT',
+                'LEI',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -87,7 +87,7 @@ class _DashboardUIState extends State<DashboardUI>
                 children: [
                   Center(
                     child: Text(
-                      'Welcome to BKIICT',
+                      'Welcome to Learning Engineering Institute',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.black87,
@@ -104,7 +104,7 @@ class _DashboardUIState extends State<DashboardUI>
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Center(
                       child: Text(
-                        'One of the Activities of Bangladesh Computer Council (BCC) is to develop trained manpower in the field of ICT through ICT training',
+                        'Learning Engineering Institute is a unique training institution offering professional electrical courses both online and offline.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Color.fromRGBO(143, 150, 158, 1),
@@ -150,10 +150,10 @@ class _DashboardUIState extends State<DashboardUI>
                     },
                     name: 'About Us',
                   ),
-                  SizedBox(
+              /*    SizedBox(
                     height: 20,
                   ),
-                  Buttons(onPressed: NoticegeneratePDF, name: 'Download Notice'),
+                  Buttons(onPressed: NoticegeneratePDF, name: 'Download Notice'),*/
                   SizedBox(
                     height: 20,
                   ),
@@ -165,7 +165,7 @@ class _DashboardUIState extends State<DashboardUI>
         ),
         bottomNavigationBar: Container(
           height: screenHeight * 0.08,
-          color: const Color.fromRGBO(134, 188, 66, 1),
+          color: const Color(0xFFFF5202),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -315,7 +315,7 @@ class _DashboardUIState extends State<DashboardUI>
           content: Text(
             'Are you sure you want to log out?',
             style: TextStyle(
-              color: const Color.fromRGBO(134, 188, 66, 1),
+              color: const Color(0xFFFF5202),
               fontWeight: FontWeight.bold,
               fontSize: 16,
               fontFamily: 'default',
@@ -332,7 +332,7 @@ class _DashboardUIState extends State<DashboardUI>
                   child: Text(
                     'Cancel',
                     style: TextStyle(
-                      color: const Color.fromRGBO(134, 188, 66, 1),
+                      color: const Color(0xFFFF5202),
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                       fontFamily: 'default',

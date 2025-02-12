@@ -47,7 +47,10 @@ import 'registrationpersonalinfo.dart';
 /// - [fetchBatch(String courseId)]: Fetches the list of batches for a selected course.
 /// - [handleBatch(List<dynamic> batchData)]: Handles the fetched batch data.
 class RegistrationCenterUI extends StatefulWidget {
-  const RegistrationCenterUI({super.key});
+  final bool shouldRefresh;
+
+  const RegistrationCenterUI({Key? key, this.shouldRefresh = false})
+      : super(key: key);
 
   @override
   State<RegistrationCenterUI> createState() => _RegistrationCenterUIState();
@@ -78,6 +81,25 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
   bool _isFetchedBatch = false;
   bool _pageLoading = true;
   bool _isLoading = false;
+
+  // Define the available courses, batches, and prices
+  final List<String> Courses = [
+    'Electrical Installation and Maintenance',
+    'Professional Industrial Wiring',
+    'Professional House Wiring',
+  ];
+
+  final Map<String, List<String>> Batches = {
+    'Electrical Installation and Maintenance': ['8th Batch'],
+    'Professional Industrial Wiring': ['17th Batch New'],
+    'Professional House Wiring': ['19th Batch New'],
+  };
+
+  final Map<String, int> Prices = {
+    'Electrical Installation and Maintenance': 5100,
+    'Professional Industrial Wiring': 3060,
+    'Professional House Wiring': 2550,
+  };
 
   Future<void> fetchCenter() async {
     if (_isFetched) return;
@@ -188,7 +210,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
   }
 
   Future<void> handleCourse(List<dynamic> courseData) async {
-    if(courseData == []){
+    if (courseData == []) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('No Course is available right now'),
@@ -264,7 +286,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
   }
 
   Future<void> handleBatch(List<dynamic> batchData) async {
-    if(batchData == []){
+    if (batchData == []) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('No Batch is available right now'),
@@ -298,10 +320,22 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
     }
   }
 
+  bool isloaded = false;
+
   @override
   void initState() {
     super.initState();
-    fetchCenter();
+    Future.delayed(Duration(seconds: 2), () {
+      if (widget.shouldRefresh && !isloaded) {
+        isloaded = true;
+        print('Refreshed!');
+        fetchCenter();
+        setState(() {
+          print('Page Loading');
+          _pageLoading = false;
+        });
+      }
+    });
   }
 
   String? selectedCenter;
@@ -365,7 +399,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
               SizedBox(
                 height: 15,
               ),
-             LabeledTextWithAsterisk(text: 'Select a Center'),
+              /*       LabeledTextWithAsterisk(text: 'Select a Center'),
               SizedBox(
                 height: 5,
               ),
@@ -474,7 +508,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
               ),
               SizedBox(
                 height: 15,
-              ),
+              ),*/
               LabeledTextWithAsterisk(text: 'Select a Course'),
               SizedBox(
                 height: 5,
@@ -501,67 +535,70 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
                           ),
                         ),
                       ],
-                      DropdownFormField(
-                        hintText: 'Select Course',
-                        dropdownItems:
-                            courses.map((course) => course.name).toList(),
-                        initialValue: selectedCourse,
-                        onChanged: (newValue) {
+                      DropdownButtonFormField<String>(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Select Course',
+                          hintStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 12),
+                        ),
+                        value: selectedCourse,
+                        items: Courses.map((course) {
+                          return DropdownMenuItem(
+                            value: course,
+                            child: Text(
+                              course,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'default',
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
                           setState(() {
-                            selectedCourse = newValue!;
-                            batches = [];
-                            _Fee = '';
-                            _batchID = '';
-                            _isFetchedBatch = false;
+                            selectedCourse = value;
+                            selectedBatchNo = null;
+                            selectedTutionFee = null;
                           });
-                          if (newValue != null) {
-                            Course selectedCourseObject = courses.firstWhere(
-                              (type) => type.name == newValue,
-                            );
-                            if (selectedCourseObject != null) {
-                              _Fee =
-                                  selectedCourseObject.fee.toString() + ' TK';
-                              _courseID = selectedCourseObject.id.toString();
-                              fetchBatch(_courseID);
-                              print(_courseID);
-                            }
-                          }
                         },
                       ),
+                      // DropdownFormField(
+                      //   hintText: 'Select Course',
+                      //   dropdownItems:
+                      //       courses.map((course) => course.name).toList(),
+                      //   initialValue: selectedCourse,
+                      //   onChanged: (newValue) {
+                      //     setState(() {
+                      //       selectedCourse = newValue!;
+                      //       batches = [];
+                      //       _Fee = '';
+                      //       _batchID = '';
+                      //       _isFetchedBatch = false;
+                      //     });
+                      //     if (newValue != null) {
+                      //       Course selectedCourseObject = courses.firstWhere(
+                      //         (type) => type.name == newValue,
+                      //       );
+                      //       if (selectedCourseObject != null) {
+                      //         _Fee =
+                      //             selectedCourseObject.fee.toString() + ' TK';
+                      //         _courseID = selectedCourseObject.id.toString();
+                      //         fetchBatch(_courseID);
+                      //         print(_courseID);
+                      //       }
+                      //     }
+                      //   },
+                      // ),
                     ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              LabeledTextWithoutAsterisk(text: 'Course Free'),
-              SizedBox(
-                height: 5,
-              ),
-              Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(5),
-                child: Container(
-                  width: screenWidth * 0.9,
-                  height: screenHeight * 0.075,
-                  padding: EdgeInsets.only(left: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: Colors.grey),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.only(top: 15, left: 15),
-                    child: Text(
-                      _Fee != null && _Fee.isNotEmpty ? _Fee : 'Tution Fee',
-                      style: TextStyle(
-                        color: Color.fromRGBO(143, 150, 158, 1),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        fontFamily: 'default',
-                      ),
-                    ),
                   ),
                 ),
               ),
@@ -594,30 +631,105 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
                           ),
                         ),
                       ],
-                      DropdownFormField(
-                        hintText: 'Select Batch',
-                        dropdownItems: batches
-                            .map((batch) => '${batch.number} - ${batch.name}')
-                            .toList(),
-                        initialValue: selectedBatchNo,
-                        onChanged: (newValue) {
+                      DropdownButtonFormField<String>(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Select Batch',
+                          hintStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 12),
+                        ),
+                        value: selectedBatchNo,
+                        items: selectedCourse != null
+                            ? Batches[selectedCourse!]!.map((batch) {
+                                return DropdownMenuItem(
+                                  value: batch,
+                                  child: Text(
+                                    batch,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'default',
+                                    ),
+                                  ),
+                                );
+                              }).toList()
+                            : [],
+                        onChanged: (value) {
                           setState(() {
-                            selectedBatchNo = newValue!;
-                            print(newValue);
+                            selectedBatchNo = value;
+                            selectedTutionFee =
+                                Prices[selectedCourse]?.toString();
+                            _Fee = selectedTutionFee!;
+                            print('Fee : $_Fee');
                           });
-                          if (newValue != null) {
-                            BatchNo selectedBatchObject = batches.firstWhere(
-                              (type) =>
-                                  '${type.number} - ${type.name}' == newValue,
-                            );
-                            if (selectedBatchObject != null) {
-                              _batchID = selectedBatchObject.id.toString();
-                              print(_batchID);
-                            }
-                          }
                         },
                       ),
+                      // DropdownFormField(
+                      //   hintText: 'Select Batch',
+                      //   dropdownItems: batches
+                      //       .map((batch) => '${batch.number} - ${batch.name}')
+                      //       .toList(),
+                      //   initialValue: selectedBatchNo,
+                      //   onChanged: (newValue) {
+                      //     setState(() {
+                      //       selectedBatchNo = newValue!;
+                      //       print(newValue);
+                      //     });
+                      //     if (newValue != null) {
+                      //       BatchNo selectedBatchObject = batches.firstWhere(
+                      //         (type) =>
+                      //             '${type.number} - ${type.name}' == newValue,
+                      //       );
+                      //       if (selectedBatchObject != null) {
+                      //         _batchID = selectedBatchObject.id.toString();
+                      //         print(_batchID);
+                      //       }
+                      //     }
+                      //   },
+                      // ),
                     ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              LabeledTextWithoutAsterisk(text: 'Course Fee'),
+              SizedBox(
+                height: 5,
+              ),
+              Material(
+                elevation: 5,
+                borderRadius: BorderRadius.circular(5),
+                child: Container(
+                  width: screenWidth * 0.9,
+                  height: screenHeight * 0.075,
+                  padding: EdgeInsets.only(left: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: Colors.grey),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.only(top: 15, left: 15),
+                    child: Text(
+                      _Fee != null && _Fee.isNotEmpty
+                          ? '৳$_Fee'
+                          : 'Tuition Fee',
+                      style: TextStyle(
+                        color: Color.fromRGBO(143, 150, 158, 1),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        fontFamily: 'default',
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -640,14 +752,14 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
                     onPressed: () async {
                       if (RegistrationCheck()) {
                         final prefs = await SharedPreferences.getInstance();
-                        await prefs.setString('Center', _centerID);
-                        await prefs.setString(
-                            'Course Type', _CourseTypecontroller.text);
+                        /*  await prefs.setString('Center', _centerID);*/
+                        /*       await prefs.setString(
+                            'Course Type', _CourseTypecontroller.text);*/
                         await prefs.setString('Course Name', _courseID);
                         await prefs.setString('Fee', _Fee);
                         await prefs.setString('Batch', _batchID);
-                        await prefs.setString(
-                            'Center Name', selectedCenterValue.toString());
+                        /*      await prefs.setString(
+                            'Center Name', selectedCenterValue.toString());*/
                         await prefs.setString(
                             'Course_Name', selectedCourse.toString());
                         await prefs.setString(
@@ -659,13 +771,13 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
                         late final String? FeeSaved;
                         late final String? BatchSaved;
 
-                        CenterSaved = await prefs.getString('Center');
-                        CourseTypeSaved = await prefs.getString('Course Type');
+                        /*  CenterSaved = await prefs.getString('Center');
+                        CourseTypeSaved = await prefs.getString('Course Type');*/
                         CourseSaved = await prefs.getString('Course Name');
                         FeeSaved = await prefs.getString('Fee');
                         BatchSaved = await prefs.getString('Batch');
-                        print(CenterSaved);
-                        print(CourseTypeSaved);
+                        /*  print(CenterSaved);
+                        print(CourseTypeSaved);*/
                         print(CourseSaved);
                         print(FeeSaved);
                         print(BatchSaved);
@@ -701,14 +813,14 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
   }
 
   bool RegistrationCheck() {
-    return _centerID != null &&
-        _CourseTypecontroller.text.isNotEmpty &&
+    return /*_centerID != null &&
+        _CourseTypecontroller.text.isNotEmpty &&*/
         _courseID != null &&
-        _Fee != null &&
-        _batchID != null &&
-        _centerID != '' &&
-        _courseID != '' &&
-        _Fee != '' &&
-        _batchID != '';
+            _Fee != null &&
+            _batchID != null &&
+            /* _centerID != '' &&*/
+            _courseID != '' &&
+            _Fee != '' &&
+            _batchID != '';
   }
 }

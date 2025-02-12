@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bkiict_app/UI/Pages/Online%20Registration%20UI/registrationcenter.dart';
 import 'package:bkiict_app/UI/Widgets/labelText.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +67,7 @@ class _RegistrationAcademicInformationUIState
   late TextEditingController _PassingYearcontroller = TextEditingController();
   late TextEditingController _Institutecontroller = TextEditingController();
   late TextEditingController _Resultcontroller = TextEditingController();
+  late TextEditingController _Workcontroller = TextEditingController();
 
   late String? Qualification = '';
   File? _imageFile;
@@ -80,7 +82,7 @@ class _RegistrationAcademicInformationUIState
       backgroundColor: Colors.grey[100],
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+        backgroundColor: const Color(0xFFFF5202),
         titleSpacing: 5,
         leading: IconButton(
             onPressed: () {
@@ -343,9 +345,45 @@ class _RegistrationAcademicInformationUIState
                               ),
                             ),
                           ),
+                          const SizedBox(height: 5),
+                          LabeledTextWithAsterisk(text: 'Work Experience'),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            width: screenWidth * 0.9,
+                            height: 70,
+                            child: TextFormField(
+                              controller: _Workcontroller,
+                              validator: (input) {
+                                if (input == null || input.isEmpty) {
+                                  return 'Please enter your work experience';
+                                }
+                                return null;
+                              },
+                              style: const TextStyle(
+                                color: Color.fromRGBO(143, 150, 158, 1),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'default',
+                              ),
+                              decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                                labelText: 'Work Experience',
+                                labelStyle: TextStyle(
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  fontFamily: 'default',
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       )),
-                  const SizedBox(height: 5),
+             /*     const SizedBox(height: 5),
                   LabeledTextWithAsterisk(text: 'Certificate'),
                   SizedBox(
                     height: 5,
@@ -408,9 +446,9 @@ class _RegistrationAcademicInformationUIState
                         ),
                       ),
                     ),
-                  ),
+                  ),*/
                   SizedBox(
-                    height: 15,
+                    height: 20,
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.08,
@@ -470,7 +508,7 @@ class _RegistrationAcademicInformationUIState
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const RegistrationApplicationReviewUI(
+                                            const RegistrationCenterUI(
                                               shouldRefresh: true,
                                             )));
                                 setState(() {
@@ -530,7 +568,8 @@ class _RegistrationAcademicInformationUIState
           _PassingYearcontroller.text.isEmpty ||
           _Institutecontroller.text.isEmpty ||
           _Resultcontroller.text.isEmpty ||
-          _imageFile == null) {
+          _Workcontroller.text.isEmpty
+          /*_imageFile == null*/) {
         return false;
       }
       return true;
@@ -547,6 +586,8 @@ class _RegistrationAcademicInformationUIState
     await prefs.setString('passing_year', _PassingYearcontroller.text);
     await prefs.setString('institute', _Institutecontroller.text);
     await prefs.setString('result', _Resultcontroller.text);
+    await prefs.setString('work_experience', _Workcontroller.text);
+
     if (_imageFile != null) {
       await prefs.setString('certificate_image_path', _imageFile!.path);
     }
@@ -558,6 +599,7 @@ class _RegistrationAcademicInformationUIState
     print(await prefs.getString('institute'));
     print(await prefs.getString('result'));
     print(await prefs.getString('certificate_image_path'));
+    print(await prefs.getString('work_experience'));
   }
 
   Future<void> _selectImage() async {

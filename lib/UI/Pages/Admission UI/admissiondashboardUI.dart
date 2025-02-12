@@ -5,6 +5,7 @@ import '../Admission Process UI/admissionprocessUI.dart';
 import '../Course Dashboard UI/coursedashboard.dart';
 import '../Dashboard UI/dashboardUI.dart';
 import '../Online Registration UI/registrationcenter.dart';
+import '../Online Registration UI/registrationpersonalinfo.dart';
 import '../Profile UI/profileUI.dart';
 
 /// A [StatefulWidget] that represents the [AdmissionDashboardUI] for the application.
@@ -34,7 +35,7 @@ class _AdmissionDashboardUIState extends State<AdmissionDashboardUI>
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+        backgroundColor: const Color(0xFFFF5202),
         titleSpacing: 5,
         leading: IconButton(
             onPressed: () {
@@ -124,7 +125,7 @@ class _AdmissionDashboardUIState extends State<AdmissionDashboardUI>
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const RegistrationCenterUI()));
+                            builder: (context) => const RegistrationPersonalInformationUI()));
                   },
                   name: 'Online Registration'),
             ],
@@ -133,7 +134,7 @@ class _AdmissionDashboardUIState extends State<AdmissionDashboardUI>
       ),
       bottomNavigationBar: Container(
         height: screenHeight * 0.08,
-        color: const Color.fromRGBO(134, 188, 66, 1),
+        color: const Color(0xFFFF5202),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -287,7 +287,7 @@ class _LoginUIState extends State<LoginUI> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
-                                    const Color.fromRGBO(134, 188, 66, 1),
+                                    const Color(0xFFFF5202),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
@@ -340,7 +340,7 @@ class _LoginUIState extends State<LoginUI> {
                               'Register now',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Color.fromRGBO(134, 188, 66, 1),
+                                color: Color(0xFF063AF3),
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'default',

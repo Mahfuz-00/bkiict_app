@@ -84,7 +84,7 @@ class _PasswordChangedUIState extends State<PasswordChangedUI> {
                           (route) => false);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(134, 188, 66, 1),
+                      backgroundColor: Color(0xFFFF5202),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

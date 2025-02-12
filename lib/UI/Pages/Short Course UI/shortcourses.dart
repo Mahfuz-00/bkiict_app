@@ -200,7 +200,7 @@ class _ShortCoursesUIState extends State<ShortCoursesUI>
               backgroundColor: Colors.grey[100],
               key: _scaffoldKey,
               appBar: AppBar(
-                backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                backgroundColor: const Color(0xFFFF5202),
                 titleSpacing: 5,
                 leading: IconButton(
                     onPressed: () {
@@ -231,7 +231,7 @@ class _ShortCoursesUIState extends State<ShortCoursesUI>
                         width: screenWidth,
                         height: screenHeight * 0.06,
                         decoration: BoxDecoration(
-                          color: const Color.fromRGBO(134, 188, 66, 1),
+                          color: const Color(0xFFFF5202),
                         ),
                         child: TabBar(
                           padding: EdgeInsets.zero,
@@ -285,7 +285,7 @@ class _ShortCoursesUIState extends State<ShortCoursesUI>
                                 'Ongoing Courses',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Color.fromRGBO(134, 188, 66, 1),
+                                  color: Color(0xFFFF5202),
                                   fontSize: 25,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'default',
@@ -321,7 +321,7 @@ class _ShortCoursesUIState extends State<ShortCoursesUI>
                                 'Upcoming Courses',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Color.fromRGBO(134, 188, 66, 1),
+                                  color: Color(0xFFFF5202),
                                   fontSize: 25,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'default',

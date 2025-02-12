@@ -44,9 +44,15 @@ class _RegistrationPersonalInformationUIState
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TextEditingController _Datecontroller = TextEditingController();
   late TextEditingController _FullNamecontroller = TextEditingController();
+  late TextEditingController _FatherNamecontroller = TextEditingController();
+  late TextEditingController _MotherNamecontroller = TextEditingController();
   late TextEditingController _Emailcontroller = TextEditingController();
   late TextEditingController _Phonecontroller = TextEditingController();
+  late TextEditingController _WhatsAppcontroller = TextEditingController();
   late TextEditingController _Gendercontroller = TextEditingController();
+  late TextEditingController _FBcontroller = TextEditingController();
+  late TextEditingController _CurrentAddresscontroller = TextEditingController();
+  late TextEditingController _PermanentAddresscontroller = TextEditingController();
   File? _imageFile;
   final _formKey = GlobalKey<FormState>();
 
@@ -69,7 +75,7 @@ class _RegistrationPersonalInformationUIState
       backgroundColor: Colors.grey[100],
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+        backgroundColor: const Color(0xFFFF5202),
         titleSpacing: 5,
         leading: IconButton(
             onPressed: () {
@@ -152,7 +158,7 @@ class _RegistrationPersonalInformationUIState
                         ),
                       ),
                       const SizedBox(height: 5),
-                      LabeledTextWithAsterisk(text: 'Your Email Address'),
+                      LabeledTextWithAsterisk(text: 'Your Father Name'),
                       SizedBox(
                         height: 5,
                       ),
@@ -160,16 +166,10 @@ class _RegistrationPersonalInformationUIState
                         width: screenWidth * 0.9,
                         height: 70,
                         child: TextFormField(
-                          controller: _Emailcontroller,
-                          keyboardType: TextInputType.emailAddress,
+                          controller: _FatherNamecontroller,
                           validator: (input) {
                             if (input == null || input.isEmpty) {
-                              return 'Please enter your email address';
-                            }
-                            final emailRegex =
-                                RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                            if (!emailRegex.hasMatch(input)) {
-                              return 'Please enter a valid email address';
+                              return 'Please enter your father name';
                             }
                             return null;
                           },
@@ -183,7 +183,7 @@ class _RegistrationPersonalInformationUIState
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(),
-                            labelText: 'Email Address',
+                            labelText: 'Father Name',
                             labelStyle: TextStyle(
                               color: Colors.black87,
                               fontWeight: FontWeight.bold,
@@ -194,7 +194,7 @@ class _RegistrationPersonalInformationUIState
                         ),
                       ),
                       const SizedBox(height: 5),
-                      LabeledTextWithAsterisk(text: 'Your Mobile Number'),
+                      LabeledTextWithAsterisk(text: 'Your Mother Name'),
                       SizedBox(
                         height: 5,
                       ),
@@ -202,18 +202,10 @@ class _RegistrationPersonalInformationUIState
                         width: screenWidth * 0.9,
                         height: 70,
                         child: TextFormField(
-                          controller: _Phonecontroller,
-                          keyboardType: TextInputType.phone,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            LengthLimitingTextInputFormatter(11),
-                          ],
+                          controller: _MotherNamecontroller,
                           validator: (input) {
                             if (input == null || input.isEmpty) {
-                              return 'Please enter your mobile number name';
-                            }
-                            if (input.length != 11) {
-                              return 'Mobile number must be 11 digits';
+                              return 'Please enter your mother name';
                             }
                             return null;
                           },
@@ -227,7 +219,7 @@ class _RegistrationPersonalInformationUIState
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(),
-                            labelText: 'Mobile No',
+                            labelText: 'Mother Name',
                             labelStyle: TextStyle(
                               color: Colors.black87,
                               fontWeight: FontWeight.bold,
@@ -274,7 +266,7 @@ class _RegistrationPersonalInformationUIState
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5),
                               borderSide:
-                                  BorderSide(color: Colors.black, width: 1.0),
+                              BorderSide(color: Colors.black, width: 1.0),
                             ),
                             suffixIcon: GestureDetector(
                               onTap: () {
@@ -286,8 +278,8 @@ class _RegistrationPersonalInformationUIState
                                 ).then((selectedDate) {
                                   if (selectedDate != null) {
                                     final formattedDate =
-                                        DateFormat('yyyy-MM-dd')
-                                            .format(selectedDate);
+                                    DateFormat('yyyy-MM-dd')
+                                        .format(selectedDate);
                                     _Datecontroller.text = formattedDate;
                                   }
                                 });
@@ -299,6 +291,247 @@ class _RegistrationPersonalInformationUIState
                                   size: 30,
                                 ),
                               ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      LabeledTextWithAsterisk(text: 'Your Mobile Number'),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: screenWidth * 0.9,
+                        height: 70,
+                        child: TextFormField(
+                          controller: _Phonecontroller,
+                          keyboardType: TextInputType.phone,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(11),
+                          ],
+                          validator: (input) {
+                            if (input == null || input.isEmpty) {
+                              return 'Please enter your mobile number';
+                            }
+                            if (input.length != 11) {
+                              return 'Mobile number must be 11 digits';
+                            }
+                            return null;
+                          },
+                          style: const TextStyle(
+                            color: Color.fromRGBO(143, 150, 158, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          ),
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            labelText: 'Phone Number',
+                            labelStyle: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontFamily: 'default',
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      LabeledTextWithAsterisk(text: 'Your Whatsapp Number'),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: screenWidth * 0.9,
+                        height: 70,
+                        child: TextFormField(
+                          controller: _WhatsAppcontroller,
+                          keyboardType: TextInputType.phone,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(11),
+                          ],
+                          validator: (input) {
+                            if (input == null || input.isEmpty) {
+                              return 'Please enter your whatsapp number';
+                            }
+                            if (input.length != 11) {
+                              return 'Mobile number must be 11 digits';
+                            }
+                            return null;
+                          },
+                          style: const TextStyle(
+                            color: Color.fromRGBO(143, 150, 158, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          ),
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            labelText: 'Whatsapp number',
+                            labelStyle: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontFamily: 'default',
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      LabeledTextWithAsterisk(text: 'Your Email Address'),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: screenWidth * 0.9,
+                        height: 70,
+                        child: TextFormField(
+                          controller: _Emailcontroller,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (input) {
+                            if (input == null || input.isEmpty) {
+                              return 'Please enter your email address';
+                            }
+                            final emailRegex =
+                            RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                            if (!emailRegex.hasMatch(input)) {
+                              return 'Please enter a valid email address';
+                            }
+                            return null;
+                          },
+                          style: const TextStyle(
+                            color: Color.fromRGBO(143, 150, 158, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          ),
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            labelText: 'Email Address',
+                            labelStyle: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontFamily: 'default',
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      LabeledTextWithAsterisk(text: 'Your Facebook ID'),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: screenWidth * 0.9,
+                        height: 70,
+                        child: TextFormField(
+                          controller: _FBcontroller,
+                          keyboardType: TextInputType.text,
+                          validator: (input) {
+                            if (input == null || input.isEmpty) {
+                              return 'Please enter your facebook id';
+                            }
+                            return null;
+                          },
+                          style: const TextStyle(
+                            color: Color.fromRGBO(143, 150, 158, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          ),
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            labelText: 'Facebook ID',
+                            labelStyle: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontFamily: 'default',
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      LabeledTextWithAsterisk(text: 'Your Present Address'),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: screenWidth * 0.9,
+                        height: 70,
+                        child: TextFormField(
+                          controller: _CurrentAddresscontroller,
+                          keyboardType: TextInputType.text,
+                          validator: (input) {
+                            if (input == null || input.isEmpty) {
+                              return 'Please enter your present address';
+                            }
+                            return null;
+                          },
+                          style: const TextStyle(
+                            color: Color.fromRGBO(143, 150, 158, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          ),
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            labelText: 'Present Address',
+                            labelStyle: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontFamily: 'default',
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      LabeledTextWithAsterisk(text: 'Your Permanent Address'),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: screenWidth * 0.9,
+                        height: 70,
+                        child: TextFormField(
+                          controller: _PermanentAddresscontroller,
+                          keyboardType: TextInputType.text,
+                          validator: (input) {
+                            if (input == null || input.isEmpty) {
+                              return 'Please enter your permanent address';
+                            }
+                            return null;
+                          },
+                          style: const TextStyle(
+                            color: Color.fromRGBO(143, 150, 158, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'default',
+                          ),
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            labelText: 'Permanent Address',
+                            labelStyle: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontFamily: 'default',
                             ),
                           ),
                         ),
@@ -337,7 +570,7 @@ class _RegistrationPersonalInformationUIState
                 ),
               ),
               const SizedBox(height: 15),
-              LabeledTextWithAsterisk(text: 'Upload Your Profile Picture'),
+              LabeledTextWithAsterisk(text: 'Upload Your Photo(Passport Size)'),
               SizedBox(
                 height: 5,
               ),
@@ -487,6 +720,11 @@ class _RegistrationPersonalInformationUIState
           _Phonecontroller.text.isEmpty ||
           _Datecontroller.text.isEmpty ||
           _Gendercontroller.text.isEmpty ||
+          _FatherNamecontroller.text.isEmpty ||
+          _MotherNamecontroller.text.isEmpty ||
+          _FBcontroller.text.isEmpty ||
+          _CurrentAddresscontroller.text.isEmpty ||
+          _PermanentAddresscontroller.text.isEmpty ||
           _imageFile == null) {
         return false;
       }
@@ -503,6 +741,11 @@ class _RegistrationPersonalInformationUIState
     await prefs.setString('phone', _Phonecontroller.text);
     await prefs.setString('date_of_birth', _Datecontroller.text);
     await prefs.setString('gender', _Gendercontroller.text);
+    await prefs.setString('father_name', _FatherNamecontroller.text);
+    await prefs.setString('mother_name', _MotherNamecontroller.text);
+    await prefs.setString('facebook_id', _FBcontroller.text);
+    await prefs.setString('current_address', _CurrentAddresscontroller.text);
+    await prefs.setString('permanent_address', _PermanentAddresscontroller.text);
     if (_imageFile != null) {
       await prefs.setString('image_path', _imageFile!.path);
     }
@@ -513,6 +756,11 @@ class _RegistrationPersonalInformationUIState
     print(await prefs.getString('date_of_birth'));
     print(await prefs.getString('gender'));
     print(await prefs.getString('image_path'));
+    print(await prefs.getString('father_name'));
+    print(await prefs.getString('mother_name'));
+    print(await prefs.getString('facebook_id'));
+    print(await prefs.getString('current_address'));
+    print(await prefs.getString('permanent_address'));
   }
 
   Future<void> _selectImage() async {

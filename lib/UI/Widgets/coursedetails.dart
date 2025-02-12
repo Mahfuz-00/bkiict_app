@@ -193,7 +193,7 @@ class _CourseDetailsState extends State<CourseDetails> {
         : InternetConnectionChecker(
             child: Scaffold(
               appBar: AppBar(
-                backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                backgroundColor: const Color(0xFFFF5202),
                 leadingWidth: 40,
                 titleSpacing: 10,
                 leading: IconButton(
@@ -380,7 +380,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 20),
                                   decoration: BoxDecoration(
-                                    color: Color.fromRGBO(134, 188, 66, 1),
+                                    color: Color(0xFFFF5202),
                                     borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10),
@@ -443,7 +443,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 20),
                                   decoration: BoxDecoration(
-                                    color: Color.fromRGBO(134, 188, 66, 1),
+                                    color: Color(0xFFFF5202),
                                     borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10),
@@ -492,7 +492,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 20),
                                   decoration: BoxDecoration(
-                                    color: Color.fromRGBO(134, 188, 66, 1),
+                                    color: Color(0xFFFF5202),
                                     borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10),
@@ -570,7 +570,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 20),
                                   decoration: BoxDecoration(
-                                    color: Color.fromRGBO(134, 188, 66, 1),
+                                    color: Color(0xFFFF5202),
                                     borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10),

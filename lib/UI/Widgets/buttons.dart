@@ -24,7 +24,7 @@ class Buttons extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+            backgroundColor: const Color(0xFFFF5202),
             fixedSize: Size(
               MediaQuery.of(context).size.width * 0.8,
               MediaQuery.of(context).size.height * 0.08,

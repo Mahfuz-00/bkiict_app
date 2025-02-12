@@ -55,7 +55,7 @@ class _PasswordChangeUIState extends State<PasswordChangeUI> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+        backgroundColor: const Color(0xFFFF5202),
         title: Text(
           'Change Password',
           style: TextStyle(
@@ -208,7 +208,7 @@ class _PasswordChangeUIState extends State<PasswordChangeUI> {
                   borderRadius: BorderRadius.circular(10),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                      backgroundColor: const Color(0xFFFF5202),
                       fixedSize: Size(MediaQuery
                           .of(context)
                           .size
