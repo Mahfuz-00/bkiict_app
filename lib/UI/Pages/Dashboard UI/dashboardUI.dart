@@ -50,13 +50,14 @@ class _DashboardUIState extends State<DashboardUI>
         appBar: AppBar(
           backgroundColor: const Color(0xFFFF5202),
           automaticallyImplyLeading: false,
+          centerTitle: true,
           title: Row(
             children: [
               SizedBox(
                 width: 28,
               ),
               const Text(
-                'LEI',
+                'Learning Engineering Institute',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,

@@ -78,6 +78,13 @@ class _RegistrationApplicationReviewUIState
   late String passingYear = "";
   late String institute = "";
   late String result = "";
+  late String fatherName = "";
+  late String motherName = "";
+  late String whatsAppNumber = "";
+  late String fbID = "";
+  late String presentAddress = "";
+  late String permanentAddress = "";
+  late String workExperience = "";
   bool _pageLoading = true;
   bool _isFetched = false;
   bool buttonloading = false;
@@ -85,13 +92,13 @@ class _RegistrationApplicationReviewUIState
   Future<void> getDataFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     Imagepath = prefs.getString('image_path') ?? '';
-    CenterID = prefs.getString('Center') ?? '';
-    CenterName = prefs.getString('Center Name') ?? '';
-    courseType = prefs.getString('Course Type') ?? '';
-    courseID = prefs.getString('Course Name') ?? '';
+    // CenterID = prefs.getString('Center') ?? '';
+    // CenterName = prefs.getString('Center Name') ?? '';
+    // courseType = prefs.getString('Course Type') ?? '';
+    // courseID = prefs.getString('Course Name') ?? '';
     course = prefs.getString('Course_Name') ?? '';
     fee = prefs.getString('Fee') ?? '';
-    batchID = prefs.getString('Batch') ?? '';
+    // batchID = prefs.getString('Batch') ?? '';
     batch = prefs.getString('Batch Name') ?? '';
     fullName = prefs.getString('full_name') ?? '';
     email = prefs.getString('email') ?? '';
@@ -104,7 +111,14 @@ class _RegistrationApplicationReviewUIState
     passingYear = prefs.getString('passing_year') ?? '';
     institute = prefs.getString('institute') ?? '';
     result = prefs.getString('result') ?? '';
-    CertificateImagepath = prefs.getString('certificate_image_path') ?? '';
+    // CertificateImagepath = prefs.getString('certificate_image_path') ?? '';
+    fatherName = prefs.getString('father_name') ?? '';
+    motherName = prefs.getString('mother_name') ?? '';
+    whatsAppNumber = prefs.getString('whatsapp_number') ?? '';
+    fbID = prefs.getString('facebook_id') ?? '';
+    presentAddress = prefs.getString('current_address') ?? '';
+    permanentAddress = prefs.getString('permanent_address') ?? '';
+    workExperience = prefs.getString('work_experience') ?? '';/**/
     printData();
   }
 
@@ -127,6 +141,13 @@ class _RegistrationApplicationReviewUIState
     print('Institute: $institute');
     print('Result: $result');
     print('Certificate Image Path: $CertificateImagepath');
+    print('Father Name: $fatherName');
+    print('Mother Name: $motherName');
+    print('WhatsApp Number: $whatsAppNumber');
+    print('FB ID: $fbID');
+    print('Present Address: $presentAddress');
+    print('Permanent Address: $permanentAddress');
+    print('Work Experience: $workExperience');
   }
 
   Widget _buildRow(String label, String value) {
@@ -217,7 +238,7 @@ class _RegistrationApplicationReviewUIState
         backgroundColor: Colors.grey[100],
         key: _scaffoldKey,
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+          backgroundColor: const Color(0xFFFF5202),
           titleSpacing: 5,
           leading: IconButton(
               onPressed: () {
@@ -228,7 +249,7 @@ class _RegistrationApplicationReviewUIState
                 color: Colors.white,
               )),
           title: const Text(
-            'BKIICT',
+            'Application Summary',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -288,7 +309,7 @@ class _RegistrationApplicationReviewUIState
                         children: [
                           Text('Course Information Details',
                           style: TextStyle(
-                            color: Color.fromRGBO(134, 188, 66, 1),
+                            color: Color(0xFFFF5202),
                             letterSpacing: 1.2,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -300,17 +321,24 @@ class _RegistrationApplicationReviewUIState
                               padding: EdgeInsets.all(5),
                               child: Column(
                                 children: [
-                                  _buildRow('Center Name', CenterName),
+                                 /* _buildRow('Center Name', CenterName),
                                   _buildRow(
-                                      'Course Type', courseType),
+                                      'Course Type', courseType),*/
                                   _buildRow('Course Name', course),
                                   _buildRow('Course Fee', '$fee TK'),
-                                  _buildRow('Batch No', batchID),
+                                  _buildRow('Batch No', batch),
                                   _buildRow('Full Name', fullName),
-                                  _buildRow('Email', email),
-                                  _buildRow('Mobile Number', mobileNumber),
+                                  _buildRow('Father Name', fatherName),
+                                  _buildRow('Mother Name', motherName),
                                   _buildRow('Date of Birth', dateOfBirth),
                                   _buildRow('Gender', gender),
+                                  _buildRow('Present Address', presentAddress),
+                                  _buildRow('Permanent Address', permanentAddress),
+                                  _buildRow('Mobile Number', mobileNumber),
+                                  _buildRow('Email', email),
+                                  _buildRow('WhatsApp Number', whatsAppNumber),
+                                  _buildRow('FB ID', fbID),
+                                  _buildRow('Work Experience', workExperience)
                                 ],
                               )),
                         ],
@@ -332,7 +360,7 @@ class _RegistrationApplicationReviewUIState
                         children: [
                           Text('Education Details',
                             style: TextStyle(
-                              color: Color.fromRGBO(134, 188, 66, 1),
+                              color: Color(0xFFFF5202),
                               letterSpacing: 1.2,
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -361,7 +389,7 @@ class _RegistrationApplicationReviewUIState
                         ],
                       ),
                     )),
-                SizedBox(height: 15,),
+             /*   SizedBox(height: 15,),
                 Center(
                     child: Container(
                       width: screenWidth * 0.85,
@@ -390,7 +418,7 @@ class _RegistrationApplicationReviewUIState
                               width: screenWidth * 0.3,
                               height: screenHeight * 0.17,
                               decoration: BoxDecoration(
-                                /*shape: BoxShape.square,*/
+                                *//*shape: BoxShape.square,*//*
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
                                   image: FileImage(File(CertificateImagepath)),
@@ -400,7 +428,7 @@ class _RegistrationApplicationReviewUIState
                           ),
                         ],
                       ),
-                    )),
+                    )),*/
                 SizedBox(height: 25,),
                 Center(
                   child: Material(
@@ -408,7 +436,7 @@ class _RegistrationApplicationReviewUIState
                     borderRadius: BorderRadius.circular(5),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                        backgroundColor: const Color(0xFFFF5202),
                         fixedSize: Size(MediaQuery.of(context).size.width* 0.85, MediaQuery.of(context).size.height * 0.08),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),

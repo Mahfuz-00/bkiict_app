@@ -1,3 +1,4 @@
+import 'package:bkiict_app/UI/Pages/Online%20Registration%20UI/registrationapplicationreview.dart';
 import 'package:bkiict_app/UI/Widgets/labelTextTemplate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -357,7 +358,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
       backgroundColor: Colors.grey[100],
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+        backgroundColor: const Color(0xFFFF5202),
         titleSpacing: 5,
         leading: IconButton(
             onPressed: () {
@@ -531,7 +532,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
                         Align(
                           alignment: Alignment.center,
                           child: CircularProgressIndicator(
-                            color: const Color.fromRGBO(134, 188, 66, 1),
+                            color: const Color(0xFFFF5202),
                           ),
                         ),
                       ],
@@ -627,7 +628,7 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
                         Align(
                           alignment: Alignment.center,
                           child: CircularProgressIndicator(
-                            color: const Color.fromRGBO(134, 188, 66, 1),
+                            color: const Color(0xFFFF5202),
                           ),
                         ),
                       ],
@@ -737,72 +738,103 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
                 height: 25,
               ),
               Center(
-                child: Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(5),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                      fixedSize: Size(MediaQuery.of(context).size.width * 0.9,
-                          MediaQuery.of(context).size.height * 0.08),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
+                child: Row(
+                  children: [
+                    Material(
+                      elevation: 5,
+                      borderRadius: BorderRadius.circular(5),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF00A2DE),
+                          fixedSize: Size(MediaQuery.of(context).size.width * 0.4,
+                              MediaQuery.of(context).size.height * 0.08),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Back',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'default',
+                            )),
                       ),
                     ),
-                    onPressed: () async {
-                      if (RegistrationCheck()) {
-                        final prefs = await SharedPreferences.getInstance();
-                        /*  await prefs.setString('Center', _centerID);*/
-                        /*       await prefs.setString(
-                            'Course Type', _CourseTypecontroller.text);*/
-                        await prefs.setString('Course Name', _courseID);
-                        await prefs.setString('Fee', _Fee);
-                        await prefs.setString('Batch', _batchID);
-                        /*      await prefs.setString(
-                            'Center Name', selectedCenterValue.toString());*/
-                        await prefs.setString(
-                            'Course_Name', selectedCourse.toString());
-                        await prefs.setString(
-                            'Batch Name', selectedBatchNo.toString());
-
-                        late final String? CenterSaved;
-                        late final String? CourseTypeSaved;
-                        late final String? CourseSaved;
-                        late final String? FeeSaved;
-                        late final String? BatchSaved;
-
-                        /*  CenterSaved = await prefs.getString('Center');
-                        CourseTypeSaved = await prefs.getString('Course Type');*/
-                        CourseSaved = await prefs.getString('Course Name');
-                        FeeSaved = await prefs.getString('Fee');
-                        BatchSaved = await prefs.getString('Batch');
-                        /*  print(CenterSaved);
-                        print(CourseTypeSaved);*/
-                        print(CourseSaved);
-                        print(FeeSaved);
-                        print(BatchSaved);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const RegistrationPersonalInformationUI()));
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Pick all required fields'),
-                            behavior: SnackBarBehavior.floating,
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Material(
+                      elevation: 5,
+                      borderRadius: BorderRadius.circular(5),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF1EB257),
+                          fixedSize: Size(MediaQuery.of(context).size.width * 0.4,
+                              MediaQuery.of(context).size.height * 0.08),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
                           ),
-                        );
-                      }
-                    },
-                    child: const Text('Next',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'default',
-                        )),
-                  ),
+                        ),
+                        onPressed: () async {
+                          if (RegistrationCheck()) {
+                            final prefs = await SharedPreferences.getInstance();
+                            /*  await prefs.setString('Center', _centerID);*/
+                            /*       await prefs.setString(
+                                'Course Type', _CourseTypecontroller.text);*/
+                            await prefs.setString('Course Name', _courseID);
+                            await prefs.setString('Fee', _Fee);
+                            await prefs.setString('Batch', _batchID);
+                            /*      await prefs.setString(
+                                'Center Name', selectedCenterValue.toString());*/
+                            await prefs.setString(
+                                'Course_Name', selectedCourse.toString());
+                            await prefs.setString(
+                                'Batch Name', selectedBatchNo.toString());
+
+                            late final String? CenterSaved;
+                            late final String? CourseTypeSaved;
+                            late final String? CourseSaved;
+                            late final String? FeeSaved;
+                            late final String? BatchSaved;
+
+                            /*  CenterSaved = await prefs.getString('Center');
+                            CourseTypeSaved = await prefs.getString('Course Type');*/
+                            CourseSaved = await prefs.getString('Course Name');
+                            FeeSaved = await prefs.getString('Fee');
+                            BatchSaved = await prefs.getString('Batch');
+                            /*  print(CenterSaved);
+                            print(CourseTypeSaved);*/
+                            print(CourseSaved);
+                            print(FeeSaved);
+                            print(BatchSaved);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegistrationApplicationReviewUI(shouldRefresh: true,)));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Pick all required fields'),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          }
+                        },
+                        child: const Text('Next',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'default',
+                            )),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -815,12 +847,12 @@ class _RegistrationCenterUIState extends State<RegistrationCenterUI>
   bool RegistrationCheck() {
     return /*_centerID != null &&
         _CourseTypecontroller.text.isNotEmpty &&*/
-        _courseID != null &&
+      /*  _courseID != null &&*/
             _Fee != null &&
-            _batchID != null &&
+         /*   _batchID != null &&*/
             /* _centerID != '' &&*/
-            _courseID != '' &&
-            _Fee != '' &&
-            _batchID != '';
+        /*    _courseID != '' &&*/
+            _Fee != '' /*&&
+            _batchID != ''*/;
   }
 }

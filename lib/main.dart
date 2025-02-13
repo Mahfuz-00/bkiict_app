@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'BKIICT Student App',
+        title: 'Learning Engineering Institute',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
               seedColor: Color(0xFFFF5202)),

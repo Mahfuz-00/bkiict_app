@@ -28,11 +28,23 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI>
   late TextEditingController _paymentConfirmationController =
       TextEditingController();
   bool buttonloading = false;
+  String fee = '';
+  void loadFee() async {
+    final prefs = await SharedPreferences.getInstance();
+    fee = prefs.getString('Fee') ?? '';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadFee();
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+
     return InternetConnectionChecker(
       child: PopScope(
         canPop: false,
@@ -41,7 +53,7 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI>
           backgroundColor: Colors.grey[100],
           key: _scaffoldKey,
           appBar: AppBar(
-            backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+            backgroundColor: const Color(0xFFFF5202),
             titleSpacing: 5,
             automaticallyImplyLeading: false,
             title: const Text(
@@ -98,7 +110,7 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI>
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor:
-                                  const Color.fromRGBO(134, 188, 66, 1),
+                                  const Color(0xFFFF5202),
                               fixedSize: Size(
                                   MediaQuery.of(context).size.width * 0.85,
                                   MediaQuery.of(context).size.height * 0.08),
@@ -130,6 +142,13 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI>
     );
   }
 
+  final List<Map<String, String>> paymentOptions = [
+    {'service': 'Bkash', 'number': '01723882993'},
+    {'service': 'Rocket', 'number': '017238829930'},
+    {'service': 'Nagad', 'number': '01723882993'},
+  ];
+  Map<String, String>? selectedPayment;
+
   void showSliderAlert(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -145,10 +164,10 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI>
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
-                    'Bkash Payment',
+                    'Application Payment',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Color.fromRGBO(134, 188, 66, 1),
+                      color: Color(0xFFFF5202),
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                       fontFamily: 'default',
@@ -161,10 +180,41 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI>
                 height: 20,
               ),
               Text(
+                'Application Fee : $fee',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(0xFFFF5202),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  fontFamily: 'default',
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              DropdownButton<Map<String, String>>(
+                hint: Text('Choose a payment method'),
+                value: selectedPayment,
+                onChanged: (Map<String, String>? newValue) {
+                  setState(() {
+                    selectedPayment = newValue;
+                  });
+                },
+                items: paymentOptions.map((Map<String, String> option) {
+                  return DropdownMenuItem<Map<String, String>>(
+                    value: option,
+                    child: Text('${option['service']} - ${option['number']}'),
+                  );
+                }).toList(),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
                 'Trx ID',
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                  color: Color.fromRGBO(134, 188, 66, 1),
+                  color: Color(0xFFFF5202),
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                   fontFamily: 'default',
@@ -220,7 +270,7 @@ class _PaymentConfirmationUIState extends State<PaymentConfirmationUI>
                   borderRadius: BorderRadius.circular(5),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
+                      backgroundColor: const Color(0xFFFF5202),
                       fixedSize: Size(MediaQuery.of(context).size.width * 0.9,
                           MediaQuery.of(context).size.height * 0.08),
                       shape: RoundedRectangleBorder(

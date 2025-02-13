@@ -319,6 +319,7 @@ class _RegistrationAcademicInformationUIState
                             height: 70,
                             child: TextFormField(
                               controller: _Resultcontroller,
+                              keyboardType: TextInputType.number,
                               validator: (input) {
                                 if (input == null || input.isEmpty) {
                                   return 'Please enter your Passing result';
@@ -459,7 +460,7 @@ class _RegistrationAcademicInformationUIState
                           borderRadius: BorderRadius.circular(5),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red,
+                              backgroundColor: Color(0xFF00A2DE),
                               fixedSize: Size(
                                   MediaQuery.of(context).size.width * 0.4,
                                   MediaQuery.of(context).size.height * 0.08),
@@ -488,7 +489,7 @@ class _RegistrationAcademicInformationUIState
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor:
-                                  const Color.fromRGBO(134, 188, 66, 1),
+                                  const Color(0xFF1EB257),
                               fixedSize: Size(
                                   MediaQuery.of(context).size.width * 0.4,
                                   MediaQuery.of(context).size.height * 0.08),

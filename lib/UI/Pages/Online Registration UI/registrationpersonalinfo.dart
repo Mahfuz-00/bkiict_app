@@ -622,7 +622,7 @@ class _RegistrationPersonalInformationUIState
                         Text(
                           'Upload',
                           style: TextStyle(
-                            color: Color.fromRGBO(134, 188, 66, 1),
+                            color: Color(0xFFFF5202),
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                             fontFamily: 'default',
@@ -636,75 +636,46 @@ class _RegistrationPersonalInformationUIState
               SizedBox(
                 height: 20,
               ),
-              Row(
-                children: [
-                  Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(5),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        fixedSize: Size(MediaQuery.of(context).size.width * 0.4,
-                            MediaQuery.of(context).size.height * 0.08),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
+              Center(
+                child: Material(
+                  elevation: 5,
+                  borderRadius: BorderRadius.circular(5),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF1EB257),
+                      fixedSize: Size(MediaQuery.of(context).size.width * 0.9,
+                          MediaQuery.of(context).size.height * 0.08),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Back',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'default',
-                          )),
                     ),
+                    onPressed: () {
+                      if (validateInputs()) {
+                        saveData();
+                        print('validated');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const RegistrationAcademicInformationUI()));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Fill up all required fields'),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('Next',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'default',
+                        )),
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(5),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(134, 188, 66, 1),
-                        fixedSize: Size(MediaQuery.of(context).size.width * 0.4,
-                            MediaQuery.of(context).size.height * 0.08),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                      onPressed: () {
-                        if (validateInputs()) {
-                          saveData();
-                          print('validated');
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const RegistrationAcademicInformationUI()));
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Fill up all required fields'),
-                              behavior: SnackBarBehavior.floating,
-                            ),
-                          );
-                        }
-                      },
-                      child: const Text('Next',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'default',
-                          )),
-                    ),
-                  ),
-                ],
+                ),
               )
             ],
           ),
@@ -746,6 +717,7 @@ class _RegistrationPersonalInformationUIState
     await prefs.setString('facebook_id', _FBcontroller.text);
     await prefs.setString('current_address', _CurrentAddresscontroller.text);
     await prefs.setString('permanent_address', _PermanentAddresscontroller.text);
+    await prefs.setString('whatsapp_number', _WhatsAppcontroller.text);
     if (_imageFile != null) {
       await prefs.setString('image_path', _imageFile!.path);
     }
@@ -761,6 +733,7 @@ class _RegistrationPersonalInformationUIState
     print(await prefs.getString('facebook_id'));
     print(await prefs.getString('current_address'));
     print(await prefs.getString('permanent_address'));
+    print(await prefs.getString('whatsapp_number'));
   }
 
   Future<void> _selectImage() async {
@@ -775,7 +748,7 @@ class _RegistrationPersonalInformationUIState
               'Choose an option',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color.fromRGBO(25, 192, 122, 1),
+                color: Color(0xFFFF5202),
                 fontWeight: FontWeight.bold,
                 fontFamily: 'default',
                 fontSize: 22,
@@ -863,7 +836,7 @@ class _RegistrationPersonalInformationUIState
             "Error",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Color.fromRGBO(25, 192, 122, 1),
+              color: Color(0xFFFF5202),
               fontWeight: FontWeight.bold,
               fontFamily: 'default',
               fontSize: 22,
